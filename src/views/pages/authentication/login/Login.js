@@ -8,9 +8,15 @@ import {
   Form,
   FormGroup,
   Input,
-  Label
+  Label,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
 } from "reactstrap"
-import { Mail, Lock, Check, Facebook, Twitter, GitHub } from "react-feather"
+import { POST } from 'fetchier'
+import Cookie from 'js-cookie'
+import { Mail, Lock, Check, Facebook, Twitter, GitHub, Phone } from "react-feather"
 import { history } from "../../../../history"
 import Checkbox from "../../../../components/@vuexy/checkbox/CheckboxesVuexy"
 import googleSvg from "../../../../assets/img/svg/google.svg"
@@ -21,10 +27,14 @@ import "../../../../assets/scss/pages/authentication.scss"
 
 class Login extends React.Component {
   state = {
-    activeTab: "1",
-    email : "",
-    password: ""
+    phone: '',
+    pin: '',
+    otpSent: false,
+    isLoading: false,
+    success: null,
+    info: null
   }
+
   toggle = tab => {
     if (this.state.activeTab !== tab) {
       this.setState({
@@ -32,8 +42,56 @@ class Login extends React.Component {
       })
     }
   }
+
+  handleRequestOtp = async () => {
+    if(!this.state.phone) return console.log('no phone to send otp');
+    this.setState({
+      isLoading: true,
+    });
+    // setTimeout(() => this.setState({ isLoading: false, otpSent: true }), 1000);
+    try {
+      const url = 'https://zwrqt3cve3.execute-api.ap-southeast-1.amazonaws.com/dev/api/auth';
+      const body = { phone: `+855${this.state.phone}` }
+      // console.log('result', url, body);
+      const result = await POST({ url, body })
+      // console.log('result', result);
+      this.setState({ info: result, isLoading: false, otpSent: true });
+    } catch (err) {
+      console.log(err)
+      this.setState({ error: err, isLoading: false });
+    }
+  }
+
+  handleLogin = async () => {
+    if(!this.state.pin) return console.log('no pin input');
+    this.setState({
+      isLoading: true,
+    });
+    // setTimeout(() => {
+    //   this.setState({ isLoading: false });
+    //   history.push('/');
+    // }, 1500);
+    try {
+      const url = 'https://zwrqt3cve3.execute-api.ap-southeast-1.amazonaws.com/dev/api/auth';
+      const body = { phone: `+855${this.state.phone}`, code: this.state.pin }
+      // console.log('result', url, body);
+      const result = await POST({ url, body })
+      const { customToken = '' } = result.data || {};
+      customToken && Cookie.set('customToken', customToken);
+      // console.log('result', result);
+      this.setState({ isLoading: false });
+      history.push('/');
+    } catch (err) {
+      console.log(err);
+      this.setState({ error: err, isLoading: false });
+    }
+  }
+
   render() {
-    return (
+    const { error, info } = this.state;
+    return <>
+      { error && <Popup error={true} action={() => this.setState({ error: null })} body={error.message || error.data.message} /> }
+      { info && <Popup action={() => this.setState({ info: null })} body={info.message || info.data.message} /> }
       <Row className="m-0 justify-content-center">
         <Col
           sm="8"
@@ -54,78 +112,81 @@ class Login extends React.Component {
                 <Card className="rounded-0 mb-0 px-2">
                       <CardBody>
                         <h4>Login</h4>
-                        <p>Welcome back, please login to your account.</p>
+                        <p>Welcome back, Please input your phone number.</p>
                         <Form onSubmit={e => e.preventDefault()}>
-                          <FormGroup className="form-label-group position-relative has-icon-left">
-                            <Input
-                              type="email"
-                              placeholder="Email"
-                              value={this.state.email}
-                              onChange={e => this.setState({ email: e.target.value })}
-                            />
-                            <div className="form-control-position">
-                              <Mail size={15} />
-                            </div>
-                            <Label>Email</Label>
-                          </FormGroup>
-                          <FormGroup className="form-label-group position-relative has-icon-left">
-                            <Input
-                              type="password"
-                              placeholder="Password"
-                              value={this.state.password}
-                              onChange={e => this.setState({ password: e.target.value })}
-                            />
-                            <div className="form-control-position">
-                              <Lock size={15} />
-                            </div>
-                            <Label>Password</Label>
-                          </FormGroup>
-                          <FormGroup className="d-flex justify-content-between align-items-center">
-                            <Checkbox
-                              color="primary"
-                              icon={<Check className="vx-icon" size={16} />}
-                              label="Remember me"
-                            />
-                            <div className="float-right">
-                              Forgot Password?
-                            </div>
-                          </FormGroup>
+                          { !this.state.otpSent &&
+                            <FormGroup className="form-label-group position-relative has-icon-left">
+                              <Input
+                                type="number"
+                                placeholder="phone number"
+                                value={this.state.phone}
+                                onChange={e => this.setState({ phone: e.target.value })}
+                              />
+                              <div className="form-control-position">
+                                <Phone size={15} />
+                              </div>
+                            </FormGroup>
+                          }
+                          {
+                            !!this.state.otpSent &&
+                            <FormGroup className="form-label-group position-relative has-icon-left">
+                              <Input
+                                type="password"
+                                placeholder="One time password"
+                                value={this.state.pin}
+                                onChange={e => this.setState({ pin: e.target.value })}
+                              />
+                              <div className="form-control-position">
+                                <Lock size={15} />
+                              </div>
+                            </FormGroup>
+                          }
                           <div className="d-flex justify-content-between">
-                            <Button.Ripple color="primary" outline>
-                             Register                           
-                            </Button.Ripple>
-                            <Button.Ripple color="primary" type="submit" onClick={() => history.push("/")}>
-                                Login 
+                            {
+                              !!this.state.otpSent &&
+                                <Button
+                                  size="sm"
+                                  color="link"
+                                  onClick={() => this.setState({ otpSent: false })}
+                                >Send Code Again?</Button>
+                            }
+                            <Button.Ripple
+                              disabled={this.state.isLoading}
+                              color="primary"
+                              onClick={() => this.state.otpSent ? this.handleLogin() : this.handleRequestOtp()}
+                            >
+                                {!this.state.otpSent ? 'Send OTP' : 'Login'}
                             </Button.Ripple>
                           </div>
                         </Form>
                       </CardBody>
-                      <div className="auth-footer">
-                        <div className="divider">
-                          <div className="divider-text">OR</div>
-                        </div>
-                        <div className="footer-btn">
-                          <Button.Ripple className="btn-facebook" color="">
-                            <Facebook size={14} />
-                          </Button.Ripple>
-                          <Button.Ripple className="btn-twitter" color="">
-                            <Twitter size={14} stroke="white" />
-                          </Button.Ripple>
-                          <Button.Ripple className="btn-google" color="">
-                            <img src={googleSvg} alt="google" height="15" width="15" />
-                          </Button.Ripple>
-                          <Button.Ripple className="btn-github" color="">
-                            <GitHub size={14} stroke="white" />
-                          </Button.Ripple>
-                        </div>
-                      </div>
                 </Card>
               </Col>
             </Row>
           </Card>
         </Col>
       </Row>
-    )
+    </>
   }
 }
 export default Login
+
+const Popup = ({ action, error = false, body }) => {
+  return <Modal
+      isOpen={true}
+      toggle={action}
+      className="modal-dialog-centered modal-sm"
+    >
+      <ModalHeader toggle={action} className={!error ? 'bg-primary' : 'bg-danger'}>
+        {error ? 'Error' : 'Info'}
+      </ModalHeader>
+      <ModalBody>
+      {body}
+      </ModalBody>
+      <ModalFooter>
+        <Button color={error ? 'danger' : 'primary'} onClick={action}>
+          Close
+        </Button>{" "}
+      </ModalFooter>
+    </Modal>
+}
