@@ -8,9 +8,14 @@ import {
   Form,
   FormGroup,
   Input,
-  Label
+  Label,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
 } from "reactstrap"
 import { POST } from 'fetchier'
+import Cookie from 'js-cookie'
 import { Mail, Lock, Check, Facebook, Twitter, GitHub, Phone } from "react-feather"
 import { history } from "../../../../history"
 import Checkbox from "../../../../components/@vuexy/checkbox/CheckboxesVuexy"
@@ -25,7 +30,9 @@ class Login extends React.Component {
     phone: '',
     pin: '',
     otpSent: false,
-    isLoading: false
+    isLoading: false,
+    success: null,
+    info: null
   }
 
   toggle = tab => {
@@ -41,12 +48,18 @@ class Login extends React.Component {
     this.setState({
       isLoading: true,
     });
-    setTimeout(() => this.setState({ isLoading: false, otpSent: true }), 1000);
-    // const url = 'https://zwrqt3cve3.execute-api.ap-southeast-1.amazonaws.com/dev/api/auth';
-    // const body = { phone: `+855${this.state.phone}` }
-    // console.log('result', url, body);
-    // const result = await POST({ url, body })
-    // console.log('result', result);
+    // setTimeout(() => this.setState({ isLoading: false, otpSent: true }), 1000);
+    try {
+      const url = 'https://zwrqt3cve3.execute-api.ap-southeast-1.amazonaws.com/dev/api/auth';
+      const body = { phone: `+855${this.state.phone}` }
+      // console.log('result', url, body);
+      const result = await POST({ url, body })
+      // console.log('result', result);
+      this.setState({ info: result, isLoading: false, otpSent: true });
+    } catch (err) {
+      console.log(err)
+      this.setState({ error: err, isLoading: false });
+    }
   }
 
   handleLogin = async () => {
@@ -54,19 +67,31 @@ class Login extends React.Component {
     this.setState({
       isLoading: true,
     });
-    setTimeout(() => {
+    // setTimeout(() => {
+    //   this.setState({ isLoading: false });
+    //   history.push('/');
+    // }, 1500);
+    try {
+      const url = 'https://zwrqt3cve3.execute-api.ap-southeast-1.amazonaws.com/dev/api/auth';
+      const body = { phone: `+855${this.state.phone}`, code: this.state.pin }
+      // console.log('result', url, body);
+      const result = await POST({ url, body })
+      const { customToken = '' } = result.data || {};
+      customToken && Cookie.set('customToken', customToken);
+      // console.log('result', result);
       this.setState({ isLoading: false });
       history.push('/');
-    }, 1500);
-    // const url = 'https://zwrqt3cve3.execute-api.ap-southeast-1.amazonaws.com/dev/api/auth';
-    // const body = { phone: `+855${this.state.phone}`, code: this.state.pin }
-    // console.log('result', url, body);
-    // const result = await POST({ url, body })
-    // console.log('result', result);
+    } catch (err) {
+      console.log(err);
+      this.setState({ error: err, isLoading: false });
+    }
   }
 
   render() {
-    return (
+    const { error, info } = this.state;
+    return <>
+      { error && <Popup error={true} action={() => this.setState({ error: null })} body={error.message || error.data.message} /> }
+      { info && <Popup action={() => this.setState({ info: null })} body={info.message || info.data.message} /> }
       <Row className="m-0 justify-content-center">
         <Col
           sm="8"
@@ -89,17 +114,19 @@ class Login extends React.Component {
                         <h4>Login</h4>
                         <p>Welcome back, Please input your phone number.</p>
                         <Form onSubmit={e => e.preventDefault()}>
-                          <FormGroup className="form-label-group position-relative has-icon-left">
-                            <Input
-                              type="number"
-                              placeholder="phone number"
-                              value={this.state.phone}
-                              onChange={e => this.setState({ phone: e.target.value })}
-                            />
-                            <div className="form-control-position">
-                              <Phone size={15} />
-                            </div>
-                          </FormGroup>
+                          { !this.state.otpSent &&
+                            <FormGroup className="form-label-group position-relative has-icon-left">
+                              <Input
+                                type="number"
+                                placeholder="phone number"
+                                value={this.state.phone}
+                                onChange={e => this.setState({ phone: e.target.value })}
+                              />
+                              <div className="form-control-position">
+                                <Phone size={15} />
+                              </div>
+                            </FormGroup>
+                          }
                           {
                             !!this.state.otpSent &&
                             <FormGroup className="form-label-group position-relative has-icon-left">
@@ -115,6 +142,14 @@ class Login extends React.Component {
                             </FormGroup>
                           }
                           <div className="d-flex justify-content-between">
+                            {
+                              !!this.state.otpSent &&
+                                <Button
+                                  size="sm"
+                                  color="link"
+                                  onClick={() => this.setState({ otpSent: false })}
+                                >Send Code Again?</Button>
+                            }
                             <Button.Ripple
                               disabled={this.state.isLoading}
                               color="primary"
@@ -131,7 +166,27 @@ class Login extends React.Component {
           </Card>
         </Col>
       </Row>
-    )
+    </>
   }
 }
 export default Login
+
+const Popup = ({ action, error = false, body }) => {
+  return <Modal
+      isOpen={true}
+      toggle={action}
+      className="modal-dialog-centered modal-sm"
+    >
+      <ModalHeader toggle={action} className={!error ? 'bg-primary' : 'bg-danger'}>
+        {error ? 'Error' : 'Info'}
+      </ModalHeader>
+      <ModalBody>
+      {body}
+      </ModalBody>
+      <ModalFooter>
+        <Button color={error ? 'danger' : 'primary'} onClick={action}>
+          Close
+        </Button>{" "}
+      </ModalFooter>
+    </Modal>
+}
