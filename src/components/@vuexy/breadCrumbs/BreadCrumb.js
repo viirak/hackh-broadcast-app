@@ -24,7 +24,7 @@ class BreadCrumbs extends React.Component {
                 ""
               )}
               <div className="breadcrumb-wrapper vx-breadcrumbs d-sm-block d-none col-12">
-                <Breadcrumb tag="ol">
+                <Breadcrumb tag="ol" style={{ paddingLeft: 0 }}>
                   <BreadcrumbItem tag="li">
                     <NavLink to="/">
                       <Home className="align-top" size={15} />

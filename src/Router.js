@@ -42,6 +42,14 @@ const SMSPollSurvey = lazy(() =>
   import("./views/pages/messages/SMS/PollSurvey")
 )
 
+const TelegramText = lazy(() =>
+  import("./views/pages/telegram")
+)
+
+const TelegramPoll = lazy(() =>
+  import("./views/pages/telegram/poll")
+)
+
 const login = lazy(() =>
   import("./views/pages/authentication/login/Login")
 )
@@ -137,6 +145,14 @@ class AppRouter extends React.Component {
             exact
             path="/messages/sms/poll-survey"
             component={SMSPollSurvey}
+          />
+          <AppRoute
+            path="/telegram/text"
+            component={TelegramText}
+          />
+          <AppRoute
+            path="/telegram/poll"
+            component={TelegramPoll}
           />
           <AppRoute
             path="/pages/login"
