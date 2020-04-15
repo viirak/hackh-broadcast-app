@@ -30,14 +30,13 @@ export default props => {
       res => {
         console.log(res)
         setSending(false);
-        setShowConfirm(false);
       },
       err => {
         console.log(err);
         setSending(false);
-        setShowConfirm(false);
       }
     );
+    setShowConfirm(false);
   }
   const cancelSend = () => setShowConfirm(false);
 

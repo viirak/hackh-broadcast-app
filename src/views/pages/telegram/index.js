@@ -19,7 +19,6 @@ export default props => {
 
   const confirmSend = () => {
     setSending(true);
-    setShowConfirm(false);
     dispatch(sendMessage(content)).then(
       res => {
         console.log(res)
@@ -30,6 +29,7 @@ export default props => {
         setSending(false);
       }
     );
+    setShowConfirm(false);
   }
   const cancelSend = () => setShowConfirm(false);
 
