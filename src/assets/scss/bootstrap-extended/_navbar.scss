@@ -77,7 +77,8 @@
 
 .header-navbar {
   padding: 0px;
-  min-height: $navbar-height - 0.5;
+  // min-height: $navbar-height - 0.5; // original
+  min-height: 4.5rem;
   font-family: $font-family-monospace;
   transition: 300ms ease all;
   background: linear-gradient(
