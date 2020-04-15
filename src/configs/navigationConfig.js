@@ -17,7 +17,7 @@ const navigationConfig = [
     id: "sent",
     title: "Sent",
     type: "item",
-    icon: <Icon.Mail size={20} />,
+    icon: <Icon.Send size={20} />,
     permissions: ["admin", "editor"],
     navLink: "/messages/sent"
   },
@@ -25,7 +25,7 @@ const navigationConfig = [
     id: "draft",
     title: "Draft",
     type: "item",
-    icon: <Icon.MessageSquare size={20} />,
+    icon: <Icon.Edit3 size={20} />,
     permissions: ["admin", "editor"],
     navLink: "/messages/draft"
   },
