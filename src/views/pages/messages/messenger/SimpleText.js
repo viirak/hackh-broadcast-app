@@ -1,31 +1,32 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import {Row, Col, Input, Label, Button, Modal,
-ModalHeader,
-ModalBody,
-ModalFooter, Card, CardBody} from "reactstrap";
+import {Row, Col, Input, Label, Button, Card, CardBody} from "reactstrap";
 import Breadcrumbs from '../../../../components/@vuexy/breadCrumbs/BreadCrumb';
 import { Link } from "react-router-dom";
 import PhoneSimulator from '../../../../components/@hackh/PhoneSimulator/phoneSimulator';
 
-import { sendMessage } from '../../../../redux/actions/messenger';
-
+import { sendMessage } from '../../../../redux/actions/social';
+import { Confirm, Info } from '../../../../components/@hackh/popup';
 
 export default props => {
   const [content, setContent] = useState('');
   const [sending, setSending] = useState(false);
+  const [info, setInfo] = useState(null);
+  const [error, setError] = useState(null);
   const [showConfirm, setShowConfirm] = useState(false);
   const dispatch = useDispatch();
 
   const confirmSend = () => {
     setSending(true);
-    dispatch(sendMessage(content)).then(
+    dispatch(sendMessage(content, 'messenger')).then(
       res => {
-        console.log(res)
+        console.log(res);
+        setInfo(res);
         setSending(false);
       },
       err => {
         console.log(err);
+        setError(err);
         setSending(false);
       }
     );
@@ -33,30 +34,10 @@ export default props => {
   }
   const cancelSend = () => setShowConfirm(false);
 
-  const Confirm = () => {
-    return <Modal
-        isOpen={true}
-        className="modal-dialog-centered modal-md"
-      >
-        <ModalHeader className={'bg-primary'}>
-          Confirmation
-        </ModalHeader>
-        <ModalBody>
-          Do you want to send this message?
-        </ModalBody>
-        <ModalFooter>
-          <Button color={'primary'} outline onClick={cancelSend}>
-            Cancel
-          </Button>{" "}
-          <Button color={'primary'} onClick={confirmSend}>
-            Send
-          </Button>
-        </ModalFooter>
-      </Modal>
-  }
-
   return <>
-    { showConfirm && <Confirm /> }
+    { showConfirm && <Confirm onConfirm={confirmSend} onCancel={cancelSend} /> }
+    { error && <Info error={true} action={() => setError(null)} body={error} /> }
+    { info && <Info action={() => setInfo(null)} body={info} /> }
     <Breadcrumbs
       breadCrumbParent="Messenger"
       breadCrumbActive="Simple Text"
