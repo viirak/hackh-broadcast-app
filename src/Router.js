@@ -14,6 +14,14 @@ const Page2 = lazy(() =>
   import("./views/pages/Page2")
 )
 
+const TelegramText = lazy(() =>
+  import("./views/pages/telegram")
+)
+
+const TelegramPoll = lazy(() =>
+  import("./views/pages/telegram/poll")
+)
+
 const login = lazy(() =>
   import("./views/pages/authentication/login/Login")
 )
@@ -73,6 +81,14 @@ class AppRouter extends React.Component {
           <AppRoute
             path="/page2"
             component={Page2}
+          />
+          <AppRoute
+            path="/telegram/text"
+            component={TelegramText}
+          />
+          <AppRoute
+            path="/telegram/poll"
+            component={TelegramPoll}
           />
           <AppRoute
             path="/pages/login"

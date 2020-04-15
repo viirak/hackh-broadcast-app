@@ -15,6 +15,7 @@ import {
   ModalFooter,
 } from "reactstrap"
 import { POST } from 'fetchier'
+import { auth } from 'firebase/app';
 import Cookie from 'js-cookie'
 import { Mail, Lock, Check, Facebook, Twitter, GitHub, Phone } from "react-feather"
 import { history } from "../../../../history"
@@ -23,6 +24,8 @@ import googleSvg from "../../../../assets/img/svg/google.svg"
 
 import loginImg from "../../../../assets/img/pages/login.png"
 import "../../../../assets/scss/pages/authentication.scss"
+
+import { endpoints } from '../../../../redux/config';
 
 
 class Login extends React.Component {
@@ -48,13 +51,13 @@ class Login extends React.Component {
     this.setState({
       isLoading: true,
     });
-    // setTimeout(() => this.setState({ isLoading: false, otpSent: true }), 1000);
+
     try {
-      const url = 'https://zwrqt3cve3.execute-api.ap-southeast-1.amazonaws.com/dev/api/auth';
+      const url = endpoints.auth;
       const body = { phone: `+855${this.state.phone}` }
-      // console.log('result', url, body);
+
       const result = await POST({ url, body })
-      // console.log('result', result);
+
       this.setState({ info: result, isLoading: false, otpSent: true });
     } catch (err) {
       console.log(err)
@@ -67,18 +70,17 @@ class Login extends React.Component {
     this.setState({
       isLoading: true,
     });
-    // setTimeout(() => {
-    //   this.setState({ isLoading: false });
-    //   history.push('/');
-    // }, 1500);
     try {
-      const url = 'https://zwrqt3cve3.execute-api.ap-southeast-1.amazonaws.com/dev/api/auth';
+      const url = endpoints.auth;
       const body = { phone: `+855${this.state.phone}`, code: this.state.pin }
-      // console.log('result', url, body);
+
       const result = await POST({ url, body })
       const { customToken = '' } = result.data || {};
-      customToken && Cookie.set('customToken', customToken);
-      // console.log('result', result);
+
+      await auth().signInWithCustomToken(customToken);
+      const { token } = await auth().currentUser.getIdTokenResult();
+      token && Cookie.set('token', token);
+
       this.setState({ isLoading: false });
       history.push('/');
     } catch (err) {
