@@ -1,5 +1,8 @@
 import React from "react"
 import * as Icon from "react-feather"
+import Telegram from '../assets/icons/Telegram'
+import Messenger from '../assets/icons/Messenger'
+import SMS from '../assets/icons/SMS'
 const navigationConfig = [
   {
     id: "dashboard",
@@ -37,7 +40,7 @@ const navigationConfig = [
     id: "telegram",
     title: "Telegram",
     type: "collapse",
-    icon: <Icon.MessageSquare size={20} />,
+    icon: <Telegram size={20} />,
     permissions: ["admin", "editor"],
     children: [
       {
@@ -62,7 +65,7 @@ const navigationConfig = [
     id: "messenger",
     title: "Messenger",
     type: "collapse",
-    icon: <Icon.MessageSquare size={20} />,
+    icon: <Messenger size={20} />,
     permissions: ["admin", "editor"],
     children: [
       {
@@ -91,7 +94,7 @@ const navigationConfig = [
     id: "sms",
     title: "SMS",
     type: "collapse",
-    icon: <Icon.MessageSquare size={20} />,
+    icon: <SMS size={20} />,
     permissions: ["admin", "editor"],
     children: [
       {
