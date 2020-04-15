@@ -85,15 +85,13 @@
     padding: 0.35rem 1rem 0.3rem 1.64rem;
     transition: 300ms ease all;
     .navbar-brand {
-      // padding: 15px 0px;
       display: flex;
       align-items: center;
       margin-top: 1.35rem;
       .brand-logo {
-        background: url("../../../img/logo/vuesax-logo.png") no-repeat;
-        background-position: -65px -54px;
-        height: 24px;
-        width: 35px;
+        background: url("../../../img/logo/logo-cb.png") no-repeat;
+        height: 52px;
+        width: 52px;
       }
 
       .brand-text {
@@ -104,6 +102,10 @@
         font-size: 1.57rem;
         animation: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) 0s normal forwards 1
           fadein;
+        .sub {
+          font-size: 1rem;
+          display: block;
+        }
       }
     }
     .modern-nav-toggle {
@@ -274,57 +276,57 @@
 
 // Navigation Themes
 
-.horizontal-layout,
-.vertical-layout{
-  &.theme-primary {
-    .navbar-container,
-    .navbar-header {
-      .brand-logo {
-        background-position: -65px -54px !important;
-      }
-    }
-  }
-  &.theme-success {
-    .navbar-container,
-    .navbar-header {
-      .brand-logo {
-        background-position: -120px -10px !important;
-      }
-    }
-  }
-  &.theme-danger {
-    .navbar-container,
-    .navbar-header {
-      .brand-logo {
-        background-position: -10px -10px !important;
-      }
-    }
-  }
-  &.theme-info {
-    .navbar-container,
-    .navbar-header {
-      .brand-logo {
-        background-position: -10px -54px !important;
-      }
-    }
-  }
-  &.theme-warning {
-    .navbar-container,
-    .navbar-header {
-      .brand-logo {
-        background-position: -120px -54px !important;
-      }
-    }
-  }
-  &.theme-dark {
-    .navbar-container,
-    .navbar-header {
-      .brand-logo {
-        background-position: -65px -10px !important;
-      }
-    }
-  }
-}
+// .horizontal-layout,
+// .vertical-layout{
+//   &.theme-primary {
+//     .navbar-container,
+//     .navbar-header {
+//       .brand-logo {
+//         background-position: -65px -54px !important;
+//       }
+//     }
+//   }
+//   &.theme-success {
+//     .navbar-container,
+//     .navbar-header {
+//       .brand-logo {
+//         background-position: -120px -10px !important;
+//       }
+//     }
+//   }
+//   &.theme-danger {
+//     .navbar-container,
+//     .navbar-header {
+//       .brand-logo {
+//         background-position: -10px -10px !important;
+//       }
+//     }
+//   }
+//   &.theme-info {
+//     .navbar-container,
+//     .navbar-header {
+//       .brand-logo {
+//         background-position: -10px -54px !important;
+//       }
+//     }
+//   }
+//   &.theme-warning {
+//     .navbar-container,
+//     .navbar-header {
+//       .brand-logo {
+//         background-position: -120px -54px !important;
+//       }
+//     }
+//   }
+//   &.theme-dark {
+//     .navbar-container,
+//     .navbar-header {
+//       .brand-logo {
+//         background-position: -65px -10px !important;
+//       }
+//     }
+//   }
+// }
 
 // Navigation Header
 //=====================

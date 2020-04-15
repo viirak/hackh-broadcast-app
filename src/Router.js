@@ -10,8 +10,36 @@ const Home = lazy(() =>
   import("./views/pages/Home")
 )
 
-const Page2 = lazy(() =>
-  import("./views/pages/Page2")
+const SentMessages = lazy(() =>
+  import("./views/pages/messages/Sent")
+)
+
+const DraftMessages = lazy(() =>
+  import("./views/pages/messages/Draft")
+)
+
+const TelegramSimpleText = lazy(() =>
+  import("./views/pages/messages/telegram/SimpleText")
+)
+
+const TelegramPollSurvey = lazy(() =>
+  import("./views/pages/messages/telegram/PollSurvey")
+)
+
+const MessengerSimpleText = lazy(() =>
+  import("./views/pages/messages/messenger/SimpleText")
+)
+
+const MessengerPollSurvey = lazy(() =>
+  import("./views/pages/messages/messenger/PollSurvey")
+)
+
+const SMSSimpleText = lazy(() =>
+  import("./views/pages/messages/SMS/SimpleText")
+)
+
+const SMSPollSurvey = lazy(() =>
+  import("./views/pages/messages/SMS/PollSurvey")
 )
 
 const TelegramText = lazy(() =>
@@ -79,8 +107,44 @@ class AppRouter extends React.Component {
             component={Home}
           />
           <AppRoute
-            path="/page2"
-            component={Page2}
+            exact
+            path="/messages/sent"
+            component={SentMessages}
+          />
+          <AppRoute
+            exact
+            path="/messages/draft"
+            component={DraftMessages}
+          />
+          <AppRoute
+            exact
+            path="/messages/telegram/text"
+            component={TelegramSimpleText}
+          />
+          <AppRoute
+            exact
+            path="/messages/telegram/poll-survey"
+            component={TelegramPollSurvey}
+          />
+          <AppRoute
+            exact
+            path="/messages/messenger/text"
+            component={MessengerSimpleText}
+          />
+          <AppRoute
+            exact
+            path="/messages/messenger/poll-survey"
+            component={MessengerPollSurvey}
+          />
+          <AppRoute
+            exact
+            path="/messages/sms/text"
+            component={SMSSimpleText}
+          />
+          <AppRoute
+            exact
+            path="/messages/sms/poll-survey"
+            component={SMSPollSurvey}
           />
           <AppRoute
             path="/telegram/text"
