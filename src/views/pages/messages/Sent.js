@@ -1,9 +1,19 @@
-import React from "react"
+import React, { useState, useEffect } from "react";
+import { useDispatch } from 'react-redux';
+import { fetchAllMessage } from '../../../loader/db/db';
 
-class SentMessages extends React.Component{
-  render(){
-    return <h4>Sent Message List.</h4>
-  }
+export default props => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    async function fetchMessages() {
+      const res = await fetchAllMessage();
+      console.log(res)
+    };
+    fetchMessages();
+  }, [])
+
+  return <>
+    <div>Sent Message list</div>
+  </>
 }
-
-export default SentMessages

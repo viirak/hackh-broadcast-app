@@ -9,6 +9,7 @@ import Spinner from "./components/@vuexy/spinner/Fallback-spinner"
 import "./index.scss"
 import "./@fake-db"
 import './loader/auth/auth';
+import './loader/db/db';
 
 const LazyApp = lazy(() => import("./App"))
 
