@@ -82,7 +82,8 @@ const navigationConfig = [
         type: "item",
         icon: <Icon.Circle size={12} />,
         permissions: ["admin"],
-        navLink: "/messages/messenger/poll-survey"
+        navLink: "/messages/messenger/poll-survey",
+        disabled: true
       }
     ]
   },
