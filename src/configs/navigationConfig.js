@@ -19,8 +19,7 @@ const navigationConfig = [
     type: "item",
     icon: <Icon.Mail size={20} />,
     permissions: ["admin", "editor"],
-    navLink: "/messages/:filter",
-    filterBase: "/messages/sent"
+    navLink: "/messages/sent"
   },
   {
     id: "draft",
@@ -28,8 +27,7 @@ const navigationConfig = [
     type: "item",
     icon: <Icon.MessageSquare size={20} />,
     permissions: ["admin", "editor"],
-    navLink: "/messages/:filter",
-    filterBase: "/messages/draft"
+    navLink: "/messages/draft"
   },
   {
     type: "groupHeader",
@@ -48,7 +46,7 @@ const navigationConfig = [
         type: "item",
         icon: <Icon.Circle size={12} />,
         permissions: ["admin", "editor"],
-        navLink: "/telegram/text"
+        navLink: "/messages/telegram/text"
       },
       {
         id: "poll-survey",
@@ -56,7 +54,7 @@ const navigationConfig = [
         type: "item",
         icon: <Icon.Circle size={12} />,
         permissions: ["admin"],
-        navLink: "/telegram/poll-survey"
+        navLink: "/messages/telegram/poll-survey"
       }
     ]
   },
@@ -73,7 +71,7 @@ const navigationConfig = [
         type: "item",
         icon: <Icon.Circle size={12} />,
         permissions: ["admin", "editor"],
-        navLink: "/messenger/text"
+        navLink: "/messages/messenger/text"
       },
       {
         id: "poll-survey",
@@ -81,7 +79,7 @@ const navigationConfig = [
         type: "item",
         icon: <Icon.Circle size={12} />,
         permissions: ["admin"],
-        navLink: "/messenger/poll-survey"
+        navLink: "/messages/messenger/poll-survey"
       }
     ]
   },
@@ -102,7 +100,7 @@ const navigationConfig = [
         type: "item",
         icon: <Icon.Circle size={12} />,
         permissions: ["admin", "editor"],
-        navLink: "/sms/text"
+        navLink: "/messages/sms/text"
       },
       {
         id: "poll-survey",
@@ -110,7 +108,7 @@ const navigationConfig = [
         type: "item",
         icon: <Icon.Circle size={12} />,
         permissions: ["admin"],
-        navLink: "/sms/poll-survey"
+        navLink: "/messages/sms/poll-survey"
       }
     ]
   },
