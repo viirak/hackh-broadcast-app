@@ -6,11 +6,9 @@ export const sendMessage = props => async dispatch => {
   const token = Cookie.get('token');
   if(!token) return console.log('No token specified in header.');
 
-  return POST({
-    url: endpoints.telegram,
-    body: { text: props },
-    headers: {
-      Authorization: `Bearer ${token}`
-    },
-  })
+  const body = !props.method
+    ? { text: props }
+    : { ...props };
+    
+  return POST({url: endpoints.telegram, body, headers: { Authorization: `Bearer ${token}`}});
 }

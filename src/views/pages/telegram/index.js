@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {Row, Col, Input, Label, Button, Modal,
 ModalHeader,
 ModalBody,
-ModalFooter,} from "reactstrap";
+ModalFooter, Card, CardBody} from "reactstrap";
 import Breadcrumbs from '../../../components/@vuexy/breadCrumbs/BreadCrumb';
 import { Link } from "react-router-dom";
 import PhoneSimulator from '../../../components/@hackh/PhoneSimulator/phoneSimulator';
@@ -19,16 +19,15 @@ export default props => {
 
   const confirmSend = () => {
     setSending(true);
+    setShowConfirm(false);
     dispatch(sendMessage(content)).then(
       res => {
         console.log(res)
         setSending(false);
-        setShowConfirm(false);
       },
       err => {
         console.log(err);
         setSending(false);
-        setShowConfirm(false);
       }
     );
   }
@@ -43,7 +42,7 @@ export default props => {
           Confirmation
         </ModalHeader>
         <ModalBody>
-        Do you want to send this message?
+          Do you want to send this message?
         </ModalBody>
         <ModalFooter>
           <Button color={'primary'} outline onClick={cancelSend}>
@@ -56,8 +55,6 @@ export default props => {
       </Modal>
   }
 
-  console.log(showConfirm)
-
   return <>
     { showConfirm && <Confirm /> }
     <Breadcrumbs
@@ -66,25 +63,27 @@ export default props => {
     />
     <Row>
       <Col md="6" sm="12">
-        <div className="form-label-group mt-2">
-          <Input
-            type="textarea"
-            name="content"
-            id="content"
-            rows="10"
-            value={content}
-            onChange={e => setContent(e.target.value)}
-            placeholder="Input content here"
-          />
-          <Label>Content</Label>
-          <small
-            className={`counter-value float-right ${
-              content.length > 4000 ? "bg-danger" : ""
-            }`}
-          >
-            {`${content.length}/4096`}
-          </small>
-        </div>
+        <Card>
+          <CardBody>
+            <h2>Content</h2>
+            <Input
+              type="textarea"
+              name="content"
+              id="content"
+              rows="10"
+              value={content}
+              onChange={e => content.length < 4096 && setContent(e.target.value)}
+              placeholder="Input content here"
+            />
+            <small
+              className={`counter-value float-right ${
+                content.length > 3900 ? "bg-danger" : ""
+              }`}
+            >
+              {`${content.length}/4096`}
+            </small>
+          </CardBody>
+        </Card>
         <div className="d-flex justify-content-end">
           <Button
             color="primary"
