@@ -49,8 +49,8 @@ export default props => {
 
   return <>
     { showConfirm && <Confirm onConfirm={confirmSend} onCancel={cancelSend} /> }
-    { error && <Info error={true} action={() => setError(null)} body={error} /> }
-    { info && <Info action={() => setInfo(null)} body={info} /> }
+    { error && <Info error={true} action={() => setError(null)} body={'Failed to send the message'} /> }
+    { info && <Info action={() => setInfo(null)} body={'Successfully sent the message'} /> }
     <Breadcrumbs
       breadCrumbParent="Telegram"
       breadCrumbActive="Poll / Survey"
