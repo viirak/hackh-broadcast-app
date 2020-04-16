@@ -131,6 +131,7 @@ export default props => {
           className="flex-grow p-4"
           type={'telegram'}
           messages={title}
+          options={options}
         />
       </Col>
     </Row>
