@@ -127,11 +127,11 @@ export default props => {
         </div>
       </Col>
       <Col md="6" sm="12">
-        {/* <PhoneSimulator
+        <PhoneSimulator
           className="flex-grow p-4"
           type={'telegram'}
           messages={title}
-        /> */}
+        />
       </Col>
     </Row>
   </>

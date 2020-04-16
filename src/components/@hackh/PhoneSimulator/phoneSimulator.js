@@ -1,6 +1,5 @@
 import React from 'react';
-import 'html5-device-mockups/dist/device-mockups.min.css';
-import { IPhone7 } from 'react-device-mockups';
+import ScrollContainer from 'react-indiana-drag-scroll'
 
 const PhoneSimulator = ({ className, type, messages }) => {
   let socialType;
@@ -10,39 +9,35 @@ const PhoneSimulator = ({ className, type, messages }) => {
     default: socialType = { background: '#fff', bubbleBackground: '#d3d3d3' }; break;
   }
   return (
-    <div className={`virtual-device ${className}`}>
-      <IPhone7
-        height={500}
-        orientation="portrait"
-        color="black"
-      >
-        <div style={{ height: '100%',
+    <div className="device-wrapper">
+        <div className="device" data-device="iPhone7" data-orientation="portrait" data-color="white">
+          <div className="screen" style={{
+          pointerEvents: "auto",
           overflowY: 'scroll',
           backgroundColor: socialType.background,
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'flex-end' }}
-        >
-          <div style={{
-            fontSize: 10,
-            borderRadius: 8,
-            display: 'flex',
-            paddingTop: 5,
-            paddingLeft: 10,
-            paddingRight: 10,
-            minHeight: 20,
-            margin: '0 40px 8px 8px',
-            borderStyle: 'solid',
-            borderWidth: '1px',
-            backgroundColor: socialType.bubbleBackground,
-            wordBreak: 'break-word',
-            whiteSpace: 'pre-wrap',
-          }}
           >
-            <span>{messages}</span>
-          </div>
+            <ScrollContainer style={{
+              fontSize: 10,
+              borderRadius: 8,
+              display: 'flex',
+              padding: "5px 10px 5px 10px",
+              minHeight: 20,
+              width: "fit-content",
+              margin: '0 40px 8px 8px',
+              backgroundColor: socialType.bubbleBackground,
+              wordBreak: 'break-word',
+              whiteSpace: 'pre-wrap',
+            }}
+            >
+              <span>{messages}</span>
+            </ScrollContainer>
         </div>
-      </IPhone7>
+      </div>
+      <div class="button">
+      </div>
     </div>
   );
 };
