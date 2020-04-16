@@ -48,6 +48,10 @@ const login = lazy(() =>
   import("./views/pages/authentication/login/Login")
 )
 
+const landing = lazy(() =>
+  import("./views/pages/Landing")
+)
+
 // Set Layout and Component Using App Route
 const AppRoute = ({
   component: Component,
@@ -70,7 +74,7 @@ const AppRoute = ({
                   ? context.horizontalLayout
                   : context.VerticalLayout
                 return (
-                  <LayoutTag {...props} permission={props.user}>
+                  <LayoutTag {...props} permission={user}>
                     <Suspense fallback={<Spinner />}>
                       <Component {...props} />
                     </Suspense>
@@ -88,6 +92,7 @@ export default props => {
   const { user } = useSelector(store => store.auth);
   const [logging, setLogging] = useState(true);
   const dispatch = useDispatch();
+  const { pathname = '/' } = window && window.location || {};
 
   useEffect(() => {
     async function start() {
@@ -105,7 +110,7 @@ export default props => {
   }, []);
 
   if(logging) return <Spinner />
-  if(!user) history.push('/pages/login');
+  if(!user) history.push(pathname === '/subscribe' && pathname || '/pages/login');
 
   return (
     // Set the directory path if you are deploying in sub-folder
@@ -159,6 +164,11 @@ export default props => {
         <AppRoute
           path="/pages/login"
           component={login}
+          fullLayout
+        />
+        <AppRoute
+          path="/subscribe"
+          component={landing}
           fullLayout
         />
       </Switch>
