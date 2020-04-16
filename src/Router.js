@@ -90,15 +90,18 @@ export default props => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const loginToken = Cookie.get('loginToken');
-    if(loginToken)
-      return dispatch(loginUser(loginToken))
-        .then(() => setLogging(false))
-        .catch(err => {
-          console.log(err);
-          setLogging(false);
-        })
-    setLogging(false);
+    async function start() {
+      const loginToken = Cookie.get('loginToken');
+      if(loginToken)
+        return dispatch(loginUser(loginToken))
+          .then(() => setLogging(false))
+          .catch(err => {
+            console.log(err);
+            setLogging(false);
+          })
+      setLogging(false);
+    }
+    start();
   }, []);
 
   if(logging) return <Spinner />
