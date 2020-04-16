@@ -11,7 +11,6 @@ import {
   Label,
 } from "reactstrap"
 import { POST } from 'fetchier'
-import { auth } from 'firebase/app';
 import Cookie from 'js-cookie'
 import { Mail, Lock, Check, Facebook, Twitter, GitHub, Phone } from "react-feather"
 import { history } from "../../../../history"
@@ -24,7 +23,7 @@ import "../../../../assets/scss/pages/authentication.scss"
 
 import { endpoints } from '../../../../redux/config';
 import { Info } from '../../../../components/@hackh/popup';
-import { setUser } from '../../../../redux/actions/auth/customAuth';
+import { login } from '../../../../redux/actions/auth/customAuth';
 
 class Login extends React.Component {
   state = {
@@ -63,11 +62,12 @@ class Login extends React.Component {
     }
   }
 
-  handleLogin = async () => {
-    if(!this.state.pin) return console.log('no pin input');
+  handleLogin = async token => {
     this.setState({
       isLoading: true,
     });
+
+    if(!this.state.pin) return console.log('no pin input');
     try {
       const url = endpoints.auth;
       const body = { phone: `+855${this.state.phone}`, code: this.state.pin }
@@ -75,10 +75,7 @@ class Login extends React.Component {
       const result = await POST({ url, body })
       const { customToken = '' } = result.data || {};
 
-      await auth().signInWithCustomToken(customToken);
-      const userRes = await auth().currentUser.getIdTokenResult();
-      userRes.token && Cookie.set('token', userRes.token);
-      this.props.setUser(userRes);
+      await this.props.login(customToken);
 
       this.setState({ isLoading: false });
       history.push('/');
@@ -174,6 +171,6 @@ class Login extends React.Component {
 const mapStateToProps = () => ({});
 
 const mapDispatchToProps = (dispatch) => ({
-  setUser: obj => dispatch(setUser(obj)),
+  login: token => dispatch(login(token))
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

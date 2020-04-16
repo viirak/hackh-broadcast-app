@@ -18,15 +18,18 @@ import Autocomplete from "../../../components/@vuexy/autoComplete/AutoCompleteCo
 import { history } from "../../../history"
 import ReactCountryFlag from "react-country-flag"
 import { IntlContext } from "../../../utility/context/Internationalization"
+import { logout } from '../../../redux/actions/auth/customAuth';
+import { useDispatch } from 'react-redux';
 
 
 const UserDropdown = props => {
+  const dispatch = useDispatch();
   return (
     <DropdownMenu right>
       <DropdownItem
         tag="a"
         href="#"
-        onClick={e => history.push("/pages/login")}
+        onClick={() => dispatch(logout()).then(() => history.push('/pages/login'))}
       >
         <Icon.Power size={14} className="mr-50" />
         <span className="align-middle">Log Out</span>

@@ -3,8 +3,8 @@ import { endpoints } from '../config';
 import Cookie from 'js-cookie';
 import { postMessage } from '../../loader/db/db';
 
-export const sendMessage = (props, provider = 'telegram') => async dispatch => {
-  const token = Cookie.get('token');
+export const sendMessage = (props, provider = 'telegram') => async (dispatch, getState) => {
+  const { token } = getState().auth.user || {};
   if(!token) return console.log('No token specified in header.');
 
   const req = !props.method
