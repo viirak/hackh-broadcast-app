@@ -1,9 +1,11 @@
-import React, { Suspense, lazy } from "react"
+import React, { Suspense, lazy, useEffect, useState } from "react"
 import { Router, Switch, Route } from "react-router-dom"
 import { history } from "./history"
-import { connect } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import Spinner from "./components/@vuexy/spinner/Loading-spinner"
 import { ContextLayout } from "./utility/context/Layout"
+import Cookie from 'js-cookie';
+import { login as loginUser } from './redux/actions/auth/customAuth';
 
 // Route-based code splitting
 const Home = lazy(() =>
@@ -47,106 +49,119 @@ const login = lazy(() =>
 )
 
 // Set Layout and Component Using App Route
-const RouteConfig = ({
+const AppRoute = ({
   component: Component,
   fullLayout,
   permission,
-  user,
   ...rest
-}) => (
-  <Route
-    {...rest}
-    render={props => {
-      return (
-        <ContextLayout.Consumer>
-          {context => {
-            let LayoutTag =
-              fullLayout === true
-                ? context.fullLayout
-                : context.state.activeLayout === "horizontal"
-                ? context.horizontalLayout
-                : context.VerticalLayout
-              return (
-                <LayoutTag {...props} permission={props.user}>
-                  <Suspense fallback={<Spinner />}>
-                    <Component {...props} />
-                  </Suspense>
-                </LayoutTag>
-              )
-          }}
-        </ContextLayout.Consumer>
-      )
-    }}
-  />
-)
-const mapStateToProps = state => {
-  return {
-    user: state.auth.login.userRole
-  }
+}) => {
+  const user = useSelector(store => store.auth.login.userRole);
+  return (
+    <Route
+      {...rest}
+      render={props => {
+        return (
+          <ContextLayout.Consumer>
+            {context => {
+              let LayoutTag =
+                fullLayout === true
+                  ? context.fullLayout
+                  : context.state.activeLayout === "horizontal"
+                  ? context.horizontalLayout
+                  : context.VerticalLayout
+                return (
+                  <LayoutTag {...props} permission={props.user}>
+                    <Suspense fallback={<Spinner />}>
+                      <Component {...props} />
+                    </Suspense>
+                  </LayoutTag>
+                )
+            }}
+          </ContextLayout.Consumer>
+        )
+      }}
+    />
+  )
 }
 
-const AppRoute = connect(mapStateToProps)(RouteConfig)
+export default props => {
+  const { user } = useSelector(store => store.auth);
+  const [logging, setLogging] = useState(true);
+  const dispatch = useDispatch();
 
-class AppRouter extends React.Component {
-  render() {
-    return (
-      // Set the directory path if you are deploying in sub-folder
-      <Router history={history}>
-        <Switch>
-          <AppRoute
-            exact
-            path="/"
-            component={Home}
-          />
-          <AppRoute
-            exact
-            path="/messages/sent"
-            component={SentMessages}
-          />
-          <AppRoute
-            exact
-            path="/messages/draft"
-            component={DraftMessages}
-          />
-          <AppRoute
-            exact
-            path="/messages/telegram/text"
-            component={TelegramSimpleText}
-          />
-          <AppRoute
-            exact
-            path="/messages/telegram/poll-survey"
-            component={TelegramPollSurvey}
-          />
-          <AppRoute
-            exact
-            path="/messages/messenger/text"
-            component={MessengerSimpleText}
-          />
-          <AppRoute
-            exact
-            path="/messages/messenger/poll-survey"
-            component={MessengerPollSurvey}
-          />
-          <AppRoute
-            exact
-            path="/messages/sms/text"
-            component={SMSSimpleText}
-          />
-          <AppRoute
-            exact
-            path="/messages/sms/poll-survey"
-            component={SMSPollSurvey}
-          />
-          <AppRoute
-            path="/pages/login"
-            component={login}
-            fullLayout
-          />
-        </Switch>
-      </Router>
-    )
-  }
+  useEffect(() => {
+    async function start() {
+      const loginToken = Cookie.get('loginToken');
+      if(loginToken)
+        return dispatch(loginUser(loginToken))
+          .then(() => setLogging(false))
+          .catch(err => {
+            console.log(err);
+            setLogging(false);
+          })
+      setLogging(false);
+    }
+    start();
+  }, []);
+
+  if(logging) return <Spinner />
+  if(!user) history.push('/pages/login');
+
+  return (
+    // Set the directory path if you are deploying in sub-folder
+    <Router history={history}>
+      <Switch>
+        <AppRoute
+          exact
+          path="/"
+          component={Home}
+        />
+        <AppRoute
+          exact
+          path="/messages/sent"
+          component={SentMessages}
+        />
+        <AppRoute
+          exact
+          path="/messages/draft"
+          component={DraftMessages}
+        />
+        <AppRoute
+          exact
+          path="/messages/telegram/text"
+          component={TelegramSimpleText}
+        />
+        <AppRoute
+          exact
+          path="/messages/telegram/poll-survey"
+          component={TelegramPollSurvey}
+        />
+        <AppRoute
+          exact
+          path="/messages/messenger/text"
+          component={MessengerSimpleText}
+        />
+        <AppRoute
+          exact
+          path="/messages/messenger/poll-survey"
+          component={MessengerPollSurvey}
+        />
+        <AppRoute
+          exact
+          path="/messages/sms/text"
+          component={SMSSimpleText}
+        />
+        <AppRoute
+          exact
+          path="/messages/sms/poll-survey"
+          component={SMSPollSurvey}
+        />
+        <AppRoute
+          path="/pages/login"
+          component={login}
+          fullLayout
+        />
+      </Switch>
+    </Router>
+  )
 }
-
-export default AppRouter

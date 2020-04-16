@@ -9,24 +9,21 @@ import {
   FormGroup,
   Input,
   Label,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
 } from "reactstrap"
 import { POST } from 'fetchier'
-import { auth } from 'firebase/app';
 import Cookie from 'js-cookie'
 import { Mail, Lock, Check, Facebook, Twitter, GitHub, Phone } from "react-feather"
 import { history } from "../../../../history"
 import Checkbox from "../../../../components/@vuexy/checkbox/CheckboxesVuexy"
 import googleSvg from "../../../../assets/img/svg/google.svg"
+import { connect } from 'react-redux';
 
 import loginImg from "../../../../assets/img/pages/login.png"
 import "../../../../assets/scss/pages/authentication.scss"
 
 import { endpoints } from '../../../../redux/config';
-
+import { Info } from '../../../../components/@hackh/popup';
+import { login } from '../../../../redux/actions/auth/customAuth';
 
 class Login extends React.Component {
   state = {
@@ -65,11 +62,12 @@ class Login extends React.Component {
     }
   }
 
-  handleLogin = async () => {
-    if(!this.state.pin) return console.log('no pin input');
+  handleLogin = async token => {
     this.setState({
       isLoading: true,
     });
+
+    if(!this.state.pin) return console.log('no pin input');
     try {
       const url = endpoints.auth;
       const body = { phone: `+855${this.state.phone}`, code: this.state.pin }
@@ -77,9 +75,7 @@ class Login extends React.Component {
       const result = await POST({ url, body })
       const { customToken = '' } = result.data || {};
 
-      await auth().signInWithCustomToken(customToken);
-      const { token } = await auth().currentUser.getIdTokenResult();
-      token && Cookie.set('token', token);
+      await this.props.login(customToken);
 
       this.setState({ isLoading: false });
       history.push('/');
@@ -92,8 +88,8 @@ class Login extends React.Component {
   render() {
     const { error, info } = this.state;
     return <>
-      { error && <Popup error={true} action={() => this.setState({ error: null })} body={error.message || error.data.message} /> }
-      { info && <Popup action={() => this.setState({ info: null })} body={info.message || info.data.message} /> }
+      { error && <Info error={true} action={() => this.setState({ error: null })} body={error} /> }
+      { info && <Info action={() => this.setState({ info: null })} body={info} /> }
       <Row className="m-0 justify-content-center">
         <Col
           sm="8"
@@ -171,24 +167,10 @@ class Login extends React.Component {
     </>
   }
 }
-export default Login
 
-const Popup = ({ action, error = false, body }) => {
-  return <Modal
-      isOpen={true}
-      toggle={action}
-      className="modal-dialog-centered modal-sm"
-    >
-      <ModalHeader toggle={action} className={!error ? 'bg-primary' : 'bg-danger'}>
-        {error ? 'Error' : 'Info'}
-      </ModalHeader>
-      <ModalBody>
-      {body}
-      </ModalBody>
-      <ModalFooter>
-        <Button color={error ? 'danger' : 'primary'} onClick={action}>
-          Close
-        </Button>{" "}
-      </ModalFooter>
-    </Modal>
-}
+const mapStateToProps = () => ({});
+
+const mapDispatchToProps = (dispatch) => ({
+  login: token => dispatch(login(token))
+});
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
