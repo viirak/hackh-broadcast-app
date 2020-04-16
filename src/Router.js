@@ -2,7 +2,7 @@ import React, { Suspense, lazy, useEffect, useState } from "react"
 import { Router, Switch, Route } from "react-router-dom"
 import { history } from "./history"
 import { useDispatch, useSelector } from "react-redux"
-import Spinner from "./components/@vuexy/spinner/Loading-spinner"
+import Spinner from "./components/@vuexy/spinner/Fallback-spinner"
 import { ContextLayout } from "./utility/context/Layout"
 import Cookie from 'js-cookie';
 import { login as loginUser } from './redux/actions/auth/customAuth';
