@@ -2,6 +2,7 @@ import React from "react"
 import { Navbar } from "reactstrap"
 import classnames from "classnames"
 import NavbarBookmarks from "./NavbarBookmarks"
+import NavbarTitle from "./NavbarTitle"
 import NavbarUser from "./NavbarUser"
 import userImg from "../../../assets/img/portrait/small/avatar-s-11.jpg"
 
@@ -56,8 +57,7 @@ const ThemeNavbar = props => {
                 <span className="page-title">Home</span>
               </div> */}
               <div className="logo d-flex align-items-center">
-                <div className="brand-logo mr-50"></div>
-                <h2 className="text-white brand-text mb-0">Home</h2>
+                <NavbarTitle path={ props.currentPath } />
               </div>
               {props.horizontal ? (
                 <div className="logo d-flex align-items-center">
