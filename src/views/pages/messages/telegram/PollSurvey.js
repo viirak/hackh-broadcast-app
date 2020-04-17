@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import {Row, Col, Input, Label, Button, CustomInput, Card, CardBody} from "reactstrap";
 import Breadcrumbs from '../../../../components/@vuexy/breadCrumbs/BreadCrumb';
-import { Link } from "react-router-dom";
+import Dropzone from '../../../../components/@vuexy/dropzone';
+
 import PhoneSimulator from '../../../../components/@hackh/PhoneSimulator/phoneSimulator';
 
 import { sendMessage } from '../../../../redux/actions/social'
@@ -11,18 +12,22 @@ import { Confirm, Info } from '../../../../components/@hackh/popup';
 export default props => {
   const [title, setTitle] = useState('');
   const [options, setOptions] = useState([]);
+  const [image, setImage] = useState();
   const [info, setInfo] = useState(null);
   const [error, setError] = useState(null);
   const [sending, setSending] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
   const dispatch = useDispatch();
 
+  const isOptsValid = options.filter(item => item).length >= 2;
+
   const confirmSend = () => {
     setSending(true);
     const body = {
       method: 'sendPoll',
       question: title,
-      options
+      options,
+      image
     };
 
     dispatch(sendMessage(body)).then(
@@ -45,6 +50,12 @@ export default props => {
     let newOpts = Object.assign([], options);
     newOpts[num] = text;
     setOptions(newOpts);
+  }
+
+  const clear = () => {
+    setTitle(''); 
+    setOptions([]);
+    setImage();
   }
 
   return <>
@@ -78,15 +89,10 @@ export default props => {
 
             <br /><br />
 
-            {/* <Label>Image</Label>
-            <CustomInput
-              type="file"
-              id="image"
-              name="image"
-              onChange={console.log}
-            />
-
-            <br /><br /> */}
+            <h2>Image</h2>
+            <Dropzone getImage={file => setImage(file)} image={image} />
+            
+            <br /><br />
 
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <h2>Options</h2>
@@ -115,12 +121,12 @@ export default props => {
           <Button
             color="primary"
             outline
-            onClick={() => (setTitle(''), setOptions([]))}
-            disabled={!title.length && !options.length}
+            onClick={clear}
+            disabled={!title.length && !isOptsValid && !image}
           >Clear</Button>
           &nbsp;&nbsp;&nbsp;&nbsp;
           <Button.Ripple
-            disabled={sending || !title.length || !options.length}
+            disabled={sending || !title.length || !isOptsValid}
             color="primary"
             onClick={() => setShowConfirm(true)}
           >Send</Button.Ripple>
@@ -132,6 +138,7 @@ export default props => {
           type={'telegram'}
           messages={title}
           options={options}
+          image={image}
         />
       </Col>
     </Row>

@@ -7,9 +7,13 @@ export const sendMessage = (props, provider = 'telegram') => async (dispatch, ge
   const { token } = getState().auth.user || {};
   if(!token) return console.log('No token specified in header.');
 
-  const req = !props.method
+  let req = !props.method
     ? { text: props }
     : { ...props };
+
+  // if(req.image && Object.keys(req.image).length) {
+    // upload image
+  // }
 
   const messageId = await postMessage(req, provider);
 

@@ -251,7 +251,7 @@ class VerticalLayout extends PureComponent {
       sidebarState: appProps.sidebarCollapsed
     }
 
-    console.log(this.props.children.props.children);
+    // console.log(this.props.children.props.children);
     return (
       <div
         className={classnames(
