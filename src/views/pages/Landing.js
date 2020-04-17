@@ -35,28 +35,28 @@ export default props => {
             <Col md="6" sm="12" className="px-0 py-0 text-center">
               <Card className="h-100 rounded-0">
                 <CardBody className="h-100">
-                  <div style={{ width: '70%', marginLeft: 'auto', marginRight: 'auto', paddingTop: '2rem' }}>
+                  <div style={{ width: '80%', marginLeft: 'auto', marginRight: 'auto', paddingTop: '2rem' }}>
                     <h2>ចូលរួមឥលូវនេះ - Subscribe</h2>
                     <br />
                     <br />
-                    <p>ចូលរួមទទួលដំនឺងជាផ្លូវការពីប្រព័ន្ធផ្តល់ពត័មានទាក់ទងនឹងការវិវត្តន៍នៃវីរុស​ Covid-19 នៅក្នុងប្រទេសកម្ពុជា</p>
-                    <p>Subscribe to official news broadcasting system about the Covid-19 virus in Cambodia</p>
+                    <p>ចូលរួមខាងក្រោមដើម្បីទទួលដំនឺងជាផ្លូវការពីប្រព័ន្ធផ្តល់ពត័មានទាក់ទងនឹងការវិវត្តន៍នៃវីរុស​ Covid-19 នៅក្នុងប្រទេសកម្ពុជា</p>
+                    <p>Subscribe to the official news broadcasting system about the Covid-19 virus in Cambodia</p>
                     <br />
                     <br />
-                    <div className="d-flex justify-content-between px-4">
-                      <div className="align-self-center">
+                    <Row>
+                      <Col>
                         <a href="https://t.me/hackh_broadcast" target="blank">
                           <img src={iconTelegram} alt="loginImg" />
                           <p>Telegram</p>
                         </a>
-                      </div>
-                      <div className="align-self-center">
+                      </Col>
+                      <Col>
                         <a href="https://m.me/113306183658091" target="blank">
-                          <img src={iconMessenger} alt="loginImg" />
-                          <p>Messenger</p>
+                          <img style={{paddingTop: '5px'}} src={iconMessenger} alt="loginImg" />
+                          <p style={{paddingTop: '5px'}}>Messenger</p>
                         </a>
-                      </div>
-                    </div>
+                      </Col>
+                    </Row>
                   </div>
                 </CardBody>
               </Card>
