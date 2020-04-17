@@ -12,6 +12,7 @@ export default props => {
     getInputProps
   } = useDropzone({
     accept: "image/jpeg, image/png",
+    maxSize: 10000000, // image under 10MB only
     onDrop: acceptedFiles => {
       setFiles(
         Object.assign(acceptedFiles[0], {
@@ -45,7 +46,7 @@ export default props => {
                 &nbsp;&nbsp;{files.name}
               </>
             : <p className="mx-1">
-                <em>(Only *.jpeg and *.png images will be accepted)</em>
+                <em>(Only *.jpeg and *.png images will be accepted. Size limited to 10MB)</em>
               </p>
         }
       </div>
