@@ -26,20 +26,22 @@ export default props => {
         sm="10"
         className="d-flex justify-content-center"
       >
-        <Card className="bg-authentication login-card rounded-0 mb-0 w-100">
-          <Row className="m-0">
-            <Col md="3" className="d-lg-block d-none text-center align-self-center px-0 py-0">
-              <div className="px-1 py-5" style={{ backgroundColor: '#436688' }}>
-                <img src={loginImgLeft} alt="loginImg" />
-              </div>
+        <Card className="bg-authentication login-card mb-0 w-100">
+          <div style={{ backgroundColor: '#436688' }}>
+            <Row className="m-0">
+            <Col md="3" className="d-lg-block d-none text-center align-self-center px-1 py-5">
+              <img src={loginImgLeft} alt="loginImg" />
             </Col>
             <Col md="6" sm="12" className="px-0 py-0 text-center">
-              <Card className="h-100">
-                <CardBody>
-                  <div style={{ width: '70%', marginLeft: 'auto', marginRight: 'auto' }}>
-                    <h3>Subscribe</h3>
+              <Card className="h-100 rounded-0">
+                <CardBody className="h-100">
+                  <div style={{ width: '70%', marginLeft: 'auto', marginRight: 'auto', paddingTop: '2rem' }}>
+                    <h3>ចូលរួមឥលូវនេះ - Subscribe</h3>
                     <br />
+                    <p>ចូលរួមទទួលដំនឺងជាផ្លូវការពីប្រព័ន្ធផ្តល់ពត័មានទាក់ទងនឹងវីរុស​ Covid-19 នៅក្នុងប្រទេសកម្ពុជា</p>
                     <p>Subscribe to official news broadcasting system about the Covid-19 virus in Cambodia</p>
+                    <br />
+                    <br />
                     <div className="d-flex justify-content-between px-4">
                       <div className="align-self-center">
                         <a href="https://t.me/hackh_broadcast" target="blank">
@@ -58,12 +60,11 @@ export default props => {
                 </CardBody>
               </Card>
             </Col>
-            <Col md="3" className="d-lg-block d-none text-center align-self-center px-0 py-0">
-              <div className="px-2 py-5" style={{ backgroundColor: '#436688'}}>
-                <img src={loginImgRight} alt="loginImg" />
-              </div>
+            <Col md="3" className="d-lg-block d-none text-center align-self-center px-2 py-5">
+              <img src={loginImgRight} alt="loginImg" />
             </Col>
           </Row>
+          </div>
         </Card>
       </Col>
     </Row>
