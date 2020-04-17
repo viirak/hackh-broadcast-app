@@ -36,9 +36,10 @@ export default props => {
               <Card className="h-100 rounded-0">
                 <CardBody className="h-100">
                   <div style={{ width: '70%', marginLeft: 'auto', marginRight: 'auto', paddingTop: '2rem' }}>
-                    <h3>ចូលរួមឥលូវនេះ - Subscribe</h3>
+                    <h2>ចូលរួមឥលូវនេះ - Subscribe</h2>
                     <br />
-                    <p>ចូលរួមទទួលដំនឺងជាផ្លូវការពីប្រព័ន្ធផ្តល់ពត័មានទាក់ទងនឹងវីរុស​ Covid-19 នៅក្នុងប្រទេសកម្ពុជា</p>
+                    <br />
+                    <p>ចូលរួមទទួលដំនឺងជាផ្លូវការពីប្រព័ន្ធផ្តល់ពត័មានទាក់ទងនឹងការវិវត្តន៍នៃវីរុស​ Covid-19 នៅក្នុងប្រទេសកម្ពុជា</p>
                     <p>Subscribe to official news broadcasting system about the Covid-19 virus in Cambodia</p>
                     <br />
                     <br />
