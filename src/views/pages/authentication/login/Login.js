@@ -18,7 +18,7 @@ import Checkbox from "../../../../components/@vuexy/checkbox/CheckboxesVuexy"
 import googleSvg from "../../../../assets/img/svg/google.svg"
 import { connect } from 'react-redux';
 
-import loginImg from "../../../../assets/img/pages/login.png"
+import loginImg from "../../../../assets/img/pages/auth-login.png"
 import "../../../../assets/scss/pages/authentication.scss"
 
 import { endpoints } from '../../../../redux/config';
@@ -98,7 +98,7 @@ class Login extends React.Component {
           md="8"
           className="d-flex justify-content-center"
         >
-          <Card className="bg-authentication login-card rounded-0 mb-0 w-100">
+          <Card className="bg-authentication rounded-3 login-card mb-0 w-100">
             <Row className="m-0">
               <Col
                 lg="6"
@@ -109,20 +109,21 @@ class Login extends React.Component {
               <Col lg="6" md="12" className="p-0">
                 <Card className="rounded-0 mb-0 px-2">
                       <CardBody>
-                        <h4>Login</h4>
-                        <p>Welcome back, Please input your phone number.</p>
-                        <Form onSubmit={e => e.preventDefault()}>
+                        <h1 className="title">Login</h1>
+                        <p className="desc">Enter your phone number associated with your account and we will send you an one-time password code to confirm</p>
+                        <Form className="form" onSubmit={e => e.preventDefault()}>
                           { !this.state.otpSent &&
                             <FormGroup className="form-label-group position-relative has-icon-left">
                               <Input
+                                className="inputNumber"
                                 type="number"
-                                placeholder="phone number"
+                                placeholder="Please enter your phone number here"
                                 value={this.state.phone}
                                 onChange={e => this.setState({ phone: e.target.value })}
                               />
-                              <div className="form-control-position">
+                              {/* <div className="form-control-position">
                                 <Phone size={15} />
-                              </div>
+                              </div> */}
                             </FormGroup>
                           }
                           {
@@ -139,7 +140,7 @@ class Login extends React.Component {
                               </div>
                             </FormGroup>
                           }
-                          <div className="d-flex justify-content-between">
+                          <div className="">
                             {
                               !!this.state.otpSent &&
                                 <Button
@@ -153,7 +154,7 @@ class Login extends React.Component {
                               color="primary"
                               onClick={() => this.state.otpSent ? this.handleLogin() : this.handleRequestOtp()}
                             >
-                                {!this.state.otpSent ? 'Send OTP' : 'Login'}
+                                {!this.state.otpSent ? 'Send' : 'Login'}
                             </Button.Ripple>
                           </div>
                         </Form>

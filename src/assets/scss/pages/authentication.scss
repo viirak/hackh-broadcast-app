@@ -22,7 +22,8 @@
 
 // authentication pages background
 .bg-authentication {
-  background-color: $blank-bg-color;
+  background-color: $dark-card-color;
+  overflow: hidden;
   .auth-title,
   .vx-checkbox-con span,
   .divider .divider-text {
@@ -34,6 +35,27 @@
       .btn {
         padding: 0.87rem 1.2rem !important;
         margin: 1rem 1rem 1rem 0rem;
+      }
+    }
+  }
+
+  .card {
+    min-height: 25rem;
+    .card-body {
+      text-align: center;
+      padding: 3em;
+    }
+    .title{
+      font-weight: bold;
+    }
+    .desc {
+      margin: 2rem 0;
+    }
+    .form {
+      text-align: center;
+      .inputNumber {
+        padding: 0 1em;
+        text-align: center;
       }
     }
   }
