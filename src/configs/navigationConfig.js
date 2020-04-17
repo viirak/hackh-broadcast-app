@@ -44,7 +44,7 @@ const navigationConfig = [
     permissions: ["admin", "editor"],
     children: [
       {
-        id: "text",
+        id: "telegram-text",
         title: "Simple Text",
         type: "item",
         icon: <Icon.Circle size={12} />,
@@ -52,7 +52,7 @@ const navigationConfig = [
         navLink: "/messages/telegram/text"
       },
       {
-        id: "poll-survey",
+        id: "telegram-poll-survey",
         title: "Poll/Survey",
         type: "item",
         icon: <Icon.Circle size={12} />,
@@ -69,7 +69,7 @@ const navigationConfig = [
     permissions: ["admin", "editor"],
     children: [
       {
-        id: "text",
+        id: "messenger-text",
         title: "Simple Text",
         type: "item",
         icon: <Icon.Circle size={12} />,
@@ -77,7 +77,7 @@ const navigationConfig = [
         navLink: "/messages/messenger/text"
       },
       {
-        id: "poll-survey",
+        id: "messenger-poll-survey",
         title: "Poll/Survey",
         type: "item",
         icon: <Icon.Circle size={12} />,
@@ -98,7 +98,7 @@ const navigationConfig = [
     permissions: ["admin", "editor"],
     children: [
       {
-        id: "text",
+        id: "sms-text",
         title: "Simple Text",
         type: "item",
         icon: <Icon.Circle size={12} />,
@@ -106,7 +106,7 @@ const navigationConfig = [
         navLink: "/messages/sms/text"
       },
       {
-        id: "poll-survey",
+        id: "sms-poll-survey",
         title: "Poll/Survey",
         type: "item",
         icon: <Icon.Circle size={12} />,

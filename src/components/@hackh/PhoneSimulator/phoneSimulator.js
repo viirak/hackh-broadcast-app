@@ -1,7 +1,7 @@
 import React from 'react';
 import ScrollContainer from 'react-indiana-drag-scroll'
 
-const PhoneSimulator = ({ className, type, messages, options = [] }) => {
+const PhoneSimulator = ({ className, type, messages, options = [], image }) => {
   let socialType;
   switch (type) {
     case 'telegram': socialType = { background: '#19B7EA', bubbleBackground: '#fff', optionBackground: '#dadddc' }; break;
@@ -20,6 +20,7 @@ const PhoneSimulator = ({ className, type, messages, options = [] }) => {
           flexDirection: 'column',
           justifyContent: 'flex-end' }}
           >
+            {!!image && <Bubble style={{ padding: 0 }} image={image} /> }
             {!!messages && <Bubble text={messages} bgColor={socialType.bubbleBackground} />}
             {
               !!options.length &&
@@ -35,7 +36,7 @@ const PhoneSimulator = ({ className, type, messages, options = [] }) => {
   );
 };
 
-const Bubble = ({bgColor, text, style = {}}) => <ScrollContainer style={{
+const Bubble = ({bgColor, text, style = {}, image = {}}) => <ScrollContainer style={{
   fontSize: 10,
   borderRadius: 8,
   display: 'flex',
@@ -50,7 +51,8 @@ const Bubble = ({bgColor, text, style = {}}) => <ScrollContainer style={{
   maxWidth: '200px',
   ...style
 }}
->
+> 
+  { image && <img src={image.preview} className="dz-img" alt={image.name} />}
   <div>{text}</div>
 </ScrollContainer>
 

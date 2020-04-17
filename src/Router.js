@@ -97,7 +97,7 @@ export default props => {
   useEffect(() => {
     async function start() {
       const loginToken = Cookie.get('loginToken');
-      if(loginToken)
+      if(loginToken && pathname !== '/subscribe')
         return dispatch(loginUser(loginToken))
           .then(() => setLogging(false))
           .catch(err => {
