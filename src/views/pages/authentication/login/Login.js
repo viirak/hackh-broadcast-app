@@ -140,18 +140,18 @@ class Login extends React.Component {
                             </FormGroup>
                             : <FormGroup className="form-label-group position-relative">
                               <PinInput
-                                length={6} 
+                                length={6}
                                 initialValue=""
                                 focus={true}
-                                onChange={this.handleInputFocus} 
+                                onChange={this.handleInputFocus}
                                 type="numeric"
-                                inputStyle={{borderColor: 'red', borderRadius: '12px', width: '40', marginRight: '7px', fontSize: '20px'}}
+                                inputStyle={{borderColor: 'red', borderRadius: '12px', width: '40', marginRight: '5px', fontSize: '20px'}}
                                 inputFocusStyle={{borderColor: 'blue'}}
                                 onComplete={this.handlePinEntered}
                               />
                               </FormGroup>
                           }
-                          
+
                           {this.state.otpSent &&
                             <div className="resend-text">
                               <span className="text">Didn’t receive a code? </span>
@@ -161,7 +161,7 @@ class Login extends React.Component {
                                 onClick={() => this.setState({ otpSent: false })}>Resend</Button>
                             </div>
                           }
-                          
+
                           <div className="actions">
                             {!this.state.otpSent &&
                               <Button.Ripple
