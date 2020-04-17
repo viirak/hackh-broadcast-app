@@ -229,6 +229,16 @@
           .dropdown-menu {
             min-width: 12rem;
           }
+          .dropdown-item {
+            &:hover,
+            &:active {
+              background: $primary;
+              span,
+              svg {
+                color: $white;
+              }
+            }
+          }
         }
 
         > .nav-link {
