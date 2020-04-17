@@ -1,0 +1,47 @@
+{
+  "Dashboard": "Dashboard",
+  "Sent": "សារផ្ញើររួច",
+  "Draft": "ព្រៀង",
+  "Telegram": "Telegram",
+  "Messenger": "Messenger",
+  "SMS": "SMS",
+  "Simple Text": "Simple Text",
+  "Poll/Survey": "Poll/Survey",
+
+  "Telegram Text": "Telegram Text",
+  "Telegram Poll": "Telegram Poll",
+  "Messenger Text": "Messenger Text",
+  "Messenger Poll": "Messenger Poll",
+  "SMS Text": "SMS Text",
+
+  "Content": "Content",
+  "send-fail": "Failed to send the message",
+  "send-success": "Successfully sent the message",
+  "Clear":"លប់",
+  "Send":"ផ្ញើរ",
+
+  "Message Title": "Message Title",
+  "message-placeholder": "Your message here",
+  "Image": "រូបភាព",
+  "Options": "ចម្លើយ",
+
+  "send-description": "Enter your phone number associated with your account and we will send you an one-time password code to confirm",
+  "login-description": "Please enter the one-time password sent to your number: {phone-number}",
+  "login-page-title": "Login",
+  "Login": "Login",
+  "Resend": "Resend",
+  "number-not-found": "Sorry, number cannot be found.",
+  "number-unverified": "Sorry, the number is unverified.",
+  "phone-input-placeholder": "Please enter your phone number here",
+  "resend-pin-message": "Don't receive a code?",
+
+  "All": "ទាំងអស់",
+  "Text": "Text",
+  "Poll": "Poll",
+  "Survey": "Survey",
+  "Poll Result": "Poll Result",
+  "Last 7 days": "Last 7 days",
+  "Last 28 days": "Last 28 days",
+  "Last Month": "Last Month",
+  "Last Year": "Last Year"
+  }

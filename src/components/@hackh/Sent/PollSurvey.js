@@ -20,6 +20,7 @@ import {
   ArrowDown,
   ChevronDown
 } from "react-feather"
+import { FormattedMessage } from "react-intl";
 
 class PollSurvey extends React.Component {
     render(){
@@ -27,7 +28,7 @@ class PollSurvey extends React.Component {
         <Card>
           <CardHeader>
             <Send size={32}/>
-            <CardTitle>Poll/Survey</CardTitle>
+            <CardTitle><FormattedMessage id="Poll/Survey" /></CardTitle>
             <span>{moment().format("hh:mm DD MMMM YYYY")}</span>
           </CardHeader>
           <CardBody>

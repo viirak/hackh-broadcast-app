@@ -8,8 +8,18 @@ import {
 } from "reactstrap"
 import classnames from "classnames"
 import SentMessageList from "./SentMessageList";
+import { FormattedMessage } from "react-intl";
 
-let socialMediaOptions = ["All", "Telegram", "Messenger", "SMS", "Text", "Poll", "Questionnaire"];
+
+let socialMediaOptions = [
+  <FormattedMessage id="All" />,
+  <FormattedMessage id="Telegram" />,
+  <FormattedMessage id="Messenger" />,
+  <FormattedMessage id="SMS" />,
+  <FormattedMessage id="Text" />,
+  <FormattedMessage id="Poll" />,
+  <FormattedMessage id="Survey" />
+];
 
 class TabsBasic extends React.Component {
   state = {
@@ -34,7 +44,7 @@ class TabsBasic extends React.Component {
             <TabContent activeTab={this.state.activeTab} style={{maxHeight: "700px", overflow: "scroll"}}>
               <TabPane tabId="0">
                 <Nav tabs>
-                  {socialMediaOptions.map( (social, i) => 
+                  {socialMediaOptions.map( (social, i) =>
                     <NavItem>
                       <NavLink
                         className={classnames({

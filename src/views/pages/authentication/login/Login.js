@@ -25,6 +25,7 @@ import { endpoints } from '../../../../redux/config';
 import { Info } from '../../../../components/@hackh/popup';
 import { login } from '../../../../redux/actions/auth/customAuth';
 import PinInput from 'react-pin-input'
+import { FormattedMessage } from "react-intl"
 
 class Login extends React.Component {
 
@@ -85,19 +86,19 @@ class Login extends React.Component {
 
   render() {
     const { error, otpSent, isLoading } = this.state;
-    const descSend = "Enter your phone number associated with your account and we will send you an one-time password code to confirm";
-    const descLogin = `Please enter the one-time password sent to your number: ${ this.state.phone }`;
+    const descSend = <FormattedMessage id="send-description" />;
+    const descLogin = <FormattedMessage id="login-description" values={{ 'phone-number': this.state.phone }} />;
     const desc = otpSent ? descLogin : descSend;
-    const ctaText = otpSent ? 'Login' : 'Send';
+    const ctaText = otpSent ? <FormattedMessage id="Login" /> : <FormattedMessage id="Send" />;
     const ctaSpin = <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>;
     const ctaContent = isLoading ? ctaSpin : ctaText;
     let errorMsg = "";
     if ( error ) {
       console.log(error);
       if (error.statusCode === 400){
-        errorMsg = "Sorry, number cannot be found.";
+        errorMsg = <FormattedMessage id="number-not-found" />;
       } if (error.statusCode === 500){
-        errorMsg = "Sorry, the number is unverified.";
+        errorMsg = <FormattedMessage id="number-unverified" />;
       } else {
         errorMsg = error.message;
       }
@@ -122,7 +123,7 @@ class Login extends React.Component {
               <Col lg="6" md="12" className="p-0">
                 <Card className="rounded-0 mb-0 px-2">
                       <CardBody>
-                        <h1 className="title">Login</h1>
+                        <h1 className="title"><FormattedMessage id="login-page-title" /></h1>
                         <p className="desc">{ desc }</p>
                         {(error && <div className="alert alert-danger">{ errorMsg }</div> )}
                         <Form className="form" onSubmit={e => e.preventDefault()}>
@@ -131,7 +132,7 @@ class Login extends React.Component {
                               <Input
                                 className="inputNumber"
                                 type="number"
-                                placeholder="Please enter your phone number here"
+                                placeholder= "Enter phone number here"
                                 value={this.state.phone}
                                 onChange={e => this.setState({ phone: e.target.value })}
                                 onFocus={ this.handleInputFocus }
@@ -154,7 +155,7 @@ class Login extends React.Component {
 
                           {this.state.otpSent &&
                             <div className="resend-text">
-                              <span className="text">Didn’t receive a code? </span>
+                              <span className="text"><FormattedMessage id="resend-pin-message" /> </span>
                               <Button
                                 size="sm"
                                 color="link"
