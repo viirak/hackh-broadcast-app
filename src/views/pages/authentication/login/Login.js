@@ -27,6 +27,7 @@ import { login } from '../../../../redux/actions/auth/customAuth';
 
 class Login extends React.Component {
   state = {
+    error: null,
     phone: '',
     pin: '',
     otpSent: false,
@@ -44,20 +45,15 @@ class Login extends React.Component {
   }
 
   handleRequestOtp = async () => {
-    if(!this.state.phone) return console.log('no phone to send otp');
-    this.setState({
-      isLoading: true,
-    });
+    // if(!this.state.phone) return console.log('no phone to send otp');
+    this.setState({ isLoading: true });
 
     try {
       const url = endpoints.auth;
       const body = { phone: `+855${this.state.phone}` }
-
       const result = await POST({ url, body })
-
       this.setState({ info: result, isLoading: false, otpSent: true });
     } catch (err) {
-      console.log(err)
       this.setState({ error: err, isLoading: false });
     }
   }
@@ -80,16 +76,29 @@ class Login extends React.Component {
       this.setState({ isLoading: false });
       history.push('/');
     } catch (err) {
-      console.log(err);
       this.setState({ error: err, isLoading: false });
     }
   }
 
+  handleInputFocus = () => {
+    this.setState({ error: null })
+  }
+
   render() {
-    const { error, info } = this.state;
+    const { error } = this.state;
+    const ctaText = this.state.otpSent ? 'Send' : 'Login';
+    const ctaSpin = <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>;
+    const ctaContent = this.state.isLoading ? ctaSpin : ctaText;
+    let errorMsg = "";
+    if ( error ) {
+      console.log(error);
+      if (error.statusCode === 400){
+        errorMsg = "Sorry, number cannot be found.";
+      } else {
+        errorMsg = error.message;
+      }
+    }
     return <>
-      { error && <Info error={true} action={() => this.setState({ error: null })} body={error} /> }
-      { info && <Info action={() => this.setState({ info: null })} body={info} /> }
       <Row className="m-0 justify-content-center">
         <Col
           sm="8"
@@ -111,6 +120,7 @@ class Login extends React.Component {
                       <CardBody>
                         <h1 className="title">Login</h1>
                         <p className="desc">Enter your phone number associated with your account and we will send you an one-time password code to confirm</p>
+                        {(error && <div className="alert alert-danger">{ errorMsg }</div> )}
                         <Form className="form" onSubmit={e => e.preventDefault()}>
                           { !this.state.otpSent &&
                             <FormGroup className="form-label-group position-relative has-icon-left">
@@ -120,6 +130,7 @@ class Login extends React.Component {
                                 placeholder="Please enter your phone number here"
                                 value={this.state.phone}
                                 onChange={e => this.setState({ phone: e.target.value })}
+                                onFocus={ this.handleInputFocus }
                               />
                               {/* <div className="form-control-position">
                                 <Phone size={15} />
@@ -146,15 +157,13 @@ class Login extends React.Component {
                                 <Button
                                   size="sm"
                                   color="link"
-                                  onClick={() => this.setState({ otpSent: false })}
-                                >Send Code Again?</Button>
+                                  onClick={() => this.setState({ otpSent: false })}>Send Code Again?</Button>
                             }
                             <Button.Ripple
                               disabled={this.state.isLoading}
                               color="primary"
-                              onClick={() => this.state.otpSent ? this.handleLogin() : this.handleRequestOtp()}
-                            >
-                                {!this.state.otpSent ? 'Send' : 'Login'}
+                              onClick={() => this.state.otpSent ? this.handleLogin() : this.handleRequestOtp()}>
+                                { ctaContent }
                             </Button.Ripple>
                           </div>
                         </Form>
