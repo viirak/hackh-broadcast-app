@@ -4,7 +4,7 @@ import classnames from "classnames"
 import NavbarBookmarks from "./NavbarBookmarks"
 import NavbarTitle from "./NavbarTitle"
 import NavbarUser from "./NavbarUser"
-import userImg from "../../../assets/img/portrait/small/avatar-s-11.jpg"
+import userImg from "../../../assets/img/portrait/small/avatar-man-mask.jpg"
 
 
 const ThemeNavbar = props => {
