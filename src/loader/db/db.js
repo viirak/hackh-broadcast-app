@@ -21,16 +21,19 @@ export const fetchAllMessage = async (provider = 'telegram') => {
   });
 };
 
-export const postMessage = async ({ text, method, question, options }, provider) => {
+export const postMessage = async ({ text, method, question, options, imageUrl }, provider) => {
   const databaseRef = database().ref(provider);
   let obj = { date: moment().format() };
   if(method) {
     obj.question = question;
     obj.options = options;
     obj.method = method;
+    
+    if(imageUrl) obj.imageUrl = imageUrl;
   }
-  else obj.message = text;
 
+  else obj.message = text;
+  console.log('opj', obj)
   const result = await databaseRef.push(obj).then((snap) => snap.key);
   return result;
 };
