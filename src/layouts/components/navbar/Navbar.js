@@ -4,12 +4,17 @@ import classnames from "classnames"
 import NavbarBookmarks from "./NavbarBookmarks"
 import NavbarTitle from "./NavbarTitle"
 import NavbarUser from "./NavbarUser"
-import userImg from "../../../assets/img/portrait/small/avatar-s-11.jpg"
+import userImg from "../../../assets/img/portrait/small/avatar-man-mask.jpg"
+import { useDispatch, useSelector } from "react-redux"
 
 
 const ThemeNavbar = props => {
   const colorsArr = [ "primary", "danger", "success", "info", "warning", "dark"]
   const navbarTypes = ["floating" , "static" , "sticky" , "hidden"]
+  const { user } = useSelector(store => store.auth)
+  console.log(user.claims.name);
+  console.log(user.claims.phone_number);
+
   return (
     <React.Fragment>
       <div className="content-overlay" />
@@ -68,7 +73,8 @@ const ThemeNavbar = props => {
               <NavbarUser
                 handleAppOverlay={props.handleAppOverlay}
                 changeCurrentLang={props.changeCurrentLang}
-                userName="John Doe"
+                userName={ user.claims.name }
+                userRole={ user.claims.phone_number }
                 userImg={ userImg }
               />
             </div>
