@@ -24,8 +24,10 @@ import "../../../../assets/scss/pages/authentication.scss"
 import { endpoints } from '../../../../redux/config';
 import { Info } from '../../../../components/@hackh/popup';
 import { login } from '../../../../redux/actions/auth/customAuth';
+import PinInput from 'react-pin-input'
 
 class Login extends React.Component {
+
   state = {
     error: null,
     phone: '',
@@ -45,9 +47,7 @@ class Login extends React.Component {
   }
 
   handleRequestOtp = async () => {
-    // if(!this.state.phone) return console.log('no phone to send otp');
-    this.setState({ isLoading: true });
-
+    this.setState({ isLoading: true, error: null });
     try {
       const url = endpoints.auth;
       const body = { phone: `+855${this.state.phone}` }
@@ -58,21 +58,24 @@ class Login extends React.Component {
     }
   }
 
-  handleLogin = async token => {
-    this.setState({
-      isLoading: true,
-    });
+  handleInputFocus = () => {
+    this.setState({ error: null })
+  }
 
-    if(!this.state.pin) return console.log('no pin input');
+  handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      this.handleRequestOtp()
+    }
+  }
+
+  handlePinEntered = async (value, index) => {
+    this.setState({ error: null, isLoading: true });
     try {
       const url = endpoints.auth;
-      const body = { phone: `+855${this.state.phone}`, code: this.state.pin }
-
+      const body = { phone: `+855${this.state.phone}`, code: value }
       const result = await POST({ url, body })
       const { customToken = '' } = result.data || {};
-
       await this.props.login(customToken);
-
       this.setState({ isLoading: false });
       history.push('/');
     } catch (err) {
@@ -80,20 +83,21 @@ class Login extends React.Component {
     }
   }
 
-  handleInputFocus = () => {
-    this.setState({ error: null })
-  }
-
   render() {
-    const { error } = this.state;
-    const ctaText = this.state.otpSent ? 'Send' : 'Login';
+    const { error, otpSent, isLoading } = this.state;
+    const descSend = "Enter your phone number associated with your account and we will send you an one-time password code to confirm";
+    const descLogin = `Please enter the one-time password sent to your number: ${ this.state.phone }`;
+    const desc = otpSent ? descLogin : descSend;
+    const ctaText = otpSent ? 'Login' : 'Send';
     const ctaSpin = <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>;
-    const ctaContent = this.state.isLoading ? ctaSpin : ctaText;
+    const ctaContent = isLoading ? ctaSpin : ctaText;
     let errorMsg = "";
     if ( error ) {
       console.log(error);
       if (error.statusCode === 400){
         errorMsg = "Sorry, number cannot be found.";
+      } if (error.statusCode === 500){
+        errorMsg = "Sorry, the number is unverified.";
       } else {
         errorMsg = error.message;
       }
@@ -119,11 +123,11 @@ class Login extends React.Component {
                 <Card className="rounded-0 mb-0 px-2">
                       <CardBody>
                         <h1 className="title">Login</h1>
-                        <p className="desc">Enter your phone number associated with your account and we will send you an one-time password code to confirm</p>
+                        <p className="desc">{ desc }</p>
                         {(error && <div className="alert alert-danger">{ errorMsg }</div> )}
                         <Form className="form" onSubmit={e => e.preventDefault()}>
-                          { !this.state.otpSent &&
-                            <FormGroup className="form-label-group position-relative has-icon-left">
+                          { !this.state.otpSent
+                            ? <FormGroup className="form-label-group position-relative has-icon-left">
                               <Input
                                 className="inputNumber"
                                 type="number"
@@ -131,40 +135,42 @@ class Login extends React.Component {
                                 value={this.state.phone}
                                 onChange={e => this.setState({ phone: e.target.value })}
                                 onFocus={ this.handleInputFocus }
+                                onKeyDown= { this.handleKeyDown }
                               />
-                              {/* <div className="form-control-position">
-                                <Phone size={15} />
-                              </div> */}
                             </FormGroup>
-                          }
-                          {
-                            !!this.state.otpSent &&
-                            <FormGroup className="form-label-group position-relative has-icon-left">
-                              <Input
-                                type="password"
-                                placeholder="One time password"
-                                value={this.state.pin}
-                                onChange={e => this.setState({ pin: e.target.value })}
+                            : <FormGroup className="form-label-group position-relative">
+                              <PinInput
+                                length={6} 
+                                initialValue=""
+                                focus={true}
+                                onChange={this.handleInputFocus} 
+                                type="numeric"
+                                inputStyle={{borderColor: 'red', borderRadius: '12px', width: '40', marginRight: '7px', fontSize: '20px'}}
+                                inputFocusStyle={{borderColor: 'blue'}}
+                                onComplete={this.handlePinEntered}
                               />
-                              <div className="form-control-position">
-                                <Lock size={15} />
-                              </div>
-                            </FormGroup>
+                              </FormGroup>
                           }
-                          <div className="">
-                            {
-                              !!this.state.otpSent &&
-                                <Button
-                                  size="sm"
-                                  color="link"
-                                  onClick={() => this.setState({ otpSent: false })}>Send Code Again?</Button>
+                          
+                          {this.state.otpSent &&
+                            <div className="resend-text">
+                              <span className="text">Didn’t receive a code? </span>
+                              <Button
+                                size="sm"
+                                color="link"
+                                onClick={() => this.setState({ otpSent: false })}>Resend</Button>
+                            </div>
+                          }
+                          
+                          <div className="actions">
+                            {!this.state.otpSent &&
+                              <Button.Ripple
+                                disabled={this.state.isLoading}
+                                color="primary"
+                                onClick={() => this.handleRequestOtp()}>
+                                  { ctaContent }
+                              </Button.Ripple>
                             }
-                            <Button.Ripple
-                              disabled={this.state.isLoading}
-                              color="primary"
-                              onClick={() => this.state.otpSent ? this.handleLogin() : this.handleRequestOtp()}>
-                                { ctaContent }
-                            </Button.Ripple>
                           </div>
                         </Form>
                       </CardBody>
