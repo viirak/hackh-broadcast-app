@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { database } from 'firebase/app';
+import { database, storage } from 'firebase/app';
 import moment from 'moment';
 
 export const fetchAllMessage = async (provider = 'telegram') => {
@@ -34,3 +34,13 @@ export const postMessage = async ({ text, method, question, options }, provider)
   const result = await databaseRef.push(obj).then((snap) => snap.key);
   return result;
 };
+
+export const uploadImage = async reference => {
+  const imageRef = storage().ref('reference').child(`${new Date().getTime()}`)
+
+  return await imageRef
+    .put(reference)
+    .then(res => imageRef.getDownloadURL())
+    .then(downloadURL => downloadURL)
+    .catch(err => console.log('upload err', err));
+ };

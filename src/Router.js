@@ -108,7 +108,7 @@ export default props => {
     }
     start();
   }, []);
-
+  return <Spinner />
   if(logging) return <Spinner />
   if(!user) history.push(pathname === '/subscribe' && pathname || '/pages/login');
 
