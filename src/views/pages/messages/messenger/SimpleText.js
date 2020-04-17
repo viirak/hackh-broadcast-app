@@ -7,6 +7,7 @@ import PhoneSimulator from '../../../../components/@hackh/PhoneSimulator/phoneSi
 
 import { sendMessage } from '../../../../redux/actions/social';
 import { Confirm, Info } from '../../../../components/@hackh/popup';
+import { FormattedMessage } from "react-intl";
 
 export default props => {
   const [content, setContent] = useState('');
@@ -36,8 +37,8 @@ export default props => {
 
   return <>
     { showConfirm && <Confirm onConfirm={confirmSend} onCancel={cancelSend} /> }
-    { error && <Info error={true} action={() => setError(null)} body={'Failed to send the message'} /> }
-    { info && <Info action={() => setInfo(null)} body={'Successfully sent the message'} /> }
+    { error && <Info error={true} action={() => setError(null)} body=<FormattedMessage id="send-fail" /> /> }
+    { info && <Info action={() => setInfo(null)} body=<FormattedMessage id="send-success" /> /> }
     <Breadcrumbs
       breadCrumbParent="Messenger"
       breadCrumbActive="Simple Text"
@@ -46,7 +47,7 @@ export default props => {
       <Col md="6" sm="12">
         <Card>
           <CardBody>
-            <h2>Content</h2>
+            <h2><FormattedMessage id="Content" /></h2>
             <Input
               type="textarea"
               name="content"
@@ -71,13 +72,13 @@ export default props => {
             outline
             onClick={() => setContent('')}
             disabled={!content.length}
-          >Clear</Button>
+          ><FormattedMessage id="Clear" /></Button>
           &nbsp;&nbsp;&nbsp;&nbsp;
           <Button.Ripple
             disabled={sending || !content.length}
             color="primary"
             onClick={() => setShowConfirm(true)}
-          >Send</Button.Ripple>
+          ><FormattedMessage id="Send" /></Button.Ripple>
         </div>
       </Col>
       <Col md="6" sm="12">
