@@ -88,10 +88,10 @@
   },
   "scripts": {
     "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
+    "build": "rm -rf build/ && react-app-rewired build && cp _redirects build/",
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject",
-    "serve": "rm -rf build/ && npm run build && cp _redirects build/ && serve -s  build/"
+    "serve": "serve -s  build/"
   },
   "eslintConfig": {
     "extends": "react-app"

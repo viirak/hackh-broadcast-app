@@ -17,6 +17,9 @@
   "Content": "មាតិការ",
   "send-fail": "មិនអាចផ្ញើសារបានជោគជ័យ",
   "send-success": "សារផ្ញើបានដោយជោគជ័យ",
+  "Info": "ពត៍មាន",
+  "Close": "បិទ",
+  "Error": "មានបញ្ហា",
   "Clear":"លុប",
   "Send":"ផ្ញើរ",
 
@@ -53,5 +56,9 @@
   "Message Question": "សំណួរ",
   "Messages": "ប្រអប់សារ",
   "social-media": "បណ្តាញសង្គម",
-  "traditional-media": "បណ្តាញទូរស័ព្ទ"
+  "traditional-media": "បណ្តាញទូរស័ព្ទ",
+  "Confirmation": "បញ្ជាក់",
+  "Cancel": "ត្រលប់ក្រោយ",
+  "Send": "ផ្ញើចេញ",
+  "confirmation-body": "តើអ្នកពិតជាចង់ផ្ញើសារនេះចេញមែនឬ?"
   }

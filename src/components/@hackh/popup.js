@@ -6,6 +6,8 @@ import {
   ModalBody,
   ModalFooter,
 } from "reactstrap"
+import { FormattedMessage } from 'react-intl'
+
 
 export const Info = ({ action, error = false, body }) => {
   return <Modal
@@ -14,14 +16,14 @@ export const Info = ({ action, error = false, body }) => {
       className="modal-dialog-centered modal-sm"
     >
       <ModalHeader toggle={action} className={!error ? 'bg-primary' : 'bg-danger'}>
-        {error ? 'Error' : 'Info'}
+        <FormattedMessage id={error ? 'Error' : 'Info'} />
       </ModalHeader>
       <ModalBody>
-      {body.data && body.data.message || body.message || body}
+        {body.data && body.data.message || body.message || body}
       </ModalBody>
       <ModalFooter>
         <Button color={error ? 'danger' : 'primary'} onClick={action}>
-          Close
+          <FormattedMessage id={'Close'} />
         </Button>{" "}
       </ModalFooter>
     </Modal>
@@ -33,17 +35,17 @@ export const Confirm = ({ onConfirm, onCancel }) => {
       className="modal-dialog-centered modal-md"
     >
       <ModalHeader className={'bg-primary'}>
-        Confirmation
+        <FormattedMessage id={'Confirmation'} />
       </ModalHeader>
       <ModalBody>
-        Do you want to send this message?
+        <FormattedMessage id={'confirmation-body'} />
       </ModalBody>
       <ModalFooter>
         <Button color={'primary'} outline onClick={onCancel}>
-          Cancel
+          <FormattedMessage id={'Cancel'} />
         </Button>{" "}
         <Button color={'primary'} onClick={onConfirm}>
-          Send
+          <FormattedMessage id={'Send'} />
         </Button>
       </ModalFooter>
     </Modal>
