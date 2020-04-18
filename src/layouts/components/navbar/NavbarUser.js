@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import {
   NavItem,
   NavLink,
@@ -8,7 +8,9 @@ import {
   DropdownItem,
   DropdownToggle,
   Media,
-  Badge
+  Badge,
+  Label,
+  Input
 } from "reactstrap"
 import PerfectScrollbar from "react-perfect-scrollbar"
 import axios from "axios"
@@ -16,23 +18,36 @@ import * as Icon from "react-feather"
 import classnames from "classnames"
 import Autocomplete from "../../../components/@vuexy/autoComplete/AutoCompleteComponent"
 import { history } from "../../../history"
-import ReactCountryFlag from "react-country-flag"
-import { IntlContext } from "../../../utility/context/Internationalization"
-import { logout } from '../../../redux/actions/auth/customAuth';
-import { useDispatch } from 'react-redux';
+import { logout, updateUser } from '../../../redux/actions/auth/customAuth';
+import { useDispatch, useSelector } from 'react-redux';
+import { FormattedMessage } from "react-intl"
+import LanguageDropdown from './language';
 
 
 const UserDropdown = props => {
   const dispatch = useDispatch();
+  const { auth: { user: { claims: { name = '' } } } } = useSelector(store => store);
+  const [newName, setNewName] = useState(name);
+
   return (
     <DropdownMenu right>
+      <DropdownItem header style={{ paddingLeft: 0 }}><FormattedMessage id="Update Name" /></DropdownItem>
+      <Input
+        type="text"
+        value={newName}
+        onChange={e => setNewName(e.target.value)}
+        onBlur={() => newName.length && dispatch(updateUser({ displayName: newName }))}
+      />
+
+      <DropdownItem divider/>
+
       <DropdownItem
         tag="a"
         href="#"
         onClick={() => dispatch(logout()).then(() => history.push('/pages/login'))}
       >
         <Icon.Power size={14} className="mr-50" />
-        <span className="align-middle">Log Out</span>
+        <span className="align-middle"><FormattedMessage id="Log Out" /></span>
       </DropdownItem>
     </DropdownMenu>
   )
@@ -57,63 +72,10 @@ class NavbarUser extends React.PureComponent {
     })
   }
 
-  handleLangDropdown = () =>
-    this.setState({ langDropdown: !this.state.langDropdown })
-
   render() {
     return (
       <ul className="nav navbar-nav navbar-nav-user float-right">
-        <IntlContext.Consumer>
-          {context => {
-            let langArr = {
-              "en" : "English",
-              "kh" : "Khmer"
-            }
-            return (
-              <Dropdown
-                tag="li"
-                className="dropdown-language nav-item"
-                isOpen={this.state.langDropdown}
-                toggle={this.handleLangDropdown}
-                data-tour="language"
-              >
-                <DropdownToggle
-                  tag="a"
-                  className="nav-link"
-                >
-                  <ReactCountryFlag
-                  className="country-flag"
-                    countryCode={
-                      context.state.locale === "en"
-                        ? "us"
-                        : context.state.locale
-                    }
-                    svg
-                  />
-                  <span className="d-sm-inline-block d-none text-capitalize align-middle ml-50">
-                    {langArr[context.state.locale]}
-                  </span>
-                </DropdownToggle>
-                <DropdownMenu right>
-                  <DropdownItem
-                    tag="a"
-                    onClick={e => context.switchLanguage("en")}
-                  >
-                    <ReactCountryFlag className="country-flag" countryCode="us" svg />
-                    <span className="ml-1">English</span>
-                  </DropdownItem>
-                  <DropdownItem
-                    tag="a"
-                    onClick={e => context.switchLanguage("kh")}
-                  >
-                    <ReactCountryFlag className="country-flag" countryCode="kh" svg />
-                    <span className="ml-1">Khmer</span>
-                  </DropdownItem>
-                </DropdownMenu>
-              </Dropdown>
-            )
-          }}
-        </IntlContext.Consumer>
+        <LanguageDropdown />
         <UncontrolledDropdown tag="li" className="dropdown-user nav-item">
           <DropdownToggle tag="a" className="nav-link dropdown-user-link">
             <div className="user-nav d-sm-flex d-none">

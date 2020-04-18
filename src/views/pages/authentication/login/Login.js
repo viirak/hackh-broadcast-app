@@ -26,6 +26,7 @@ import { Info } from '../../../../components/@hackh/popup';
 import { login } from '../../../../redux/actions/auth/customAuth';
 import PinInput from 'react-pin-input'
 import { FormattedMessage } from "react-intl"
+import LanguageDropdown from '../../../../layouts/components/navbar/language';
 
 class Login extends React.Component {
 
@@ -122,59 +123,64 @@ class Login extends React.Component {
               </Col>
               <Col lg="6" md="12" className="p-0">
                 <Card className="rounded-0 mb-0 px-2">
-                      <CardBody>
-                        <h1 className="title"><FormattedMessage id="login-page-title" /></h1>
-                        <p className="desc">{ desc }</p>
-                        {(error && <div className="alert alert-danger">{ errorMsg }</div> )}
-                        <Form className="form" onSubmit={e => e.preventDefault()}>
-                          { !this.state.otpSent
-                            ? <FormGroup className="form-label-group position-relative has-icon-left">
-                              <Input
-                                className="inputNumber"
-                                type="number"
-                                placeholder= "Enter phone number here"
-                                value={this.state.phone}
-                                onChange={e => this.setState({ phone: e.target.value })}
-                                onFocus={ this.handleInputFocus }
-                                onKeyDown= { this.handleKeyDown }
-                              />
-                            </FormGroup>
-                            : <FormGroup className="form-label-group position-relative">
-                              <PinInput
-                                length={6}
-                                initialValue=""
-                                focus={true}
-                                onChange={this.handleInputFocus}
-                                type="numeric"
-                                inputStyle={{borderColor: 'red', borderRadius: '12px', width: '40', marginRight: '5px', fontSize: '20px'}}
-                                inputFocusStyle={{borderColor: 'blue'}}
-                                onComplete={this.handlePinEntered}
-                              />
-                              </FormGroup>
-                          }
+                  <div style={{ position: 'absolute', top: '0.2rem', right: '0.5rem'}}>
+                    <ul className="navbar-nav">
+                      <LanguageDropdown />
+                    </ul>
+                  </div>
+                  <CardBody>
+                    <h1 className="title"><FormattedMessage id="login-page-title" /></h1>
+                    <p className="desc">{ desc }</p>
+                    {(error && <div className="alert alert-danger">{ errorMsg }</div> )}
+                    <Form className="form" onSubmit={e => e.preventDefault()}>
+                      { !this.state.otpSent
+                        ? <FormGroup className="form-label-group position-relative has-icon-left">
+                          <Input
+                            className="inputNumber"
+                            type="number"
+                            placeholder= "Enter phone number here"
+                            value={this.state.phone}
+                            onChange={e => this.setState({ phone: e.target.value })}
+                            onFocus={ this.handleInputFocus }
+                            onKeyDown= { this.handleKeyDown }
+                          />
+                        </FormGroup>
+                        : <FormGroup className="form-label-group position-relative">
+                            <PinInput
+                              length={6}
+                              initialValue=""
+                              focus={true}
+                              onChange={this.handleInputFocus}
+                              type="numeric"
+                              inputStyle={{borderColor: 'red', borderRadius: '12px', width: '40', marginRight: '5px', fontSize: '20px'}}
+                              inputFocusStyle={{borderColor: 'blue'}}
+                              onComplete={this.handlePinEntered}
+                            />
+                          </FormGroup>
+                      }
 
-                          {this.state.otpSent &&
-                            <div className="resend-text">
-                              <span className="text"><FormattedMessage id="resend-pin-message" /> </span>
-                              <Button
-                                size="sm"
-                                color="link"
-                                onClick={() => this.setState({ otpSent: false })}>Resend</Button>
-                            </div>
-                          }
+                      {this.state.otpSent &&
+                        <div className="resend-text">
+                          <span className="text"><FormattedMessage id="resend-pin-message" /> </span>
+                          <Button
+                            size="sm"
+                            color="link"
+                            onClick={() => this.setState({ otpSent: false })}>Resend</Button>
+                        </div>
+                      }
 
-                          <div className="actions">
-                            {!this.state.otpSent &&
-                              <Button.Ripple
-                                disabled={this.state.isLoading}
-                                color="primary"
-                                onClick={() => this.handleRequestOtp()}>
-                                  { ctaContent }
-                              </Button.Ripple>
-                            }
-                          </div>
-                        </Form>
-                      </CardBody>
+                      <div className="actions">
+                        {!this.state.otpSent &&
+                          <Button.Ripple
+                            disabled={this.state.isLoading}
+                            color="primary"
+                            onClick={() => this.handleRequestOtp()}>
+                              { ctaContent }
+                          </Button.Ripple>
+                        }
+                      </div>
+                    </Form>
+                  </CardBody>
                 </Card>
               </Col>
             </Row>

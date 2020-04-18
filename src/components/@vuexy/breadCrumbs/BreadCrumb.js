@@ -55,7 +55,7 @@ class BreadCrumbs extends React.Component {
             </div>
           </div>
         </div>
-        <div className="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
+        {/* <div className="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
           <div className="form-group breadcrum-right dropdown">
             <UncontrolledButtonDropdown>
               <DropdownToggle
@@ -89,7 +89,7 @@ class BreadCrumbs extends React.Component {
               </DropdownMenu>
             </UncontrolledButtonDropdown>
           </div>
-        </div>
+        </div> */}
       </div>
     )
   }

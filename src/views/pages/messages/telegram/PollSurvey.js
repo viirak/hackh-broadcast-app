@@ -71,14 +71,14 @@ export default props => {
       <Col md="6" sm="12">
         <Card>
           <CardBody>
-            <h2><FormattedMessage id="Message Title" /></h2>
+            <h2><FormattedMessage id="Message Question" /></h2>
             <Input
               type="textarea"
               name="title"
               rows="2"
               value={title}
               onChange={e => title.length < 255 && setTitle(e.target.value)}
-              placeholder=<FormattedMessage id="message-placeholder" />
+              // placeholder=<FormattedMessage id="message-placeholder" />
             />
             <small
               className={`counter-value float-right ${
@@ -97,7 +97,9 @@ export default props => {
 
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <h2><FormattedMessage id="Options" /></h2>
-              <Button color="link" size="md" onClick={() => options.length < 10 && setOptions(options.concat(''))}> +Add({options.length}/10)</Button>
+              <Button color="link" size="md" onClick={() => options.length < 10 && setOptions(options.concat(''))}>
+                 <FormattedMessage id="add" /> ({options.length}/10)
+               </Button>
             </div>
             {
               options.map((text = '', index) => {

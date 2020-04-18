@@ -12,8 +12,6 @@ const ThemeNavbar = props => {
   const colorsArr = [ "primary", "danger", "success", "info", "warning", "dark"]
   const navbarTypes = ["floating" , "static" , "sticky" , "hidden"]
   const { user } = useSelector(store => store.auth)
-  console.log(user.claims.name);
-  console.log(user.claims.phone_number);
 
   return (
     <React.Fragment>
@@ -74,7 +72,7 @@ const ThemeNavbar = props => {
                 handleAppOverlay={props.handleAppOverlay}
                 changeCurrentLang={props.changeCurrentLang}
                 userName={ user.claims.name }
-                userRole={ user.claims.phone_number }
+                userRole={ user.claims.role }
                 userImg={ userImg }
               />
             </div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { Card, CardHeader, CardBody, CardTitle } from "reactstrap"
 import { useDropzone } from "react-dropzone"
+import { FormattedMessage } from 'react-intl';
 import '../../assets/scss/plugins/extensions/dropzone.scss'
 
 export default props => {
@@ -19,7 +20,7 @@ export default props => {
           preview: URL.createObjectURL(acceptedFiles[0])
         })
       );
-      props.getImage(acceptedFiles[0]); 
+      props.getImage(acceptedFiles[0]);
     }
   })
 
@@ -46,7 +47,7 @@ export default props => {
                 &nbsp;&nbsp;{files.name}
               </>
             : <p className="mx-1">
-                <em>(Only *.jpeg and *.png images will be accepted. Size limited to 10MB)</em>
+                <em><FormattedMessage id="image-description"/></em>
               </p>
         }
       </div>

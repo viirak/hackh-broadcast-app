@@ -30,7 +30,7 @@ const PhoneSimulator = ({ className, type, messages, options = [], image }) => {
             }
         </div>
       </div>
-      <div class="button">
+      <div className="button">
       </div>
     </div>
   );
@@ -51,7 +51,7 @@ const Bubble = ({bgColor, text, style = {}, image = {}}) => <ScrollContainer sty
   maxWidth: '200px',
   ...style
 }}
-> 
+>
   { image && <img src={image.preview} className="dz-img" alt={image.name} />}
   <div>{text}</div>
 </ScrollContainer>

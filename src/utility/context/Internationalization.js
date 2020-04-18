@@ -1,5 +1,6 @@
 import React from "react"
 import { IntlProvider } from "react-intl"
+import Cookie from 'js-cookie'
 
 import messages_en from "../../assets/data/locales/en.json"
 import messages_kh from "../../assets/data/locales/kh.json"
@@ -19,8 +20,8 @@ const Context = React.createContext()
 
 class IntlProviderWrapper extends React.Component {
   state = {
-    locale: "en",
-    messages: menu_messages["en"]
+    locale: Cookie.get('locale') || "en",
+    messages: menu_messages[Cookie.get('locale') || "en"]
   }
 
   render() {
@@ -31,6 +32,7 @@ class IntlProviderWrapper extends React.Component {
         value={{
           state: this.state,
           switchLanguage: language => {
+            Cookie.set('locale', language)
             this.setState({
               locale: language,
               messages: menu_messages[language]
@@ -52,4 +54,3 @@ class IntlProviderWrapper extends React.Component {
 }
 
 export { IntlProviderWrapper, Context as IntlContext }
-

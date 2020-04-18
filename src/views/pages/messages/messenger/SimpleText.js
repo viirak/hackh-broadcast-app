@@ -55,7 +55,7 @@ export default props => {
               rows="10"
               value={content}
               onChange={e => content.length < 4096 && setContent(e.target.value)}
-              placeholder="Input content here"
+              // placeholder="Input content here"
             />
             <small
               className={`counter-value float-right ${

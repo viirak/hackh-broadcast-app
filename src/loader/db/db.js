@@ -28,12 +28,12 @@ export const postMessage = async ({ text, method, question, options, imageUrl },
     obj.question = question;
     obj.options = options;
     obj.method = method;
-    
+
     if(imageUrl) obj.imageUrl = imageUrl;
   }
 
   else obj.message = text;
-  console.log('opj', obj)
+
   const result = await databaseRef.push(obj).then((snap) => snap.key);
   return result;
 };

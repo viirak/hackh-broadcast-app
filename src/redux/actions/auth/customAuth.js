@@ -20,8 +20,19 @@ export const login = token => async dispatch => {
       await auth().signInWithCustomToken(token);
       const userRes = await auth().currentUser.getIdTokenResult();
       dispatch(setUser(userRes));
-      
+
       resolve('Logged in');
     } catch (err) { reject(err) };
   });
+}
+
+export const updateUser = obj => async (dispatch, getState) => {
+  await auth().currentUser.updateProfile(obj);
+  const { displayName } = auth().currentUser;
+  const { user: currentUserState } = getState().auth;
+  const newUserState = {
+    ...currentUserState,
+    claims: { ...currentUserState.claims, name: displayName }
+  };
+  dispatch(setUser(newUserState));
 }

@@ -16,7 +16,7 @@ const navigationConfig = [
   },
   {
     type: "groupHeader",
-    groupTitle: "MESSAGES"
+    groupTitle: <FormattedMessage id="Messages" />
   },
   {
     id: "sent",
@@ -36,7 +36,7 @@ const navigationConfig = [
   },
   {
     type: "groupHeader",
-    groupTitle: "SOCIAL MEDIA"
+    groupTitle: <FormattedMessage id="social-media" />
   },
   {
     id: "telegram",
@@ -90,7 +90,7 @@ const navigationConfig = [
   },
   {
     type: "groupHeader",
-    groupTitle: "TRADITIONAL MEDIA"
+    groupTitle: <FormattedMessage id="traditional-media" />
   },
   {
     id: "sms",

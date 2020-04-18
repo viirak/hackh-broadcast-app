@@ -44,5 +44,12 @@
 "Last 7 days": "Last 7 days",
 "Last 28 days": "Last 28 days",
 "Last Month": "Last Month",
-"Last Year": "Last Year"
+"Last Year": "Last Year",
+
+"image-description": "(Only *.jpeg and *.png images will be accepted. Size limited to 10MB)",
+"add": "+Add",
+"Message Question": "Question",
+"Messages": "Messages",
+"social-media": "Social Media",
+"traditional-media": "Traditional Media"
 }
