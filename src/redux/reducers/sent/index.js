@@ -1,6 +1,9 @@
 
 const initialState = {
-    sentMessages: []
+    sentMessages: [],
+    statistics: {},
+    telegram: [],
+    messenger: []
   }
   
   const sentReducer = (state = initialState, action) => {
@@ -8,7 +11,14 @@ const initialState = {
       case "FETCH_ALL_MESSAGES":
         return {
           ...state,
-          sentMessages: action.payload,
+          sentMessages: action.payload.all,
+          telegram: action.payload.telegram,
+          messenger: action.payload.messenger
+        }
+      case "FETCH_ALL_STATISTICS": 
+        return {
+          ...state,
+          statistics: action.payload
         }
       default:
         return state

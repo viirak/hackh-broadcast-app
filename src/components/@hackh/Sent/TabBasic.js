@@ -61,7 +61,22 @@ class TabsBasic extends React.Component {
                 </Nav>
                 <TabContent className="py-50" activeTab={this.state.active} data-spy="scroll">
                   <TabPane tabId="0">
-                    <SentMessageList messages={this.props.messages} />
+                    <SentMessageList 
+                      messages={this.props.messages} 
+                      loadStatistics={this.props.loadStatistics}
+                    />
+                  </TabPane>
+                  <TabPane tabId="1">
+                    <SentMessageList 
+                      messages={this.props.telegram}
+                      loadStatistics={this.props.loadStatistics}
+                    />
+                  </TabPane>
+                  <TabPane tabId="2">
+                    <SentMessageList 
+                     messages={this.props.messenger} 
+                     loadStatistics={this.props.loadStatistics}
+                    />
                   </TabPane>
                 </TabContent>
               </TabPane>
