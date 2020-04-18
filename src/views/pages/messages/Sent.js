@@ -5,7 +5,7 @@ import {Search} from "react-feather";
 import PollSurvey from "../../../components/@hackh/Sent/PollSurvey";
 import PollResultChart from "../../ui-elements/cards/analytics/PollResult"
 import TabsBasic from "../../../components/@hackh/Sent/TabBasic";
-import { loadMessages } from "../../../redux/actions/sent/index";
+import { loadMessages, loadStatistics } from "../../../redux/actions/sent/index";
 
 let $primary = "#7367F0",
   $success = "#28C76F",
@@ -19,6 +19,7 @@ let $primary = "#7367F0",
 class SentMessages extends React.Component{
   componentDidMount() {
     this.props.loadMessages();
+    this.props.loadStatistics();
   }
   render(){
     return <>
@@ -65,13 +66,15 @@ class SentMessages extends React.Component{
 }
 
 const mapStateToProps = state => {
-  const { sentMessages } = state.sent;
+  const { sentMessages, statistics } = state.sent;
   return {
-    sentMessages
+    sentMessages,
+    statistics
   }
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  loadMessages: () => dispatch(loadMessages())
+  loadMessages: () => dispatch(loadMessages()),
+  loadStatistics: () => dispatch(loadStatistics())
 });
 export default connect(mapStateToProps, mapDispatchToProps)(SentMessages);

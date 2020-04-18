@@ -1,6 +1,7 @@
 
 const initialState = {
-    sentMessages: []
+    sentMessages: [],
+    statistics: []
   }
   
   const sentReducer = (state = initialState, action) => {
@@ -9,6 +10,11 @@ const initialState = {
         return {
           ...state,
           sentMessages: action.payload,
+        }
+      case "FETCH_ALL_STATISTICS": 
+        return {
+          ...state,
+          statistics: action.payload
         }
       default:
         return state

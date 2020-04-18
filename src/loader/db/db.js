@@ -2,6 +2,25 @@
 import { database } from 'firebase/app';
 import moment from 'moment';
 
+// "statistics/id"
+export const fetchPollStatistics = async (provider='statistics') => {
+  const databaseRef = database().ref(provider).limitToLast(200);
+  return new Promise((resolve, reject) => {
+    try {
+      databaseRef.on('value', (snapshot) => {
+        const data = snapshot.val() || {};
+        const messages = [];
+        snapshot.forEach((child) => {
+          messages.push(child.val());
+        });
+        return resolve(messages.reverse());
+      })
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
 export const fetchAllMessage = async (provider = 'telegram') => {
   const databaseRef = database().ref(provider).limitToLast(200);
   return new Promise((resolve, reject) => {
