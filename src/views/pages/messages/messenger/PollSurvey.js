@@ -1,11 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from 'react-redux';
-import {Row, Col, Input, Label, Button, CustomInput, Card, CardBody} from "reactstrap";
-import Breadcrumbs from '../../../../components/@vuexy/breadCrumbs/BreadCrumb';
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { useDispatch } from 'react-redux';
+import {Row, Col, Input, Button, Card, CardBody} from "reactstrap";
 import PhoneSimulator from '../../../../components/@hackh/PhoneSimulator/phoneSimulator';
 import Dropzone from '../../../../components/@vuexy/dropzone';
-
 import { sendMessage } from '../../../../redux/actions/social'
 import { Confirm, Info } from '../../../../components/@hackh/popup';
 import { FormattedMessage } from "react-intl"
@@ -63,10 +60,6 @@ export default props => {
     { showConfirm && <Confirm onConfirm={confirmSend} onCancel={cancelSend} /> }
     { error && <Info error={true} action={() => setError(null)} body={props.intl.formatMessage({ id: 'send-fail' })} /> }
     { info && <Info action={() => setInfo(null)} body={props.intl.formatMessage({ id: 'send-success' })} /> }
-    <Breadcrumbs
-      breadCrumbParent="Messenger"
-      breadCrumbActive="Poll / Survey"
-    />
     <Row>
       <Col md="6" sm="12">
         <Card>
