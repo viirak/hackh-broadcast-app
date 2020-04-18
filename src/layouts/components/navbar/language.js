@@ -1,16 +1,9 @@
 import React, { useState } from "react"
 import {
-  NavItem,
-  NavLink,
-  UncontrolledDropdown,
   Dropdown,
   DropdownMenu,
   DropdownItem,
   DropdownToggle,
-  Media,
-  Badge,
-  Label,
-  Input
 } from "reactstrap"
 import ReactCountryFlag from "react-country-flag"
 import { IntlContext } from "../../../utility/context/Internationalization"
@@ -63,7 +56,7 @@ export default props => {
                 onClick={e => context.switchLanguage("kh")}
               >
                 <ReactCountryFlag className="country-flag" countryCode="kh" svg />
-                <span className="ml-1">Khmer</span>
+                <span className="ml-1">ភាសាខ្មែរ</span>
               </DropdownItem>
             </DropdownMenu>
           </Dropdown>
