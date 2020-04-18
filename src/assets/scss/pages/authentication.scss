@@ -22,7 +22,8 @@
 
 // authentication pages background
 .bg-authentication {
-  background-color: $blank-bg-color;
+  background-color: $dark-card-color;
+  overflow: hidden;
   .auth-title,
   .vx-checkbox-con span,
   .divider .divider-text {
@@ -36,6 +37,45 @@
         margin: 1rem 1rem 1rem 0rem;
       }
     }
+  }
+
+  .card {
+    min-height: 25rem;
+    .card-body {
+      text-align: center;
+      padding: 3em;
+    }
+    .title{
+      font-weight: bold;
+    }
+    .desc {
+      margin: 2rem 0;
+    }
+    .form {
+      text-align: center;
+      .inputNumber {
+        padding: 0 1em;
+        text-align: center;
+      }
+    }
+  }
+}
+
+.pincode-input-container {
+  .pincode-input-text
+  {
+    padding:0 !important;
+    margin:0 2px;
+    text-align:center;
+    border: 1px solid;
+    background: transparent;
+    width: 40px;
+    height: 40px;
+  }
+  .pincode-input-text:focus
+  {
+    outline:none;
+    box-shadow:none;
   }
 }
 

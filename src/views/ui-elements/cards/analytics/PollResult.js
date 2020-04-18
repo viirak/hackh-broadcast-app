@@ -18,6 +18,7 @@ import {
   ArrowDown,
   ChevronDown
 } from "react-feather"
+import { FormattedMessage } from "react-intl";
 
 class PollResultChart extends React.Component {
   state = {
@@ -52,15 +53,14 @@ class PollResultChart extends React.Component {
     return (
       <Card>
         <CardHeader>
-          <CardTitle>Poll Result</CardTitle>
+          <CardTitle><FormattedMessage id="Poll Result" /></CardTitle>
           <UncontrolledDropdown>
-            <DropdownToggle tag="small" className="text-bold-500 cursor-pointer">
-              Last 7 days <ChevronDown size={10} />
+            <DropdownToggle tag="small" className="text-bold-500 cursor-pointer"><FormattedMessage id="Last 7 days" /> <ChevronDown size={10} />
             </DropdownToggle>
             <DropdownMenu right>
-              <DropdownItem>Last 28 days</DropdownItem>
-              <DropdownItem>Last Month</DropdownItem>
-              <DropdownItem>Last Year</DropdownItem>
+              <DropdownItem><FormattedMessage id="Last 28 days" /></DropdownItem>
+              <DropdownItem><FormattedMessage id="Last Month" /></DropdownItem>
+              <DropdownItem><FormattedMessage id="Last Year" /></DropdownItem>
             </DropdownMenu>
           </UncontrolledDropdown>
         </CardHeader>

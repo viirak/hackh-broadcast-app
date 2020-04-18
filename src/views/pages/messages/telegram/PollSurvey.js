@@ -8,6 +8,7 @@ import PhoneSimulator from '../../../../components/@hackh/PhoneSimulator/phoneSi
 
 import { sendMessage } from '../../../../redux/actions/social'
 import { Confirm, Info } from '../../../../components/@hackh/popup';
+import { FormattedMessage } from "react-intl"
 
 export default props => {
   const [title, setTitle] = useState('');
@@ -53,7 +54,7 @@ export default props => {
   }
 
   const clear = () => {
-    setTitle(''); 
+    setTitle('');
     setOptions([]);
     setImage();
   }
@@ -70,14 +71,14 @@ export default props => {
       <Col md="6" sm="12">
         <Card>
           <CardBody>
-            <h2>Message Title</h2>
+            <h2><FormattedMessage id="Message Title" /></h2>
             <Input
               type="textarea"
               name="title"
               rows="2"
               value={title}
               onChange={e => title.length < 255 && setTitle(e.target.value)}
-              placeholder="Message title here"
+              placeholder=<FormattedMessage id="message-placeholder" />
             />
             <small
               className={`counter-value float-right ${
@@ -89,13 +90,13 @@ export default props => {
 
             <br /><br />
 
-            <h2>Image</h2>
+            <h2><FormattedMessage id="Image" /></h2>
             <Dropzone getImage={file => setImage(file)} image={image} />
-            
+
             <br /><br />
 
             <div style={{ display: 'flex', alignItems: 'center' }}>
-              <h2>Options</h2>
+              <h2><FormattedMessage id="Options" /></h2>
               <Button color="link" size="md" onClick={() => options.length < 10 && setOptions(options.concat(''))}> +Add({options.length}/10)</Button>
             </div>
             {
@@ -123,13 +124,13 @@ export default props => {
             outline
             onClick={clear}
             disabled={!title.length && !isOptsValid && !image}
-          >Clear</Button>
+          ><FormattedMessage id="Clear" /></Button>
           &nbsp;&nbsp;&nbsp;&nbsp;
           <Button.Ripple
             disabled={sending || !title.length || !isOptsValid}
             color="primary"
             onClick={() => setShowConfirm(true)}
-          >Send</Button.Ripple>
+          ><FormattedMessage id="Send" /></Button.Ripple>
         </div>
       </Col>
       <Col md="6" sm="12">
