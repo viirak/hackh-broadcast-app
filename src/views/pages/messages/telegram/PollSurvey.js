@@ -78,7 +78,7 @@ export default props => {
               rows="2"
               value={title}
               onChange={e => title.length < 255 && setTitle(e.target.value)}
-              // placeholder=<FormattedMessage id="message-placeholder" />
+              placeholder={props.intl.formatMessage({ id: 'question-title' })}
             />
             <small
               className={`counter-value float-right ${

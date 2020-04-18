@@ -230,7 +230,7 @@ class SideMenuContent extends React.Component {
           )}
         </li>
       )
-      
+
       if (
         item.navLink &&
         item.collapsed !== undefined &&

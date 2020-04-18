@@ -6,6 +6,7 @@ import Spinner from "./components/@vuexy/spinner/Fallback-spinner"
 import { ContextLayout } from "./utility/context/Layout"
 import Cookie from 'js-cookie';
 import { login as loginUser } from './redux/actions/auth/customAuth';
+import { injectIntl } from 'react-intl'
 
 // Route-based code splitting
 const Home = lazy(() =>
@@ -60,6 +61,7 @@ const AppRoute = ({
   ...rest
 }) => {
   const user = useSelector(store => store.auth.login.userRole);
+  const WithIntl = injectIntl(Component);
   return (
     <Route
       {...rest}
@@ -76,7 +78,7 @@ const AppRoute = ({
                 return (
                   <LayoutTag {...props} permission={user}>
                     <Suspense fallback={<Spinner />}>
-                      <Component {...props} />
+                      <WithIntl {...props} />
                     </Suspense>
                   </LayoutTag>
                 )

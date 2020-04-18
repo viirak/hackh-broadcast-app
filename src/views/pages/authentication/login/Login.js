@@ -25,7 +25,7 @@ import { endpoints } from '../../../../redux/config';
 import { Info } from '../../../../components/@hackh/popup';
 import { login } from '../../../../redux/actions/auth/customAuth';
 import PinInput from 'react-pin-input'
-import { FormattedMessage } from "react-intl"
+import { FormattedMessage, injectIntl } from "react-intl"
 import LanguageDropdown from '../../../../layouts/components/navbar/language';
 
 class Login extends React.Component {
@@ -138,7 +138,7 @@ class Login extends React.Component {
                           <Input
                             className="inputNumber"
                             type="number"
-                            placeholder= "Enter phone number here"
+                            placeholder={this.props.intl.formatMessage({ id: 'phone-input-placeholder' })}
                             value={this.state.phone}
                             onChange={e => this.setState({ phone: e.target.value })}
                             onFocus={ this.handleInputFocus }
