@@ -4,12 +4,14 @@ import {
   CardHeader,
   CardTitle,
   CardBody,
+  Badge,
   UncontrolledDropdown,
   DropdownMenu,
   DropdownItem,
   DropdownToggle
 } from "reactstrap"
-import { Send  } from "react-feather"
+import _ from "lodash";
+import { Send, Circle } from "react-feather"
 import moment from "moment";
 import Chart from "react-apexcharts"
 import {
@@ -23,16 +25,33 @@ import {
 import { FormattedMessage } from "react-intl";
 
 class PollSurvey extends React.Component {
+
+  listPollResults = () => {
+    const { statistics } = this.props;
+    if (!_.isEmpty(statistics)) {
+      if (_.get(statistics, "options", undefined)) {
+        let arr = [];
+        for(var opt of statistics.options) {
+          for (var j=0; j < opt.voter_count; j++) {
+            arr.push(<Badge color="primary" className="mr-1">{opt.text}</Badge>)
+          }
+        }
+        return arr;
+      }
+    } else {
+      return <span>No poll found.</span>
+    }
+  }
+  
     render(){
         return(
         <Card>
           <CardHeader>
-            <Send size={32}/>
             <CardTitle><FormattedMessage id="Poll/Survey" /></CardTitle>
             <span>{moment().format("hh:mm DD MMMM YYYY")}</span>
           </CardHeader>
           <CardBody>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum quis mollis quam. Proin ut condimentum dolor. Proin ornare euismod leo, quis consequat est vulputate sit amet. Quisque sollicitudin libero in dolor aliquet convallis. Curabitur lorem nulla, tincidunt vel ultrices ut, commodo sed libero. Vestibulum volutpat, massa sed vulputate cursus, quam magna tempor nunc, mattis rhoncus diam mi non erat. Aliquam posuere tempor dolor. Mauris vitae elit sed tortor gravida ullamcorper. Donec ultricies dui vel ligula viverra pulvinar. Ut lacinia malesuada ante non aliquam.</p>
+            {this.listPollResults()}
           </CardBody>
         </Card>
         );
