@@ -21,9 +21,10 @@
 }
 
 .message-actions {
-  margin-top: 1em;
+  margin-top: 1.5em;
 
   &.has-border-top {
+    margin-top: 1em;
     border-top: 1px solid darken($color: $white, $amount: 10);
     padding-top: 1.5em;
   }

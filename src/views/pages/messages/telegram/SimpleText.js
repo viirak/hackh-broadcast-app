@@ -41,23 +41,26 @@ export default props => {
       <Col md="6" sm="12">
         <Card>
           <CardBody>
-            <h2 className="message-title"><FormattedMessage id="Message" /></h2>
-            <Input
-              type="textarea"
-              name="content"
-              id="content"
-              rows="5"
-              value={content}
-              onChange={e => content.length < 4096 && setContent(e.target.value)}
-              placeholder={props.intl.formatMessage({ id: 'message-placeholder' })}
-            />
-            <small
-              className={`message-char-count counter-value ${
-                content.length > 3900 ? "bg-danger" : ""
-              }`}>
-              {`${content.length}/4096`}
-            </small>
-
+            <div className="message-section">
+              <h2 className="message-title"><FormattedMessage id="Message" /></h2>
+              <div className="input-control">
+                <Input
+                  type="textarea"
+                  name="content"
+                  id="content"
+                  rows="5"
+                  value={content}
+                  onChange={e => content.length < 4096 && setContent(e.target.value)}
+                  placeholder={props.intl.formatMessage({ id: 'message-placeholder' })}
+                />
+                <small
+                  className={`input-char-count ${
+                    content.length > 3900 ? "bg-danger" : ""
+                  }`}>
+                  {`${content.length}/4096`}
+                </small>
+              </div>
+            </div>
             <div className="message-actions d-flex justify-content-end">
               <Button
                 color="primary"

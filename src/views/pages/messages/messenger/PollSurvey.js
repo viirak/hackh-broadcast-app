@@ -5,6 +5,7 @@ import PhoneSimulator from '../../../../components/@hackh/PhoneSimulator/phoneSi
 import Dropzone from '../../../../components/@vuexy/dropzone';
 import { sendMessage } from '../../../../redux/actions/social'
 import { Confirm, Info } from '../../../../components/@hackh/popup';
+import "../../../../assets/scss/pages/message.scss";
 import { FormattedMessage } from "react-intl"
 
 export default props => {
@@ -64,69 +65,73 @@ export default props => {
       <Col md="6" sm="12">
         <Card>
           <CardBody>
-            <h2><FormattedMessage id="Message Question" /></h2>
-            <Input
-              type="textarea"
-              name="title"
-              rows="2"
-              value={title}
-              onChange={e => title.length < 255 && setTitle(e.target.value)}
-              placeholder={props.intl.formatMessage({ id: 'question-title' })}
-            />
-            <small
-              className={`counter-value float-right ${
-                title.length > 200 ? "bg-danger" : ""
-              }`}
-            >
-              {`${title.length}/255`}
-            </small>
+            <div className="message-section">
+              <h2 className="message-title"><FormattedMessage id="Question" /></h2>
+              <div className="input-control">
+                <Input
+                  type="textarea"
+                  name="title"
+                  rows="5"
+                  value={title}
+                  onChange={e => title.length < 255 && setTitle(e.target.value)}
+                  placeholder={props.intl.formatMessage({ id: 'question-title' })}
+                />
+                <small
+                  className={`input-char-count ${
+                    title.length > 200 ? "bg-danger" : ""
+                  }`}
+                >
+                  {`${title.length}/255`}
+                </small>
+              </div>
+            </div>
 
-            <br /><br />
+            <div className="message-section">
+              <h2 className="message-section-title"><FormattedMessage id="Image" /></h2>
+              <Dropzone getImage={file => setImage(file)} image={image} />
+            </div>
 
-            <h2><FormattedMessage id="Image" /></h2>
-            <Dropzone getImage={file => setImage(file)} image={image} />
-
-            <br /><br />
-
-            <div style={{ display: 'flex', alignItems: 'center' }}>
-              <h2><FormattedMessage id="Options" /></h2>
-              <Button color="link" size="md" onClick={() => options.length < 10 && setOptions(options.concat(''))}>
+            <div className="message-section section-options">
+              <h2 className="message-section-title"><FormattedMessage id="Options" /></h2>
+              <Button className="option-action-add" color="link" size="md" onClick={() => options.length < 10 && setOptions(options.concat(''))}>
                 <FormattedMessage id="add" /> ({options.length}/10)
               </Button>
+              <div className="message-options">
+                {
+                  options.map((text = '', index) => {
+                    return <div className="option">
+                        <span className="option-no">#{index + 1}</span>
+                        <div className="option-input input-control">
+                          <Input type="text" value={text} onChange={e => text.length < 100 && handleSetOptions(e.target.value, index)} />
+                          <small
+                            className={`input-char-count ${
+                              text.length > 80 ? "bg-danger" : ""
+                            }`}
+                          >
+                            {`${text.length}/100`}
+                          </small>
+                        </div>
+                      </div>
+                  })
+                }
+              </div>
             </div>
-            {
-              options.map((text = '', index) => {
-                return <Row className="mb-2">
-                    <Col sm="2"><h1>#{index + 1}</h1></Col>
-                    <Col sm="10">
-                      <Input type="text" value={text} onChange={e => text.length < 100 && handleSetOptions(e.target.value, index)} />
-                      <small
-                        className={`counter-value float-right ${
-                          text.length > 80 ? "bg-danger" : ""
-                        }`}
-                      >
-                        {`${text.length}/100`}
-                      </small>
-                    </Col>
-                  </Row>
-              })
-            }
+            <div className="message-section message-actions has-border-top d-flex justify-content-end">
+            <Button
+                color="primary"
+                outline
+                onClick={clear}
+                disabled={!title.length && !isOptsValid && !image}
+              ><FormattedMessage id="Clear" /></Button>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <Button.Ripple
+                disabled={sending || !title.length || !isOptsValid}
+                color="primary"
+                onClick={() => setShowConfirm(true)}
+              ><FormattedMessage id="Send" /></Button.Ripple>
+            </div>
           </CardBody>
         </Card>
-        <div className="d-flex justify-content-end">
-        <Button
-            color="primary"
-            outline
-            onClick={clear}
-            disabled={!title.length && !isOptsValid && !image}
-          ><FormattedMessage id="Clear" /></Button>
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          <Button.Ripple
-            disabled={sending || !title.length || !isOptsValid}
-            color="primary"
-            onClick={() => setShowConfirm(true)}
-          ><FormattedMessage id="Send" /></Button.Ripple>
-        </div>
       </Col>
       <Col md="6" sm="12">
         <PhoneSimulator
