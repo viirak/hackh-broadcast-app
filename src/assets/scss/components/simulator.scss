@@ -18,30 +18,7 @@
     background-image: url("../../img/backgrounds/bg-telegram.png");
     .buble {
       background-color: $white;
-    }
-  }
-  &.messenger{
-    background-color: #f1f0f0;
-    .buble {
-      background-color: #d3d3d3;
-    }
-  }
-  .bubles {
-    display: flex;
-    flex-direction: column;
-    min-height: 20px;
-    // width: fit-content;
-    padding: 0 40px 8px 12px;
-    // max-width: 200px;
-    .buble {
-      font-size: 10px;
-      border-radius: 8px;
-      padding: 8px 10px;
-      background-color: $white;
-      word-break: break-word;
-      white-space: pre-wrap;
-      margin-bottom: 10px;
-      position: relative;
+
       &.buble-message {
         position: relative;
       }
@@ -62,16 +39,46 @@
         font-weight: bold;
         color: $primary;
       }
+      .message {
+        font-weight: bold;
+      }
+      .option .text {
+        font-weight: bold;
+      }
+
+    }
+  }
+  &.messenger{
+    background-color: $white;
+    .buble {
+      background-color: #f5f5f5;
+    }
+  }
+  .bubles {
+    display: flex;
+    flex-direction: column;
+    min-height: 20px;
+    // width: fit-content;
+    padding: 0 40px 8px 12px;
+    // max-width: 200px;
+    .buble {
+      font-size: 10px;
+      border-radius: 8px;
+      padding: 8px 10px;
+      word-break: break-word;
+      white-space: pre-wrap;
+      margin-bottom: 10px;
+      position: relative;
+
+      .message, .option .text {
+        font-size: 14px;
+      }
+
       .buble-sub-title {
         font-size: 12px;
         color: darken($color: $white, $amount: 20);
       }
-      .message, .option .text {
-        font-size: 14px;
-      }
-      .message {
-        font-weight: bold;
-      }
+
       .poll {
         margin-top: 10px;
       }
@@ -83,9 +90,7 @@
         margin-right: 10px;
         border-radius: 10px;
       }
-      .option .text {
-        font-weight: bold;
-      }
+
     }
   }
 }

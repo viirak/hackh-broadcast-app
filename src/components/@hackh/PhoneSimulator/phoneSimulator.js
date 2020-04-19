@@ -8,24 +8,25 @@ const PhoneSimulator = ({ className, type, messages, options = [], image }) => {
     <div className="device-wrapper" style={{ marginLeft: 'auto', marginRight: 'auto' }}>
       <div className="device" data-device="iPhone7" data-orientation="portrait" data-color="white">
         <div className={screenCls}>
-          <Bubble text={messages} image={image} options={options} />
+          <Bubble type={type} text={messages} image={image} options={options} />
         </div>
       </div>
     </div>
   );
 };
 
-const Bubble = ({text, image = {}, options={}}) => {
+const Bubble = ({type, text, image = {}, options={}}) => {
+  const channelTitle = "KH Covid-19 Broadcast";
   return <div className="bubles">
     { Object.keys(image).length > 0 &&
       <div className="buble buble-image">
-        <h3 className="buble-title">KH Covid-19 Broadcast</h3>
+        {type === 'telegram' && <h3 className="buble-title">{channelTitle}</h3>}
         <img src={image.preview} className="dz-img" alt={image.name} />
         </div>
     }
     { text !== '' &&
       <div className="buble buble-message">
-        <h3 className="buble-title">KH Covid-19 Broadcast</h3>
+        {type === 'telegram' && <h3 className="buble-title">{channelTitle}</h3>}
         <div className="message">{text}</div>
         {!!options.length &&
           <div className="poll">
