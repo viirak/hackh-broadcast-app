@@ -50,7 +50,7 @@ class SentMessages extends React.Component{
   }
 
   searchMessage = (event) => {
-    console.log(event.target.value);  
+    console.log(event.target.value);
   }
   render(){
     return <>
@@ -58,7 +58,7 @@ class SentMessages extends React.Component{
       <Col md="7" sm="15">
         <Card>
           <CardBody>
-            <div className="sent-searchbar mt-1">
+            {/* <div className="sent-searchbar mt-1">
               <FormGroup className="position-relative">
                 <div className="form-control-position">
                   <Search size={22} />
@@ -69,16 +69,16 @@ class SentMessages extends React.Component{
                   onChange={this.searchMessage}
                 />
               </FormGroup>
-            </div>
-            { this.props.sentMessages.length > 0 ? 
-            <TabsBasic 
-              messages={this.props.sentMessages || []} 
+            </div> */}
+            { this.props.sentMessages.length > 0 ?
+            <TabsBasic
+              messages={this.props.sentMessages || []}
               telegram={this.props.telegram || []}
               messenger={this.props.messenger || []}
               loadStatistics={this.props.loadStatistics}
               style={{maxHeight: "inherit", overflow: "scroll"}}
             />
-            : 
+            :
             <Spinner animation="border" role="status">
               <span className="sr-only">Loading...</span>
             </Spinner>}
@@ -86,7 +86,7 @@ class SentMessages extends React.Component{
         </Card>
       </Col>
       <Col md="5" sm="9">
-        <PollSurvey statistics={this.props.statistics} /> 
+        <PollSurvey statistics={this.props.statistics} />
         <div className="justify-content-end">
         <PollResultChart
           statistics={this.props.statistics}
