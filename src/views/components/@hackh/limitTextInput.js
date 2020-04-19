@@ -13,7 +13,7 @@ export default props => {
     {...rest}
   />
   <small
-    className={`counter-value float-right ${
+    className={`input-char-count ${
       value.length > parseInt(limit * 0.9) ? "bg-danger" : ""
     }`}
   >

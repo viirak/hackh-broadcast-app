@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react"
-import { Card, CardHeader, CardBody, CardTitle } from "reactstrap"
 import { useDropzone } from "react-dropzone"
 import { FormattedMessage } from 'react-intl';
 import '../../assets/scss/plugins/extensions/dropzone.scss'
@@ -7,8 +6,6 @@ import '../../assets/scss/plugins/extensions/dropzone.scss'
 export default props => {
   const [files, setFiles] = useState(props.image || {})
   const {
-    acceptedFiles,
-    // rejectedFiles,
     getRootProps,
     getInputProps
   } = useDropzone({

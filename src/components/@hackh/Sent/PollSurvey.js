@@ -4,23 +4,11 @@ import {
   CardHeader,
   CardTitle,
   CardBody,
-  Badge,
-  UncontrolledDropdown,
-  DropdownMenu,
-  DropdownItem,
-  DropdownToggle
+  Badge
 } from "reactstrap"
 import _ from "lodash";
-import { Send, Circle } from "react-feather"
 import moment from "moment";
-import Chart from "react-apexcharts"
 import {
-  Monitor,
-  ArrowUp,
-  Smartphone,
-  Tablet,
-  ArrowDown,
-  ChevronDown
 } from "react-feather"
 import { FormattedMessage } from "react-intl";
 
@@ -42,7 +30,7 @@ class PollSurvey extends React.Component {
       return <span>No poll found.</span>
     }
   }
-  
+
     render(){
         return(
         <Card>

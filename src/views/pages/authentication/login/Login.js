@@ -4,28 +4,21 @@ import {
   Card,
   CardBody,
   Row,
+  Label,
   Col,
   Form,
   FormGroup,
   Input,
-  Label,
 } from "reactstrap"
 import { POST } from 'fetchier'
-import Cookie from 'js-cookie'
-import { Mail, Lock, Check, Facebook, Twitter, GitHub, Phone } from "react-feather"
 import { history } from "../../../../history"
-import Checkbox from "../../../../components/@vuexy/checkbox/CheckboxesVuexy"
-import googleSvg from "../../../../assets/img/svg/google.svg"
 import { connect } from 'react-redux';
-
 import loginImg from "../../../../assets/img/pages/auth-login.png"
 import "../../../../assets/scss/pages/authentication.scss"
-
 import { endpoints } from '../../../../redux/config';
-import { Info } from '../../../../components/@hackh/popup';
 import { login } from '../../../../redux/actions/auth/customAuth';
 import PinInput from 'react-pin-input'
-import { FormattedMessage, injectIntl } from "react-intl"
+import { FormattedMessage } from "react-intl"
 import LanguageDropdown from '../../../../layouts/components/navbar/language';
 
 class Login extends React.Component {
@@ -94,7 +87,7 @@ class Login extends React.Component {
     const descSend = <FormattedMessage id="send-description" />;
     const descLogin = <FormattedMessage
       id="login-description"
-      // values={{ 'phone-number': this.state.phone }} 
+      // values={{ 'phone-number': this.state.phone }}
     />;
     const desc = otpSent ? descLogin : descSend;
     const ctaText = otpSent ? <FormattedMessage id="Login" /> : <FormattedMessage id="Send" />;
@@ -130,7 +123,7 @@ class Login extends React.Component {
               </Col>
               <Col lg="6" md="12" className="p-0">
                 <Card className="rounded-0 mb-0 px-2">
-                  <div style={{ position: 'absolute', top: '0.2rem', right: '0.5rem'}}>
+                  <div style={{ position: 'absolute', top: '10px', right: '20px'}}>
                     <ul className="navbar-nav">
                       <LanguageDropdown />
                     </ul>
@@ -159,7 +152,12 @@ class Login extends React.Component {
                               focus={true}
                               onChange={this.handleInputFocus}
                               type="numeric"
-                              inputStyle={{borderColor: 'red', borderRadius: '12px', width: '35px', height: '45px', marginRight: '5px', fontSize: '18px'}}
+                              inputStyle={{
+                                borderColor: 'red',
+                                borderRadius: '12px',
+                                width: '40',
+                                marginRight: '5px',
+                                fontSize: '20px'}}
                               inputFocusStyle={{borderColor: 'blue'}}
                               onComplete={this.handlePinEntered}
                             />

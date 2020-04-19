@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from 'react-redux';
-import {Row, Col, Input, Label, Button, CustomInput, Card, CardBody} from "reactstrap";
-import Breadcrumbs from '../../../../components/@vuexy/breadCrumbs/BreadCrumb';
+import React, { useState } from "react";
+import { useDispatch } from 'react-redux';
+import {Row, Col, Input, Button, Card, CardBody} from "reactstrap";
 import Dropzone from '../../../../components/@vuexy/dropzone';
-
 import PhoneSimulator from '../../../../components/@hackh/PhoneSimulator/phoneSimulator';
-
 import { sendMessage } from '../../../../redux/actions/social'
 import { Confirm, Info } from '../../../../components/@hackh/popup';
+import "../../../../assets/scss/pages/message.scss";
 import LimitTextInput from './../../../components/@hackh/limitTextInput';
 import { FormattedMessage } from "react-intl"
 
@@ -64,64 +62,71 @@ export default props => {
     { showConfirm && <Confirm onConfirm={confirmSend} onCancel={cancelSend} /> }
     { error && <Info error={true} action={() => setError(null)} body={props.intl.formatMessage({ id: 'send-fail' })} /> }
     { info && <Info action={() => setInfo(null)} body={props.intl.formatMessage({ id: 'send-success' })} /> }
-    <Breadcrumbs
-      breadCrumbParent="Telegram"
-      breadCrumbActive="Poll / Survey"
-    />
     <Row>
       <Col md="6" sm="12">
         <Card>
           <CardBody>
-            <h2><FormattedMessage id="Message Question" /></h2>
-            <LimitTextInput
-              type="textarea"
-              name="title"
-              rows="2"
-              value={title}
-              action={setTitle}
-              limit={255}
-              placeholder={props.intl.formatMessage({ id: 'question-title' })}
-            />
-
-            <br /><br />
-
-            <h2><FormattedMessage id="Image" /></h2>
-            <Dropzone getImage={file => setImage(file)} image={image} />
-
-            <br /><br />
-
-            <div style={{ display: 'flex', alignItems: 'center' }}>
-              <h2><FormattedMessage id="Options" /></h2>
-              <Button color="link" size="md" onClick={() => options.length < 10 && setOptions(options.concat(''))}>
-                 <FormattedMessage id="add" /> ({options.length}/10)
-               </Button>
+            <div className="message-section section-message">
+              <h2 className="message-title"><FormattedMessage id="Message Question" /></h2>
+              <div className="input-control">
+                <LimitTextInput
+                  type="textarea"
+                  name="title"
+                  rows="5"
+                  value={title}
+                  action={setTitle}
+                  limit={255}
+                  placeholder={props.intl.formatMessage({ id: 'question-title' })}
+                />
+              </div>
             </div>
-            {
-              options.map((text = '', index) => {
-                return <Row className="mb-2">
-                    <Col sm="2"><h1>#{index + 1}</h1></Col>
-                    <Col sm="10">
-                      <LimitTextInput type="text" value={text} limit={99} action={val => handleSetOptions(val, index)} />
-                    </Col>
-                  </Row>
-              })
-            }
+            <div className="message-section section-image">
+              <h2 className="message-section-title"><FormattedMessage id="Image" /></h2>
+              <Dropzone getImage={file => setImage(file)} image={image} />
+            </div>
+            <div className="message-section section-options">
+              <h2 className="message-section-title"><FormattedMessage id="Options" /></h2>
+              <Button className="option-action-add" color="link" size="md" onClick={() => options.length < 10 && setOptions(options.concat(''))}>
+                <FormattedMessage id="add" /> ({options.length}/10)
+              </Button>
+              <div className="message-options">
+              {
+                options.map((text = '', index) => {
+                  return <div className="option">
+                      <span className="option-no">#{index + 1}</span>
+                      <div className="option-input input-control">
+                        <Input type="text" value={text} onChange={e => text.length < 100 && handleSetOptions(e.target.value, index)} />
+                        <small
+                          className={`input-char-count ${
+                            text.length > 80 ? "bg-danger" : ""
+                          }`}
+                        >
+                          {`${text.length}/100`}
+                        </small>
+                      </div>
+                    </div>
+                })
+              }
+              </div>
+            </div>
+
+            <div className="message-section message-actions has-border-top d-flex justify-content-end">
+              <Button
+                color="primary"
+                outline
+                onClick={clear}
+                disabled={!title.length && !isOptsValid && !image}
+              ><FormattedMessage id="Clear" /></Button>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <Button.Ripple
+                disabled={sending || !title.length || !isOptsValid}
+                color="primary"
+                onClick={() => setShowConfirm(true)}
+              ><FormattedMessage id="Send" /></Button.Ripple>
+            </div>
           </CardBody>
         </Card>
-        <div className="d-flex justify-content-end">
-          <Button
-            color="primary"
-            outline
-            onClick={clear}
-            disabled={!title.length && !isOptsValid && !image}
-          ><FormattedMessage id="Clear" /></Button>
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          <Button.Ripple
-            disabled={sending || !title.length || !isOptsValid}
-            color="primary"
-            onClick={() => setShowConfirm(true)}
-          ><FormattedMessage id="Send" /></Button.Ripple>
-        </div>
+
       </Col>
       <Col md="6" sm="12">
         <PhoneSimulator

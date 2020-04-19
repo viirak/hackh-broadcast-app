@@ -1,16 +1,10 @@
 import React from 'react';
 import {
-  Button,
   Card,
   CardBody,
   Row,
-  Col,
-  Form,
-  FormGroup,
-  Input,
-  Label,
+  Col
 } from "reactstrap"
-import { Mail, Lock, Check, Facebook, Twitter, GitHub, Phone } from "react-feather"
 
 // import loginImg from "../../assets/img/pages/login.png"
 import loginImgLeft from "../../assets/img/pages/loginLeft.png"
