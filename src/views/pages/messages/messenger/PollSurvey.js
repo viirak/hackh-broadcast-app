@@ -6,6 +6,7 @@ import Dropzone from '../../../../components/@vuexy/dropzone';
 import { sendMessage } from '../../../../redux/actions/social'
 import { Confirm, Info } from '../../../../components/@hackh/popup';
 import "../../../../assets/scss/pages/message.scss";
+import LimitTextInput from './../../../components/@hackh/limitTextInput';
 import { FormattedMessage } from "react-intl"
 
 export default props => {
@@ -68,14 +69,14 @@ export default props => {
             <div className="message-section">
               <h2 className="message-title"><FormattedMessage id="Question" /></h2>
               <div className="input-control">
-                <Input
-                  type="textarea"
-                  name="title"
-                  rows="5"
-                  value={title}
-                  onChange={e => title.length < 255 && setTitle(e.target.value)}
-                  placeholder={props.intl.formatMessage({ id: 'question-title' })}
-                />
+              <LimitTextInput
+                type="textarea"
+                name="title"
+                rows="2"
+                value={title}
+                limit={255}
+                action={setTitle}
+                placeholder={props.intl.formatMessage({ id: 'question-title' })} />
                 <small
                   className={`input-char-count ${
                     title.length > 200 ? "bg-danger" : ""
@@ -117,7 +118,7 @@ export default props => {
               </div>
             </div>
             <div className="message-section message-actions has-border-top d-flex justify-content-end">
-            <Button
+              <Button
                 color="primary"
                 outline
                 onClick={clear}

@@ -27,7 +27,7 @@
 "Options": "Options",
 
 "send-description": "Enter your phone number associated with your account and we will send you an one-time password code to confirm",
-"login-description": "Please enter the one-time password sent to your number: {phone-number}",
+"login-description": "Please enter the one-time password sent to your number",
 "login-page-title": "Login",
 "Login": "Login",
 "Resend": "Resend",
@@ -54,5 +54,6 @@
 "Messages": "Messages",
 "social-media": "Social Media",
 "traditional-media": "Traditional Media",
-"confirmation-body": "Do you want to send this message?"
+"confirmation-body": "Do you want to send this message?",
+"attempts": "attempts left"
 }

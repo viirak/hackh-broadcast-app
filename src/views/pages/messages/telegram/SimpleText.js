@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch } from 'react-redux';
-import {Row, Col, Input, Button, Card, CardBody} from "reactstrap";
+import {Row, Col, Button, Card, CardBody} from "reactstrap";
 import PhoneSimulator from '../../../../components/@hackh/PhoneSimulator/phoneSimulator';
 import { sendMessage } from '../../../../redux/actions/social';
 import { Confirm, Info } from '../../../../components/@hackh/popup';
 import "../../../../assets/scss/pages/message.scss";
+import LimitTextInput from './../../../components/@hackh/limitTextInput';
 import { FormattedMessage } from "react-intl";
 
 export default props => {
@@ -44,13 +45,14 @@ export default props => {
             <div className="message-section">
               <h2 className="message-title"><FormattedMessage id="Message" /></h2>
               <div className="input-control">
-                <Input
+                <LimitTextInput
                   type="textarea"
                   name="content"
                   id="content"
-                  rows="5"
+                  rows="10"
+                  limit={4095}
                   value={content}
-                  onChange={e => content.length < 4096 && setContent(e.target.value)}
+                  action={setContent}
                   placeholder={props.intl.formatMessage({ id: 'message-placeholder' })}
                 />
                 <small

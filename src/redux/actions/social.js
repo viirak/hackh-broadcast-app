@@ -16,6 +16,7 @@ export const sendMessage = (props, provider = 'telegram') => async (dispatch, ge
   }
 
   const messageId = await postMessage(req, provider);
+
   let url;
   switch (provider) {
     case 'messenger': url = endpoints.messenger; break;

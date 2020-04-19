@@ -6,6 +6,7 @@ import PhoneSimulator from '../../../../components/@hackh/PhoneSimulator/phoneSi
 import { sendMessage } from '../../../../redux/actions/social'
 import { Confirm, Info } from '../../../../components/@hackh/popup';
 import "../../../../assets/scss/pages/message.scss";
+import LimitTextInput from './../../../components/@hackh/limitTextInput';
 import { FormattedMessage } from "react-intl"
 
 export default props => {
@@ -68,12 +69,13 @@ export default props => {
             <div className="message-section section-message">
               <h2 className="message-title"><FormattedMessage id="Message Question" /></h2>
               <div className="input-control">
-                <Input
+                <LimitTextInput
                   type="textarea"
                   name="title"
-                  rows="5"
+                  rows="2"
                   value={title}
-                  onChange={e => title.length < 255 && setTitle(e.target.value)}
+                  action={setTitle}
+                  limit={255}
                   placeholder={props.intl.formatMessage({ id: 'question-title' })}
                 />
                 <small

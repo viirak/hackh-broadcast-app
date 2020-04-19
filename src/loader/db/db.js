@@ -2,6 +2,9 @@
 import { database, storage } from 'firebase/app';
 import moment from 'moment';
 
+import S3 from 'react-aws-s3';
+import { s3Config } from '../../redux/config';
+
 export const fetchPollStatistics = async (id) => {
   const path = `statistics/${id}`;
   const databaseRef = database().ref(path).limitToLast(200);
@@ -77,11 +80,9 @@ export const postMessage = async ({ text, method, question, options, imageUrl },
 };
 
 export const uploadImage = async reference => {
-  const imageRef = storage().ref('reference').child(`${new Date().getTime()}`)
-
-  return await imageRef
-    .put(reference)
-    .then(res => imageRef.getDownloadURL())
-    .then(downloadURL => downloadURL)
-    .catch(err => console.log('upload err', err));
+  const ReactS3Client = new S3(s3Config);
+  return await ReactS3Client
+      .uploadFile(reference, new Date().getTime())
+      .then(data => data.location)
+      .catch(err => console.log('error upload', err));
  };
