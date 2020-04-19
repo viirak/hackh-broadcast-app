@@ -15,8 +15,8 @@
 "SMS Text": "SMS Text",
 
 "Content": "Content",
-"send-fail": "Failed to send the message",
-"send-success": "Successfully sent the message",
+"send-fail": "Oops, there is something wrong. The message cannot be broadcasted. Please try again.",
+"send-success": "The message has been successfully broadcasted.",
 "Clear":"Clear",
 "Send":"Send",
 
@@ -31,9 +31,9 @@
 "login-page-title": "Login",
 "Login": "Login",
 "Resend": "Resend",
-"number-not-found": "Sorry, number cannot be found.",
+"number-not-found": "Sorry, the number cannot be found.",
 "number-unverified": "Sorry, the number is unverified.",
-"phone-input-placeholder": "Please enter your phone number here",
+"phone-input-placeholder": "Your phone number here",
 "resend-pin-message": "Don't receive a code?",
 
 "All": "All",
