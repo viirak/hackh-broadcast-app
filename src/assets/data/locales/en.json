@@ -51,6 +51,7 @@
 "image-description": "(Only *.jpeg and *.png images will be accepted. Size limited to 10MB)",
 "add": "+Add",
 "Message Question": "Question",
+"Message": "Message",
 "Messages": "Messages",
 "social-media": "Social Media",
 "traditional-media": "Traditional Media",

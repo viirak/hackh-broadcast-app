@@ -3,21 +3,11 @@ import {
   Card,
   CardHeader,
   CardTitle,
-  CardBody,
-  UncontrolledDropdown,
-  DropdownMenu,
-  DropdownItem,
-  DropdownToggle
+  CardBody
 } from "reactstrap"
 import Chart from "react-apexcharts"
 import _ from "lodash";
 import {
-  Monitor,
-  ArrowUp,
-  Smartphone,
-  Tablet,
-  ArrowDown,
-  ChevronDown,
   Circle
 } from "react-feather"
 import { FormattedMessage } from "react-intl";

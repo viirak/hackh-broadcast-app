@@ -1,22 +1,13 @@
 import React, { useState } from "react"
 import {
-  NavItem,
-  NavLink,
   UncontrolledDropdown,
-  Dropdown,
   DropdownMenu,
   DropdownItem,
   DropdownToggle,
-  Media,
-  Badge,
-  Label,
   Input
 } from "reactstrap"
-import PerfectScrollbar from "react-perfect-scrollbar"
 import axios from "axios"
 import * as Icon from "react-feather"
-import classnames from "classnames"
-import Autocomplete from "../../../components/@vuexy/autoComplete/AutoCompleteComponent"
 import { history } from "../../../history"
 import { logout, updateUser } from '../../../redux/actions/auth/customAuth';
 import { useDispatch, useSelector } from 'react-redux';

@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from 'react-redux';
-import {Row, Col, Input, FormGroup, Spinner, Card, CardBody, CardTitle} from "reactstrap";
-import {Search} from "react-feather";
+import {Row, Col, Spinner, Card, CardBody} from "reactstrap";
 import PollSurvey from "../../../components/@hackh/Sent/PollSurvey";
 import PollResultChart from "../../ui-elements/cards/analytics/PollResult"
 import TabsBasic from "../../../components/@hackh/Sent/TabBasic";
