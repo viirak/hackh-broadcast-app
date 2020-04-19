@@ -37,7 +37,8 @@ class Login extends React.Component {
     otpSent: false,
     isLoading: false,
     success: null,
-    info: null
+    info: null,
+    attempts: 5
   }
 
   toggle = tab => {
@@ -81,14 +82,20 @@ class Login extends React.Component {
       this.setState({ isLoading: false });
       history.push('/');
     } catch (err) {
-      this.setState({ error: err, isLoading: false });
+      let newState = { isLoading: false };
+      if(this.state.attempts - 1 === 0) newState = { ...newState, attempts: 5, otpSent: false }
+      else newState = { ...newState, error: err, attempts: this.state.attempts - 1 }
+      this.setState(newState);
     }
   }
 
   render() {
     const { error, otpSent, isLoading } = this.state;
     const descSend = <FormattedMessage id="send-description" />;
-    const descLogin = <FormattedMessage id="login-description" values={{ 'phone-number': this.state.phone }} />;
+    const descLogin = <FormattedMessage
+      id="login-description"
+      // values={{ 'phone-number': this.state.phone }} 
+    />;
     const desc = otpSent ? descLogin : descSend;
     const ctaText = otpSent ? <FormattedMessage id="Login" /> : <FormattedMessage id="Send" />;
     const ctaSpin = <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>;
@@ -152,7 +159,7 @@ class Login extends React.Component {
                               focus={true}
                               onChange={this.handleInputFocus}
                               type="numeric"
-                              inputStyle={{borderColor: 'red', borderRadius: '12px', width: '40', marginRight: '5px', fontSize: '20px'}}
+                              inputStyle={{borderColor: 'red', borderRadius: '12px', width: '35px', height: '45px', marginRight: '5px', fontSize: '18px'}}
                               inputFocusStyle={{borderColor: 'blue'}}
                               onComplete={this.handlePinEntered}
                             />
@@ -161,7 +168,12 @@ class Login extends React.Component {
 
                       {this.state.otpSent &&
                         <div className="resend-text">
-                          <span className="text"><FormattedMessage id="resend-pin-message" /> </span>
+                          <Label className="text">
+                            <span style={{ textDecoration: 'underline', fontSize: '110%', fontWeight: '600' }}>{this.state.attempts}</span>
+                            &nbsp;<FormattedMessage id="attempts" />
+                          </Label>
+                          <br/><br/>
+                          <span className="text"><FormattedMessage id="resend-pin-message" /></span>
                           <Button
                             size="sm"
                             color="link"

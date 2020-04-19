@@ -8,6 +8,7 @@ import Dropzone from '../../../../components/@vuexy/dropzone';
 
 import { sendMessage } from '../../../../redux/actions/social'
 import { Confirm, Info } from '../../../../components/@hackh/popup';
+import LimitTextInput from './../../../components/@hackh/limitTextInput';
 import { FormattedMessage } from "react-intl"
 
 export default props => {
@@ -72,21 +73,14 @@ export default props => {
         <Card>
           <CardBody>
             <h2><FormattedMessage id="Message Question" /></h2>
-            <Input
+            <LimitTextInput
               type="textarea"
               name="title"
               rows="2"
               value={title}
-              onChange={e => title.length < 255 && setTitle(e.target.value)}
-              placeholder={props.intl.formatMessage({ id: 'question-title' })}
-            />
-            <small
-              className={`counter-value float-right ${
-                title.length > 200 ? "bg-danger" : ""
-              }`}
-            >
-              {`${title.length}/255`}
-            </small>
+              limit={255}
+              action={setTitle}
+              placeholder={props.intl.formatMessage({ id: 'question-title' })} />
 
             <br /><br />
 
@@ -106,14 +100,7 @@ export default props => {
                 return <Row className="mb-2">
                     <Col sm="2"><h1>#{index + 1}</h1></Col>
                     <Col sm="10">
-                      <Input type="text" value={text} onChange={e => text.length < 100 && handleSetOptions(e.target.value, index)} />
-                      <small
-                        className={`counter-value float-right ${
-                          text.length > 80 ? "bg-danger" : ""
-                        }`}
-                      >
-                        {`${text.length}/100`}
-                      </small>
+                      <LimitTextInput type="text" value={text} limit={99} action={val => handleSetOptions(val, index)}/>
                     </Col>
                   </Row>
               })

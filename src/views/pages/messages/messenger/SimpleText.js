@@ -7,6 +7,7 @@ import PhoneSimulator from '../../../../components/@hackh/PhoneSimulator/phoneSi
 
 import { sendMessage } from '../../../../redux/actions/social';
 import { Confirm, Info } from '../../../../components/@hackh/popup';
+import LimitTextInput from './../../../components/@hackh/limitTextInput';
 import { FormattedMessage } from "react-intl";
 
 export default props => {
@@ -48,22 +49,16 @@ export default props => {
         <Card>
           <CardBody>
             <h2><FormattedMessage id="Content" /></h2>
-            <Input
+            <LimitTextInput
               type="textarea"
               name="content"
               id="content"
               rows="10"
+              limit={4095}
               value={content}
-              onChange={e => content.length < 4096 && setContent(e.target.value)}
+              action={setContent}
               placeholder={props.intl.formatMessage({ id: 'message-placeholder' })}
             />
-            <small
-              className={`counter-value float-right ${
-                content.length > 3900 ? "bg-danger" : ""
-              }`}
-            >
-              {`${content.length}/4096`}
-            </small>
           </CardBody>
         </Card>
         <div className="d-flex justify-content-end">
