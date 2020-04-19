@@ -36,6 +36,7 @@
 "phone-input-placeholder": "Your phone number here",
 "resend-pin-message": "Don't receive a code?",
 
+"Update Name": "Update Name",
 "All": "All",
 "Text": "Text",
 "Poll": "Poll",
@@ -46,6 +47,7 @@
 "Last Month": "Last Month",
 "Last Year": "Last Year",
 
+"Log Out": "Log Out",
 "image-description": "(Only *.jpeg and *.png images will be accepted. Size limited to 10MB)",
 "add": "+Add",
 "Message Question": "Question",
