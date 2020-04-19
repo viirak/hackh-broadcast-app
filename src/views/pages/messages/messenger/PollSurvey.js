@@ -72,18 +72,11 @@ export default props => {
               <LimitTextInput
                 type="textarea"
                 name="title"
-                rows="2"
+                rows="5"
                 value={title}
                 limit={255}
                 action={setTitle}
                 placeholder={props.intl.formatMessage({ id: 'question-title' })} />
-                <small
-                  className={`input-char-count ${
-                    title.length > 200 ? "bg-danger" : ""
-                  }`}
-                >
-                  {`${title.length}/255`}
-                </small>
               </div>
             </div>
 

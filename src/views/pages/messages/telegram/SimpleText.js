@@ -55,12 +55,6 @@ export default props => {
                   action={setContent}
                   placeholder={props.intl.formatMessage({ id: 'message-placeholder' })}
                 />
-                <small
-                  className={`input-char-count ${
-                    content.length > 3900 ? "bg-danger" : ""
-                  }`}>
-                  {`${content.length}/4096`}
-                </small>
               </div>
             </div>
             <div className="message-actions d-flex justify-content-end">
