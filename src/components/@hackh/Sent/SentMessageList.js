@@ -56,7 +56,7 @@ class ListGroupCustom extends React.Component {
   render() {
     const { messages } = this.props;
     const list = messages.map( (msg, i) => 
-    <ListGroupItem key={i} onClick={() => this.props.loadStatistics(messages[i])}>
+    <ListGroupItem key={i} onPointerOver={() => this.props.loadStatistics(messages[i])}>
       <div className="d-flex flex-row justify-content-start">
         <div className="d-flex flex-column p-1 justify-content-around align-items-center">
           {this.getIcon(msg.type)}

@@ -1,5 +1,17 @@
 import { fetchPollStatistics, fetchTelegramMessages, fetchMessengerMessages } from '../../../loader/db/db';
 
+const sortDate = (a, b) => {
+  var dateA = a.date;
+  var dateB = b.date;
+  if (dateA < dateB) {
+    return 1;
+  }
+  if (dateA > dateB) {
+    return -1;
+  }
+  return 0;
+};
+
 export const loadMessages = (props) => {
   return async (dispatch, getState) => {
     const { token } = getState().auth.user || {};
@@ -11,7 +23,7 @@ export const loadMessages = (props) => {
     dispatch({
       type: "FETCH_ALL_MESSAGES",
       payload: {
-        all: messengerMessages.concat(telegramMessages),
+        all: messengerMessages.concat(telegramMessages).sort(sortDate),
         messenger:  messengerMessages,
         telegram: telegramMessages
       }
@@ -37,6 +49,11 @@ export const loadStatistics = message => {
       dispatch({
         type: "FETCH_ALL_STATISTICS",
         payload: message.statistics
+      })
+    } else {
+      dispatch({
+        type: "FETCH_ALL_STATISTICS",
+        payload: {}
       })
     }
   }
