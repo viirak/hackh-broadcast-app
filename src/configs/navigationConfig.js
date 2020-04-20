@@ -11,7 +11,7 @@ const navigationConfig = [
     title: <FormattedMessage id="Dashboard" />,
     type: "item",
     icon: <Icon.Home size={20} />,
-    permissions: ["admin", "editor"],
+    permissions: ["superadmin", "admin", "viewer"],
     navLink: "/",
     disabled: true
   },
@@ -24,7 +24,7 @@ const navigationConfig = [
     title: <FormattedMessage id="Sent" />,
     type: "item",
     icon: <Icon.Send size={20} />,
-    permissions: ["admin", "editor"],
+    permissions: ["superadmin", "admin", "viewer"],
     navLink: "/messages/sent"
   },
   {
@@ -32,7 +32,7 @@ const navigationConfig = [
     title: <FormattedMessage id="Draft" />,
     type: "item",
     icon: <Icon.Edit3 size={20} />,
-    permissions: ["admin", "editor"],
+    permissions: ["superadmin", "admin", "editor"],
     navLink: "/messages/draft",
     disabled: true
   },
@@ -45,14 +45,14 @@ const navigationConfig = [
     title: <FormattedMessage id="Telegram" />,
     type: "collapse",
     icon: <Telegram size={20} />,
-    permissions: ["admin", "editor"],
+    permissions: ["superadmin", "admin", "editor"],
     children: [
       {
         id: "telegram-text",
         title: <FormattedMessage id="Simple Text" />,
         type: "item",
         icon: <Icon.Circle size={12} />,
-        permissions: ["admin", "editor"],
+        permissions: ["superadmin", "admin", "editor"],
         navLink: "/messages/telegram/text"
       },
       {
@@ -60,7 +60,7 @@ const navigationConfig = [
         title: <FormattedMessage id="Poll/Survey" />,
         type: "item",
         icon: <Icon.Circle size={12} />,
-        permissions: ["admin"],
+        permissions: ["superadmin", "admin", "editor"],
         navLink: "/messages/telegram/poll-survey"
       }
     ]
@@ -70,14 +70,14 @@ const navigationConfig = [
     title: <FormattedMessage id="Messenger" />,
     type: "collapse",
     icon: <Messenger size={20} />,
-    permissions: ["admin", "editor"],
+    permissions: ["superadmin", "admin", "editor"],
     children: [
       {
         id: "messenger-text",
         title: <FormattedMessage id="Simple Text" />,
         type: "item",
         icon: <Icon.Circle size={12} />,
-        permissions: ["admin", "editor"],
+        permissions: ["superadmin", "admin", "editor"],
         navLink: "/messages/messenger/text"
       },
       {
@@ -85,7 +85,7 @@ const navigationConfig = [
         title: <FormattedMessage id="Poll/Survey" />,
         type: "item",
         icon: <Icon.Circle size={12} />,
-        permissions: ["admin"],
+        permissions: ["superadmin", "admin", "editor"],
         navLink: "/messages/messenger/poll-survey"
       }
     ]
@@ -99,7 +99,7 @@ const navigationConfig = [
     title: "SMS",
     type: "collapse",
     icon: <SMS size={20} />,
-    permissions: ["admin", "editor"],
+    permissions: ["superadmin", "admin", "editor"],
     disabled: true,
     children: [
       {
@@ -107,7 +107,7 @@ const navigationConfig = [
         title: <FormattedMessage id="Simple Text" />,
         type: "item",
         icon: <Icon.Circle size={12} />,
-        permissions: ["admin", "editor"],
+        permissions: ["superadmin", "admin", "editor"],
         navLink: "/messages/sms/text"
       },
       {
@@ -115,7 +115,7 @@ const navigationConfig = [
         title: <FormattedMessage id="Poll/Survey" />,
         type: "item",
         icon: <Icon.Circle size={12} />,
-        permissions: ["admin"],
+        permissions: ["superadmin", "admin", "editor"],
         navLink: "/messages/sms/poll-survey"
       }
     ]
