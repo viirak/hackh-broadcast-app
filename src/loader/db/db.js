@@ -43,8 +43,8 @@ export const fetchTelegramMessages = async (provider = 'telegram') => {
   });
 };
 
-export const fetchMessengerMessages = async (provider = 'messenger') => {
-  const databaseRef = database().ref(provider).limitToLast(200);
+export const fetchAllMessages = async () => {
+  const databaseRef = database().ref('messages').orderByChild('date').limitToLast(200);
   return new Promise((resolve, reject) => {
     try {
       databaseRef.on('value', (snapshot) => {

@@ -14,6 +14,14 @@ import { FormattedMessage } from "react-intl";
 
 class PollSurvey extends React.Component {
 
+  getIcon = social => {
+    switch (social) {
+      case "telegram": return <img src="/telegram2.svg" width="40" alt="messenger" />;
+      case "messenger": return <img src="/messenger.svg" width="40" alt="telegram" />
+      default: return null;
+    }
+  }
+
   listPollResults = () => {
     const { statistics } = this.props;
     if (!_.isEmpty(statistics)) {
@@ -21,7 +29,7 @@ class PollSurvey extends React.Component {
         let arr = [];
         for(var opt of statistics.options) {
           for (var j=0; j < opt.voter_count; j++) {
-            arr.push(<Badge color="primary" className="mr-1">{opt.text}</Badge>)
+            arr.push(<span className="mr-1">{opt.text}</span>)
           }
         }
         return arr;
@@ -32,13 +40,20 @@ class PollSurvey extends React.Component {
   }
 
     render(){
-        return(
+      const { statistics } = this.props;
+      const date = _.get(statistics, 'date', '');
+      const question = _.get(statistics, 'question', '');
+      return(
         <Card>
           <CardHeader>
-            <CardTitle><FormattedMessage id="Poll/Survey" /></CardTitle>
-            <span>{moment().format("hh:mm DD MMMM YYYY")}</span>
+            {this.getIcon(statistics.provider)}
+            <CardTitle>
+              <FormattedMessage id="Poll/Survey" />
+            </CardTitle>
+            <span>{ date ? moment(date).format("HH:mm DD MMMM YYYY") : ""}</span>
           </CardHeader>
           <CardBody>
+            <p>{question}</p>
             {this.listPollResults()}
           </CardBody>
         </Card>
