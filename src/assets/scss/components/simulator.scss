@@ -6,6 +6,9 @@
 @import "../core/variables/variables";
 @import "~bootstrap/scss/_variables.scss";
 
+.device .screen {
+  pointer-events: auto;
+}
 .screen {
   pointer-events: auto;
   overflow-Y: scroll;

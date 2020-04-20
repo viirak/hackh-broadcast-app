@@ -1,5 +1,5 @@
 import React from 'react';
-// import ScrollContainer from 'react-indiana-drag-scroll'
+import ScrollContainer from 'react-indiana-drag-scroll'
 import "../../../assets/scss/components/simulator.scss";
 
 const PhoneSimulator = ({ className, type, messages, options = [], image }) => {
@@ -8,7 +8,9 @@ const PhoneSimulator = ({ className, type, messages, options = [], image }) => {
     <div className="device-wrapper" style={{ marginLeft: 'auto', marginRight: 'auto' }}>
       <div className="device" data-device="iPhone7" data-orientation="portrait" data-color="white">
         <div className={screenCls}>
-          <Bubble type={type} text={messages} image={image} options={options} />
+          <ScrollContainer className="scroll-container">
+            <Bubble type={type} text={messages} image={image} options={options} />
+          </ScrollContainer>
         </div>
       </div>
     </div>

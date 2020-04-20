@@ -212,7 +212,8 @@ class VerticalLayout extends PureComponent {
       activeTheme: appProps.menuTheme,
       collapsed: this.state.collapsedContent,
       permission: this.props.permission,
-      deviceWidth: this.state.width
+      deviceWidth: this.state.width,
+      currentUser: this.props.currentUser.claims.role // user role
     }
     let navbarProps = {
       toggleSidebarMenu: this.toggleSidebarMenu,
@@ -291,7 +292,8 @@ class VerticalLayout extends PureComponent {
 }
 const mapStateToProps = state => {
   return {
-    app: state.customizer
+    app: state.customizer,
+    currentUser: state.auth.user
   }
 }
 export default connect(mapStateToProps, {
