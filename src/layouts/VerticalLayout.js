@@ -223,7 +223,8 @@ class VerticalLayout extends PureComponent {
       handleAppOverlay: this.handleAppOverlay,
       appOverlayState: this.state.appOverlay,
       navbarColor: appProps.navbarColor,
-      navbarType: appProps.navbarType
+      navbarType: appProps.navbarType,
+      currentPath: this.props.match.path
     }
 
     let footerProps = {
@@ -249,6 +250,8 @@ class VerticalLayout extends PureComponent {
       scrollToTop: appProps.hideScrollToTop,
       sidebarState: appProps.sidebarCollapsed
     }
+
+    // console.log(this.props.children.props.children);
     return (
       <div
         className={classnames(

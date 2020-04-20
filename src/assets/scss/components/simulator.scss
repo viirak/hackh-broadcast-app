@@ -1,0 +1,96 @@
+@import "~bootstrap/scss/_functions.scss";
+@import "~bootstrap/scss/mixins";
+@import "../bootstrap-extended/mixins";
+
+// Core variables and mixins overrides
+@import "../core/variables/variables";
+@import "~bootstrap/scss/_variables.scss";
+
+.screen {
+  pointer-events: auto;
+  overflow-Y: scroll;
+  background-color: #19b7ea;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  &.telegram{
+    background-color: #19B7EA;
+    background-image: url("../../img/backgrounds/bg-telegram.png");
+    .buble {
+      background-color: $white;
+
+      &.buble-message {
+        position: relative;
+      }
+      &.buble-message::before{
+        content: "";
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        left: -10px;
+        bottom: 0px;
+        border: 15px solid transparent;
+        border-bottom-color: $white;
+        border-top: 0;
+        border-right: 0;
+      }
+      .buble-title {
+        font-size: 12px;
+        font-weight: bold;
+        color: $primary;
+      }
+      .message {
+        font-weight: bold;
+      }
+      .option .text {
+        font-weight: bold;
+      }
+
+    }
+  }
+  &.messenger{
+    background-color: $white;
+    .buble {
+      background-color: #f5f5f5;
+    }
+  }
+  .bubles {
+    display: flex;
+    flex-direction: column;
+    min-height: 20px;
+    // width: fit-content;
+    padding: 0 40px 8px 12px;
+    // max-width: 200px;
+    .buble {
+      font-size: 10px;
+      border-radius: 8px;
+      padding: 8px 10px;
+      word-break: break-word;
+      white-space: pre-wrap;
+      margin-bottom: 10px;
+      position: relative;
+
+      .message, .option .text {
+        font-size: 14px;
+      }
+
+      .buble-sub-title {
+        font-size: 12px;
+        color: darken($color: $white, $amount: 20);
+      }
+
+      .poll {
+        margin-top: 10px;
+      }
+      .option .icon {
+        display: inline-block;
+        border: 1px solid darken($color: $white, $amount: 20);
+        height: 12px;
+        width: 12px;
+        margin-right: 10px;
+        border-radius: 10px;
+      }
+
+    }
+  }
+}

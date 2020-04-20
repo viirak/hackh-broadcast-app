@@ -1,0 +1,62 @@
+@import "~bootstrap/scss/_functions.scss";
+@import "~bootstrap/scss/mixins";
+@import "../bootstrap-extended/mixins";
+
+// Core variables and mixins overrides
+@import "../core/variables/variables";
+@import "~bootstrap/scss/_variables.scss";
+
+.message-title {
+  margin-bottom: .5em;
+}
+
+.input-control{
+  position: relative;
+  .input-char-count {
+    position: absolute;
+    top: -20px;
+    right: 0px;
+    color: darken($color: $white, $amount: 20);
+  }
+}
+
+.message-actions {
+  margin-top: 1.5em;
+
+  &.has-border-top {
+    margin-top: 1em;
+    border-top: 1px solid darken($color: $white, $amount: 10);
+    padding-top: 1.5em;
+  }
+}
+
+.message-section {
+  margin-bottom: 1em;
+  position: relative;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+.message-section-title {
+  font-size: 16px;
+}
+
+.message-options {
+  padding: 1em 0;
+  .option {
+    position: relative;
+    margin-bottom: 1em;
+    .option-no {
+      color: darken($color: $white, $amount: 30)
+    }
+  }
+}
+
+.option-action-add {
+  position: absolute;
+  top: 3px;
+  right: 0px;
+  &.btn {
+    padding: 0;
+  }
+}

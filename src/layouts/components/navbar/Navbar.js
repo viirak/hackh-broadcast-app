@@ -1,14 +1,17 @@
 import React from "react"
 import { Navbar } from "reactstrap"
 import classnames from "classnames"
-import NavbarBookmarks from "./NavbarBookmarks"
+import NavbarTitle from "./NavbarTitle"
 import NavbarUser from "./NavbarUser"
-import userImg from "../../../assets/img/portrait/small/avatar-s-11.jpg"
+import userImg from "../../../assets/img/portrait/small/avatar-man-mask.jpg"
+import { useSelector } from "react-redux"
 
 
 const ThemeNavbar = props => {
   const colorsArr = [ "primary", "danger", "success", "info", "warning", "dark"]
   const navbarTypes = ["floating" , "static" , "sticky" , "hidden"]
+  const { user } = useSelector(store => store.auth)
+
   return (
     <React.Fragment>
       <div className="content-overlay" />
@@ -48,11 +51,8 @@ const ThemeNavbar = props => {
               className="navbar-collapse d-flex justify-content-between align-items-center"
               id="navbar-mobile"
             >
-              <div className="bookmark-wrapper">
-                <NavbarBookmarks
-                  sidebarVisibility={props.sidebarVisibility}
-                  handleAppOverlay={props.handleAppOverlay}
-                />
+              <div className="logo d-flex align-items-center">
+                <NavbarTitle path={ props.currentPath } />
               </div>
               {props.horizontal ? (
                 <div className="logo d-flex align-items-center">
@@ -63,7 +63,8 @@ const ThemeNavbar = props => {
               <NavbarUser
                 handleAppOverlay={props.handleAppOverlay}
                 changeCurrentLang={props.changeCurrentLang}
-                userName="John Doe"
+                userName={ user.claims.name }
+                userRole={ user.claims.role }
                 userImg={ userImg }
               />
             </div>

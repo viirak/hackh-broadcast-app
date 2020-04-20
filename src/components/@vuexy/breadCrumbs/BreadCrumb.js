@@ -24,7 +24,7 @@ class BreadCrumbs extends React.Component {
                 ""
               )}
               <div className="breadcrumb-wrapper vx-breadcrumbs d-sm-block d-none col-12">
-                <Breadcrumb tag="ol">
+                <Breadcrumb tag="ol" style={{ paddingLeft: 0 }}>
                   <BreadcrumbItem tag="li">
                     <NavLink to="/">
                       <Home className="align-top" size={15} />
@@ -55,7 +55,7 @@ class BreadCrumbs extends React.Component {
             </div>
           </div>
         </div>
-        <div className="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
+        {/* <div className="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
           <div className="form-group breadcrum-right dropdown">
             <UncontrolledButtonDropdown>
               <DropdownToggle
@@ -89,7 +89,7 @@ class BreadCrumbs extends React.Component {
               </DropdownMenu>
             </UncontrolledButtonDropdown>
           </div>
-        </div>
+        </div> */}
       </div>
     )
   }
