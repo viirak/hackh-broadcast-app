@@ -13,8 +13,9 @@ const Footer = props => {
         "d-none": props.footerType === "hidden"
       })}
     >
-      <p className="mb-0 clearfix">
-        <span className="float-md-left d-block d-md-inline-block mt-25">
+      <p className="mb-0" style={{ textAlign: 'center' }}>
+        <br />
+        <span className="d-block d-md-inline-block mt-25">
           Covid-19 Broadcasting Project COPYRIGHT © {new Date().getFullYear()}
           <a
             href="https://slash.co"

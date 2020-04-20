@@ -1,4 +1,4 @@
-export const API_URL = process.env.REACT_APP_API_URL;
+export const API_URL = 'https://1f104eb6.ngrok.io/api' || process.env.REACT_APP_API_URL;
 
 export const endpoints = {
   auth: API_URL + '/auth',
