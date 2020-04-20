@@ -73,7 +73,7 @@ class Login extends React.Component {
       const { customToken = '' } = result.data || {};
       await this.props.login(customToken);
       this.setState({ isLoading: false });
-      history.push('/');
+      history.push('/messages/telegram/text');
     } catch (err) {
       let newState = { isLoading: false };
       if(this.state.attempts - 1 === 0) newState = { ...newState, attempts: 5, otpSent: false }

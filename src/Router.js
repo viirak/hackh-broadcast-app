@@ -113,6 +113,7 @@ export default props => {
 
   if(logging) return <Spinner />
   if(!user) history.push(pathname === '/subscribe' && pathname || '/pages/login');
+  pathname === '/' && history.push('/messages/telegram/text');
 
   return (
     // Set the directory path if you are deploying in sub-folder

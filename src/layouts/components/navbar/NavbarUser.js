@@ -22,7 +22,7 @@ const UserDropdown = props => {
 
   return (
     <DropdownMenu right>
-      <DropdownItem header style={{ paddingLeft: 0 }}><FormattedMessage id="Update Name" /></DropdownItem>
+      {/* <DropdownItem header style={{ paddingLeft: 0 }}><FormattedMessage id="Update Name" /></DropdownItem>
       <Input
         type="text"
         value={newName}
@@ -30,7 +30,7 @@ const UserDropdown = props => {
         onBlur={() => newName.length && dispatch(updateUser({ displayName: newName }))}
       />
 
-      <DropdownItem divider/>
+      <DropdownItem divider/> */}
 
       <DropdownItem
         tag="a"

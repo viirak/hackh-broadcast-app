@@ -12,7 +12,8 @@ const navigationConfig = [
     type: "item",
     icon: <Icon.Home size={20} />,
     permissions: ["admin", "editor"],
-    navLink: "/"
+    navLink: "/",
+    disabled: true
   },
   {
     type: "groupHeader",
@@ -32,7 +33,8 @@ const navigationConfig = [
     type: "item",
     icon: <Icon.Edit3 size={20} />,
     permissions: ["admin", "editor"],
-    navLink: "/messages/draft"
+    navLink: "/messages/draft",
+    disabled: true
   },
   {
     type: "groupHeader",
@@ -98,6 +100,7 @@ const navigationConfig = [
     type: "collapse",
     icon: <SMS size={20} />,
     permissions: ["admin", "editor"],
+    disabled: true,
     children: [
       {
         id: "sms-text",
@@ -113,8 +116,7 @@ const navigationConfig = [
         type: "item",
         icon: <Icon.Circle size={12} />,
         permissions: ["admin"],
-        navLink: "/messages/sms/poll-survey",
-        disabled: true
+        navLink: "/messages/sms/poll-survey"
       }
     ]
   },
