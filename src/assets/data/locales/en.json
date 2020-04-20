@@ -48,7 +48,8 @@
 "Last Year": "Last Year",
 
 "Log Out": "Log Out",
-"image-description": "(Only *.jpeg and *.png images will be accepted. Size limited to 10MB)",
+"image-description": "Only *.jpeg and *.png images will be accepted. Size limited to 10MB",
+"image-preview": "Image preview will appear here",
 "add": "+Add",
 "Message Question": "Question",
 "Message": "Message",

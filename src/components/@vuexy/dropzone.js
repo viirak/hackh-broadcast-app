@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { useDropzone } from "react-dropzone"
 import { FormattedMessage } from 'react-intl';
+import { Col, Row } from 'reactstrap'
 import '../../assets/scss/plugins/extensions/dropzone.scss'
 
 export default props => {
@@ -35,19 +36,27 @@ export default props => {
 
   return (
     <section className="pb-1">
-      <div {...getRootProps({ className: "dropzone" })}>
-        <input {...getInputProps()} />
-        {
-          Object.keys(files).length
-            ? <>
-                <img src={files.preview} className="dz-img" alt={files.name} />
-                &nbsp;&nbsp;{files.name}
-              </>
-            : <p className="mx-1">
-                <em><FormattedMessage id="image-description"/></em>
-              </p>
-        }
-      </div>
+      <Row>
+        <Col sm="8">
+          <div {...getRootProps({ className: "dropzone" })}>
+            <input {...getInputProps()} />
+            {
+              !!Object.keys(files).length
+                ? <>
+                    <img src={files.preview} className="dz-img" alt={files.name} />
+                  </>
+                : <p className="mx-1">
+                  <em><FormattedMessage id="image-preview"/></em>
+                </p>
+            }
+          </div>
+        </Col>
+        <Col sm="4" className="d-flex">
+          <em className="align-self-center" style={{ fontSize: '90%', textAlign: 'center' }}>
+            <FormattedMessage id="image-description"/>
+          </em>
+        </Col>
+      </Row>
     </section>
   )
 }
