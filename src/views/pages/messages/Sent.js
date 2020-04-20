@@ -4,7 +4,7 @@ import {Row, Col, Spinner, Card, CardBody} from "reactstrap";
 import PollSurvey from "../../../components/@hackh/Sent/PollSurvey";
 import PollResultChart from "../../ui-elements/cards/analytics/PollResult"
 import TabsBasic from "../../../components/@hackh/Sent/TabBasic";
-import { loadMessages, loadStatistics } from "../../../redux/actions/sent/index";
+import { loadAllMessages, loadStatistics } from "../../../redux/actions/sent/index";
 import _ from "lodash";
 
 let colors = [
@@ -21,7 +21,7 @@ let colors = [
 
 class SentMessages extends React.Component{
   componentDidMount() {
-    this.props.loadMessages();
+    this.props.loadAllMessages();
   }
 
   getPercentage = (percent, total) => {
@@ -71,9 +71,6 @@ class SentMessages extends React.Component{
             </div> */}
             { this.props.sentMessages.length > 0 ?
             <TabsBasic
-              messages={this.props.sentMessages || []}
-              telegram={this.props.telegram || []}
-              messenger={this.props.messenger || []}
               loadStatistics={this.props.loadStatistics}
               style={{maxHeight: "inherit", overflow: "scroll"}}
             />
@@ -110,7 +107,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  loadMessages: () => dispatch(loadMessages()),
+  loadAllMessages: () => dispatch(loadAllMessages()),
   loadStatistics: (id) => dispatch(loadStatistics(id)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(SentMessages);
