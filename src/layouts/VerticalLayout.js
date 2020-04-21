@@ -213,7 +213,7 @@ class VerticalLayout extends PureComponent {
       collapsed: this.state.collapsedContent,
       permission: this.props.permission,
       deviceWidth: this.state.width,
-      currentUser: this.props.currentUser.claims.role // user role
+      currentUser: this.props.currentUser.claims.role ? this.props.currentUser : ''
     }
     let navbarProps = {
       toggleSidebarMenu: this.toggleSidebarMenu,
