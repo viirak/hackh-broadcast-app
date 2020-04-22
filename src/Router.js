@@ -53,6 +53,10 @@ const landing = lazy(() =>
   import("./views/pages/Landing")
 )
 
+const SettingUsers = lazy(() =>
+  import("./views/pages/settings/users/Users")
+)
+
 // Set Layout and Component Using App Route
 const AppRoute = ({
   component: Component,
@@ -163,6 +167,11 @@ export default props => {
           exact
           path="/messages/sms/poll-survey"
           component={SMSPollSurvey}
+        />
+        <AppRoute
+          exact
+          path="/settings/users"
+          component={SettingUsers}
         />
         <AppRoute
           path="/pages/login"
