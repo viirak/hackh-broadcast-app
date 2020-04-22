@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from 'react-redux';
-import {Row, Col, Input, Button, Card, CardBody} from "reactstrap";
+import {Row, Col, Button, Card, CardBody} from "reactstrap";
 import Dropzone from '../../../../components/@vuexy/dropzone';
 import PhoneSimulator from '../../../../components/@hackh/PhoneSimulator/phoneSimulator';
 import { sendMessage } from '../../../../redux/actions/social'
@@ -95,14 +95,7 @@ export default props => {
                   return <div className="option">
                       <span className="option-no">#{index + 1}</span>
                       <div className="option-input input-control">
-                        <Input type="text" value={text} onChange={e => text.length < 100 && handleSetOptions(e.target.value, index)} />
-                        <small
-                          className={`input-char-count ${
-                            text.length > 80 ? "bg-danger" : ""
-                          }`}
-                        >
-                          {`${text.length}/100`}
-                        </small>
+                        <LimitTextInput value={text} action={val => handleSetOptions(val, index)} />
                       </div>
                     </div>
                 })

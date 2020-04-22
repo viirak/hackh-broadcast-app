@@ -126,6 +126,9 @@ class SideMenuContent extends React.Component {
       const CustomAnchorTag = item.type === "external-link" ? `a` : Link
       // checks if item has groupheader
       if (item.type === "groupHeader") {
+        if ((item.permissions &&
+          item.permissions.includes(this.props.currentUser)) ||
+          item.permissions === undefined) {
         return (
           <li
             className="navigation-header"
@@ -133,7 +136,9 @@ class SideMenuContent extends React.Component {
           >
             <span>{item.groupTitle}</span>
           </li>
-        )
+        )} else {
+          return null
+        }
       }
 
       let renderItem = (

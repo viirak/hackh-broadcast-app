@@ -9,7 +9,8 @@ const pathTitle = {
   "/messages/telegram/poll-survey": <FormattedMessage id="Telegram Poll" />,
   "/messages/messenger/text": <FormattedMessage id="Messenger Text" />,
   "/messages/messenger/poll-survey": <FormattedMessage id="Messenger Poll" />,
-  "/messages/sms/text": <FormattedMessage id="SMS Text" />
+  "/messages/sms/text": <FormattedMessage id="SMS Text" />,
+  "/settings/users": <FormattedMessage id="Users" />
 }
 
 class NavbarTitle extends React.PureComponent {

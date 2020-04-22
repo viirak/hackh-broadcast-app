@@ -22,7 +22,7 @@ const UserDropdown = props => {
 
   return (
     <DropdownMenu right>
-      <DropdownItem header style={{ paddingLeft: 0 }}><FormattedMessage id="Update Name" /></DropdownItem>
+      {/* <DropdownItem header style={{ paddingLeft: 0 }}><FormattedMessage id="Update Name" /></DropdownItem>
       <Input
         type="text"
         value={newName}
@@ -30,7 +30,7 @@ const UserDropdown = props => {
         onBlur={() => newName.length && dispatch(updateUser({ displayName: newName }))}
       />
 
-      <DropdownItem divider/>
+      <DropdownItem divider/> */}
 
       <DropdownItem
         tag="a"
@@ -51,17 +51,17 @@ class NavbarUser extends React.PureComponent {
     suggestions: []
   }
 
-  componentDidMount() {
-    axios.get("/api/main-search/data").then(({ data }) => {
-      this.setState({ suggestions: data.searchResult })
-    })
-  }
+  // componentDidMount() {
+  //   axios.get("/api/main-search/data").then(({ data }) => {
+  //     this.setState({ suggestions: data.searchResult })
+  //   })
+  // }
 
-  handleNavbarSearch = () => {
-    this.setState({
-      navbarSearch: !this.state.navbarSearch
-    })
-  }
+  // handleNavbarSearch = () => {
+  //   this.setState({
+  //     navbarSearch: !this.state.navbarSearch
+  //   })
+  // }
 
   render() {
     return (

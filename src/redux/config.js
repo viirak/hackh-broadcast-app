@@ -4,6 +4,8 @@ export const endpoints = {
   auth: API_URL + '/auth',
   telegram: API_URL + '/telegram',
   messenger: API_URL + '/messenger',
+  users: API_URL + '/users',
+  deleteUser: API_URL + '/users/delete'
 }
 
 export const s3Config = {

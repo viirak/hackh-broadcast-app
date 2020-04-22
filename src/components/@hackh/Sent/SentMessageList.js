@@ -4,13 +4,13 @@ import {
   ListGroupItem,
   Badge
 } from "reactstrap"
+import _ from "lodash";
 import moment from "moment";
-import { Send, MessageCircle  } from "react-feather"
 import { FormattedMessage } from "react-intl";
 
 class ListGroupCustom extends React.Component {
   state = {
-    activeTab: "1",
+    selectedCheck: 0
   }
 
   toggleTab = tab => {
@@ -18,11 +18,16 @@ class ListGroupCustom extends React.Component {
       this.setState({ activeTab: tab })
     }
   }
+  trimString = function (string, length) {
+    return string.length > length ? 
+           string.substring(0, length) + '...' :
+           string;
+  };
 
   getIcon = social => {
     switch (social) {
-      case "telegram": return <Send size={32} />;
-      case "messenger": return <MessageCircle size={32} />;
+      case "telegram": return <img src="/telegram2.svg" width="40" alt="messenger" />;
+      case "messenger": return <img src="/messenger.svg" width="40" alt="telegram" />
       default: return null;
     }
   }
@@ -30,37 +35,56 @@ class ListGroupCustom extends React.Component {
   getContent = message => {
     if (message.method === "sendPoll") {
       return (
-      <div className="p-1 h-100">
-        <h5 className="text-black">
-          <FormattedMessage id="Poll" />
-        </h5>
-        <strong>{message.question}</strong>
-        <div>
-          {message.options.map(msg => <Badge color="primary" className="mr-1">{msg}</Badge>)}
+      <div className="p-1 h-100 w-100">
+        <div className="w-100 d-flex flex-row justify-content-between">
+            <h5 className="text-black">
+            <FormattedMessage id="Poll/Survey" />
+            </h5>
+            <span>{moment(message.date).format("DD MMM HH:mm")}</span>
         </div>
+        <strong>{message.question}</strong>
       </div>
       );
     } else {
       return (
-        <div className="p-1 h-100">
-          <h5 className="text-black">
-            <FormattedMessage id="Text" />
-          </h5>
-          <p className="h-50 overflow-hidden">
-            {message.message || ""}
-          </p> 
+        <div className="p-1 h-100 w-100">
+          <div className="w-100 d-flex flex-row justify-content-between">
+            <h5 className="text-black">
+            <FormattedMessage id="Simple Text" />
+            </h5>
+            <span>{moment(message.date).format("DD MMM HH:mm")}</span>
+          </div>
+          <span className="h-50">
+            {this.trimString(message.message, 100) || ""}
+          </span> 
         </div>
       );
     }
   }
+
+  onSelectChecklist = (item, key) => {
+    this.setState({ selectedCheck: key })
+    if (_.get(item, "type", "") === "poll"){
+      this.props.loadStatistics(item);
+    } else {
+      this.props.getMessageInfo(item);
+    }
+  }
+
   render() {
     const { messages } = this.props;
     const list = messages.map( (msg, i) => 
-    <ListGroupItem key={i} onClick={() => this.props.loadStatistics(messages[i])}>
-      <div className="d-flex flex-row justify-content-start">
-        <div className="d-flex flex-column p-1 justify-content-around align-items-center">
-          {this.getIcon(msg.type)}
-          <small>{moment(msg.date).format("DD-MM-YY")}</small>
+    <ListGroupItem 
+      key={i} 
+      onClick={(e) => this.onSelectChecklist(msg, i)}
+    >
+      <div className="d-flex flex-row">
+        <div className="d-flex flex-column flex-grow justify-content-around align-items-center">
+          <div>
+            {this.getIcon(msg.provider)}
+          </div>
+          {/* <small>{moment(msg.date).format("DD MMM")}</small>
+          <small>{moment(msg.date).format("HH:mm")}</small> */}
         </div>
         {this.getContent(msg)}
       </div>

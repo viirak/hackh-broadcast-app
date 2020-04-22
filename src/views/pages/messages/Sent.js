@@ -4,7 +4,7 @@ import {Row, Col, Spinner, Card, CardBody} from "reactstrap";
 import PollSurvey from "../../../components/@hackh/Sent/PollSurvey";
 import PollResultChart from "../../ui-elements/cards/analytics/PollResult"
 import TabsBasic from "../../../components/@hackh/Sent/TabBasic";
-import { loadMessages, loadStatistics } from "../../../redux/actions/sent/index";
+import { loadAllMessages, loadStatistics } from "../../../redux/actions/sent/index";
 import _ from "lodash";
 
 let colors = [
@@ -21,7 +21,7 @@ let colors = [
 
 class SentMessages extends React.Component{
   componentDidMount() {
-    this.props.loadMessages();
+    this.props.loadAllMessages();
   }
 
   getPercentage = (percent, total) => {
@@ -71,9 +71,6 @@ class SentMessages extends React.Component{
             </div> */}
             { this.props.sentMessages.length > 0 ?
             <TabsBasic
-              messages={this.props.sentMessages || []}
-              telegram={this.props.telegram || []}
-              messenger={this.props.messenger || []}
               loadStatistics={this.props.loadStatistics}
               style={{maxHeight: "inherit", overflow: "scroll"}}
             />
@@ -85,13 +82,15 @@ class SentMessages extends React.Component{
         </Card>
       </Col>
       <Col md="5" sm="9">
-        <PollSurvey statistics={this.props.statistics} />
+        <PollSurvey statistics={this.props.statistics} messageInfo={this.props.messageInfo} />
         <div className="justify-content-end">
+        { !_.isEmpty(this.props.statistics)  &&
         <PollResultChart
           statistics={this.props.statistics}
           colors={[]}
           pollResults={this.loadPollChart()}
             />
+        }
         </div>
       </Col>
     </Row>
@@ -100,17 +99,18 @@ class SentMessages extends React.Component{
 }
 
 const mapStateToProps = state => {
-  const { sentMessages, telegram, messenger, statistics } = state.sent;
+  const { sentMessages, telegram, messenger, statistics, messageInfo } = state.sent;
   return {
     sentMessages,
     telegram,
     messenger,
-    statistics
+    statistics,
+    messageInfo
   }
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  loadMessages: () => dispatch(loadMessages()),
+  loadAllMessages: () => dispatch(loadAllMessages()),
   loadStatistics: (id) => dispatch(loadStatistics(id)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(SentMessages);

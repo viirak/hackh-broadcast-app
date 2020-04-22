@@ -7,6 +7,7 @@
 "SMS": "SMS",
 "Simple Text": "Simple Text",
 "Poll/Survey": "Poll/Survey",
+"Questionnaire": "Questionnaire",
 
 "Telegram Text": "Telegram Text",
 "Telegram Poll": "Telegram Poll",
@@ -48,7 +49,8 @@
 "Last Year": "Last Year",
 
 "Log Out": "Log Out",
-"image-description": "(Only *.jpeg and *.png images will be accepted. Size limited to 10MB)",
+"image-description": "Only *.jpeg and *.png images will be accepted. Size limited to 10MB",
+"image-preview": "Image preview will appear here",
 "add": "+Add",
 "Message Question": "Question",
 "Message": "Message",
@@ -56,5 +58,29 @@
 "social-media": "Social Media",
 "traditional-media": "Traditional Media",
 "confirmation-body": "Do you want to send this message?",
-"attempts": "attempts left"
+"attempts": "attempts left",
+"Settings": "Settings",
+"Users": "Users",
+"new-user": "+ New User",
+"New User": "New User",
+"Create": "Create",
+"Phone Number": "Phone Number",
+"Display Name": "Display Name",
+"Role": "Role",
+"Actions": "Actions",
+"Loading...": "Loading...",
+"Cancel": "Cancel",
+"Save": "Save",
+"Close": "Close",
+"DELETE": "DELETE",
+"Delete": "Delete",
+
+"fetch-users-error": "Oops, something is wrong. Please try again!",
+"create-success": "User has been successfully created.",
+"create-fail": "Oops, there's an error. User cannot be created.",
+"edit-success": "Changes has been successfully saved.",
+"edit-fail": "Oops, there's an error. Changes cannot be saved.",
+"edit-nothing": "Nothing has been changed.",
+"delete-fail": "Oops, there's an error. User cannot be deleted.",
+"delete-confirm-message": "Are you sure you want to delete?"
 }

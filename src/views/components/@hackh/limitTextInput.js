@@ -13,8 +13,11 @@ export default props => {
     {...rest}
   />
   <small
+    style={{ color: '#626262'}}
     className={`input-char-count ${
-      value.length > parseInt(limit * 0.9) ? "bg-danger" : ""
+      value.length < parseInt(limit * 0.9)
+        ? ""
+        : value.length < limit ? "bg-warning" : "bg-danger"
     }`}
   >
     {`${value.length}/${limit}`}
