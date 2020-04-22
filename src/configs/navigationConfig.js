@@ -123,14 +123,14 @@ const navigationConfig = [
   {
     type: "groupHeader",
     groupTitle: <FormattedMessage id="Settings" />,
-    permissions: ["superadmin", "admin"] // need to change to superadmin only
+    permissions: ["superadmin"] // need to change to superadmin only
   },
   {
     id: "users",
     title: "Users",
     type: "item",
     icon: <Icon.Users size={20} />,
-    permissions: ["superadmin", "admin"], // need to change to superadmin only
+    permissions: ["superadmin"], // need to change to superadmin only
     navLink: "/settings/users"
   }
 
