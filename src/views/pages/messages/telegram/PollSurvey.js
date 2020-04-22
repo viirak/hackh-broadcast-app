@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from 'react-redux';
-import {Row, Col, Input, Button, Card, CardBody} from "reactstrap";
+import {Row, Col, Button, Card, CardBody} from "reactstrap";
 import Dropzone from '../../../../components/@vuexy/dropzone';
 import PhoneSimulator from '../../../../components/@hackh/PhoneSimulator/phoneSimulator';
 import { sendMessage } from '../../../../redux/actions/social'
