@@ -76,6 +76,14 @@ export const loadPollMessages = (props) => {
   };
 }
 
+export const getMessageInfo = messageInfo => {
+  return dispatch => 
+    dispatch({
+      type: "GET_MESSAGE_INFO", 
+      payload: messageInfo
+  });
+}
+
 export const loadStatistics = message => {
   return async (dispatch, getState) => {
     const { token } = getState().auth.user || {};
@@ -86,9 +94,11 @@ export const loadStatistics = message => {
         type: message.type,
         provider: message.provider,
         date: message.date,
-        question: statistics[2],
+        imageUrl: message.imageUrl,
+        question: message.question,
         options: statistics[3],
       }
+
       dispatch({
         type: "FETCH_ALL_STATISTICS",
         payload: statistics
@@ -97,6 +107,7 @@ export const loadStatistics = message => {
       const statistics = {
         type: message.type,
         date: message.date,
+        imageUrl: message.imageUrl,
         provider: message.provider,
         ...message.statistics
       }
@@ -107,7 +118,7 @@ export const loadStatistics = message => {
     } else {
       dispatch({
         type: "FETCH_ALL_STATISTICS",
-        payload: {}
+        payload: message
       })
     }
   }

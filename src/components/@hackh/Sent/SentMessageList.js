@@ -4,12 +4,13 @@ import {
   ListGroupItem,
   Badge
 } from "reactstrap"
+import _ from "lodash";
 import moment from "moment";
 import { FormattedMessage } from "react-intl";
 
 class ListGroupCustom extends React.Component {
   state = {
-    activeTab: "1",
+    selectedCheck: 0
   }
 
   toggleTab = tab => {
@@ -34,19 +35,25 @@ class ListGroupCustom extends React.Component {
   getContent = message => {
     if (message.method === "sendPoll") {
       return (
-      <div className="p-1 h-100">
-        <h5 className="text-black">
-          <FormattedMessage id="Poll/Survey" />
-        </h5>
+      <div className="p-1 h-100 w-100">
+        <div className="w-100 d-flex flex-row justify-content-between">
+            <h5 className="text-black">
+            <FormattedMessage id="Poll/Survey" />
+            </h5>
+            <span>{moment(message.date).format("DD MMM HH:mm")}</span>
+        </div>
         <strong>{message.question}</strong>
       </div>
       );
     } else {
       return (
-        <div className="p-1 h-100">
-          <h5 className="text-black">
-          <FormattedMessage id="Simple Text" />
-          </h5>
+        <div className="p-1 h-100 w-100">
+          <div className="w-100 d-flex flex-row justify-content-between">
+            <h5 className="text-black">
+            <FormattedMessage id="Simple Text" />
+            </h5>
+            <span>{moment(message.date).format("DD MMM HH:mm")}</span>
+          </div>
           <span className="h-50">
             {this.trimString(message.message, 100) || ""}
           </span> 
@@ -54,17 +61,30 @@ class ListGroupCustom extends React.Component {
       );
     }
   }
+
+  onSelectChecklist = (item, key) => {
+    this.setState({ selectedCheck: key })
+    if (_.get(item, "type", "") === "poll"){
+      this.props.loadStatistics(item);
+    } else {
+      this.props.getMessageInfo(item);
+    }
+  }
+
   render() {
     const { messages } = this.props;
     const list = messages.map( (msg, i) => 
-    <ListGroupItem key={i} onPointerOver={() => this.props.loadStatistics(messages[i])}>
+    <ListGroupItem 
+      key={i} 
+      onClick={(e) => this.onSelectChecklist(msg, i)}
+    >
       <div className="d-flex flex-row">
         <div className="d-flex flex-column flex-grow justify-content-around align-items-center">
           <div>
             {this.getIcon(msg.provider)}
           </div>
-          <small>{moment(msg.date).format("DD MMM")}</small>
-          <small>{moment(msg.date).format("HH:mm")}</small>
+          {/* <small>{moment(msg.date).format("DD MMM")}</small>
+          <small>{moment(msg.date).format("HH:mm")}</small> */}
         </div>
         {this.getContent(msg)}
       </div>
