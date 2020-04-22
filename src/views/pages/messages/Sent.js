@@ -82,13 +82,15 @@ class SentMessages extends React.Component{
         </Card>
       </Col>
       <Col md="5" sm="9">
-        <PollSurvey statistics={this.props.statistics} />
+        <PollSurvey statistics={this.props.statistics} messageInfo={this.props.messageInfo} />
         <div className="justify-content-end">
+        { !_.isEmpty(this.props.statistics)  &&
         <PollResultChart
           statistics={this.props.statistics}
           colors={[]}
           pollResults={this.loadPollChart()}
             />
+        }
         </div>
       </Col>
     </Row>
@@ -97,12 +99,13 @@ class SentMessages extends React.Component{
 }
 
 const mapStateToProps = state => {
-  const { sentMessages, telegram, messenger, statistics } = state.sent;
+  const { sentMessages, telegram, messenger, statistics, messageInfo } = state.sent;
   return {
     sentMessages,
     telegram,
     messenger,
-    statistics
+    statistics,
+    messageInfo
   }
 }
 

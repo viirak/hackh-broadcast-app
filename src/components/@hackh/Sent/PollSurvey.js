@@ -34,28 +34,44 @@ class PollSurvey extends React.Component {
         }
         return arr;
       }
-    } else {
-      return <span>No poll found.</span>
     }
   }
 
     render(){
-      const { statistics } = this.props;
-      const date = _.get(statistics, 'date', '');
-      const question = _.get(statistics, 'question', '');
+      const { statistics, messageInfo } = this.props;
       return(
         <Card>
+          { !_.isEmpty(messageInfo) ? 
+            <>
+             <CardHeader>
+             {this.getIcon(messageInfo.provider)}
+             <CardTitle>
+               <FormattedMessage id="Simple Text" />
+             </CardTitle>
+             <span>{moment(_.get(messageInfo, "date", undefined)).format("HH:mm DD MMMM YYYY")}</span>
+            </CardHeader>
+            <CardBody>
+              <p>{messageInfo.message}</p>
+            </CardBody>
+            </>
+        :
+          <>
           <CardHeader>
             {this.getIcon(statistics.provider)}
             <CardTitle>
               <FormattedMessage id="Poll/Survey" />
             </CardTitle>
-            <span>{ date ? moment(date).format("HH:mm DD MMMM YYYY") : ""}</span>
+            <span>{moment(_.get(statistics, "date", undefined)).format("HH:mm DD MMMM YYYY")}</span>
           </CardHeader>
-          <CardBody>
-            <p>{question}</p>
+          <CardBody >
+            {_.get(statistics, "imageUrl", "") &&
+              <img src={statistics.imageUrl} alt="image.png" width={200} />
+            }
+            <p><strong>{_.get(statistics, 'question', '')}</strong></p>
             {this.listPollResults()}
           </CardBody>
+          </>
+        }
         </Card>
         );
     }
