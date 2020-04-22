@@ -1,0 +1,14 @@
+// Core mixins
+@import "~bootstrap/scss/_functions.scss";
+@import "~bootstrap/scss/mixins";
+@import "../bootstrap-extended/mixins";
+
+// Core variables and mixins overrides
+@import "../core/variables/variables";
+@import "~bootstrap/scss/_variables.scss";
+
+.content-header {
+  margin-bottom: 1em;
+  padding: 0 0 2em 0;
+  border-bottom: 1px solid darken($white, 15);
+}
