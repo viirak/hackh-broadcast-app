@@ -10,7 +10,14 @@ import { connect } from 'react-redux';
 import classnames from "classnames"
 import SentMessageList from "./SentMessageList";
 import { FormattedMessage } from "react-intl";
-import { loadAllMessages, loadMessengerMessages, loadTextMessages, loadPollMessages, loadTelegramMessages } from "../../../redux/actions/sent/index";
+import { 
+  loadAllMessages, 
+  loadMessengerMessages, 
+  loadTextMessages, 
+  loadPollMessages, 
+  loadTelegramMessages,
+  getMessageInfo
+} from "../../../redux/actions/sent/index";
 
 
 let socialMediaOptions = [
@@ -82,30 +89,35 @@ class TabsBasic extends React.Component {
                     <SentMessageList 
                       messages={this.props.sentMessages} 
                       loadStatistics={this.props.loadStatistics}
+                      getMessageInfo={this.props.getMessageInfo}
                     />
                   </TabPane>
                   <TabPane tabId="1">
                     <SentMessageList 
                       messages={this.props.telegram}
                       loadStatistics={this.props.loadStatistics}
+                      getMessageInfo={this.props.getMessageInfo}
                     />
                   </TabPane>
                   <TabPane tabId="2">
                     <SentMessageList 
                      messages={this.props.messenger} 
                      loadStatistics={this.props.loadStatistics}
+                     getMessageInfo={this.props.getMessageInfo}
                     />
                   </TabPane>
                   <TabPane tabId="4">
                     <SentMessageList 
                      messages={this.props.textMessages} 
                      loadStatistics={this.props.loadStatistics}
+                     getMessageInfo={this.props.getMessageInfo}
                     />
                   </TabPane>
                   <TabPane tabId="5">
                     <SentMessageList 
                      messages={this.props.pollMessages} 
                      loadStatistics={this.props.loadStatistics}
+                     getMessageInfo={this.props.getMessageInfo}
                     />
                   </TabPane>
                 </TabContent>
@@ -124,7 +136,7 @@ const mapStateToProps = state => {
     messenger,
     textMessages, 
     pollMessages, 
-    statistics 
+    statistics
   } = state.sent;
   return {
     sentMessages,
@@ -142,5 +154,6 @@ const mapDispatchToProps = (dispatch) => ({
   loadMessengerMessages: () => dispatch(loadMessengerMessages()),
   loadTextMessages: () => dispatch(loadTextMessages()),
   loadPollMessages: () => dispatch(loadPollMessages()),
+  getMessageInfo: (message) => dispatch(getMessageInfo(message))
 });
 export default connect(mapStateToProps, mapDispatchToProps)(TabsBasic);

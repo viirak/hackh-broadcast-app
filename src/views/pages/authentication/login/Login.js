@@ -46,7 +46,7 @@ class Login extends React.Component {
     this.setState({ isLoading: true, error: null });
     try {
       const url = endpoints.auth;
-      const body = { phone: `+855${this.state.phone}` }
+      const body = { phoneNumber: `+855${this.state.phone}` }
       const result = await POST({ url, body })
       this.setState({ info: result, isLoading: false, otpSent: true });
     } catch (err) {
@@ -68,7 +68,7 @@ class Login extends React.Component {
     this.setState({ error: null, isLoading: true });
     try {
       const url = endpoints.auth;
-      const body = { phone: `+855${this.state.phone}`, code: value }
+      const body = { phoneNumber: `+855${this.state.phone}`, code: value }
       const result = await POST({ url, body })
       const { customToken = '' } = result.data || {};
       await this.props.login(customToken);
