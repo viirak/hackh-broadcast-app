@@ -7,6 +7,11 @@
 @import "../core/variables/variables";
 @import "~bootstrap/scss/_variables.scss";
 
+.tab-content-wrapper{
+  overflow-y: scroll;
+  max-height: 1800px;
+}
+
 .list-group {
   .list-group-item {
     padding: 1.5em 1em;

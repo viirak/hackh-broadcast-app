@@ -67,7 +67,7 @@ class TabsBasic extends React.Component {
   render() {
     return (
         <>
-            <TabContent activeTab={this.state.activeTab} style={{maxHeight: "1800px", overflow: "scroll"}}>
+            <TabContent activeTab={this.state.activeTab}>
               <TabPane tabId="0">
                 <Nav tabs>
                   {socialMediaOptions.map( (social, i) =>
@@ -85,7 +85,7 @@ class TabsBasic extends React.Component {
                     </NavItem>
                     )}
                 </Nav>
-                <TabContent className="py-50" activeTab={this.state.active} data-spy="scroll">
+                <TabContent className="py-50 tab-content-wrapper" activeTab={this.state.active} data-spy="scroll">
                   <TabPane tabId="0">
                     <SentMessageList
                       messages={this.props.sentMessages}
