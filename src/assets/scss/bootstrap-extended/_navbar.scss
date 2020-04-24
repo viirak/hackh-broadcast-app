@@ -75,6 +75,16 @@
   z-index: 11;
 }
 
+.header-navbar-outer{
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 100px;
+  z-index: 1;
+  background: $body-bg;
+}
+
 .header-navbar {
   padding: 0px;
   // min-height: $navbar-height - 0.5; // original
