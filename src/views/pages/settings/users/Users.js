@@ -72,7 +72,7 @@ class CreateEditModal extends React.Component{
       role,
       isPhoneNumberValid
     } = this.state;
-    const { item, closeModal, isCreate, user } = this.props;
+    const { item, isCreate, user } = this.props;
     const headers = {
       'Content-Type': 'application/json',
       'Authorization': user.token
@@ -262,7 +262,7 @@ class ConfirmModal extends React.Component{
   state = { isDeleting: false, isError: false, message: null }
 
   handleDelete = async () => {
-    const { item, user, onCancel, onDeleteComplete } = this.props;
+    const { item, user, onDeleteComplete } = this.props;
     this.setState({ isDeleting: true });
     const headers = {
       'Content-Type': 'application/json',
@@ -286,7 +286,7 @@ class ConfirmModal extends React.Component{
 
   render() {
     const { isDeleting, message, isError } = this.state;
-    const { isOpen, item, onCancel } = this.props;
+    const { isOpen, onCancel } = this.props;
     return (
       <Modal
         isOpen={isOpen}

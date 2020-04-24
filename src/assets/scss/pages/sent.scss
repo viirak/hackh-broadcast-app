@@ -1,0 +1,154 @@
+// Core mixins
+@import "~bootstrap/scss/_functions.scss";
+@import "~bootstrap/scss/mixins";
+@import "../bootstrap-extended/mixins";
+
+// Core variables and mixins overrides
+@import "../core/variables/variables";
+@import "~bootstrap/scss/_variables.scss";
+
+.tab-content-wrapper{
+  overflow-y: scroll;
+  max-height: 1800px;
+}
+
+.list-group {
+  .list-group-item {
+    padding: 1.5em 1em;
+    .column-icon {
+      border-right: 1px solid darken($color: $white, $amount: 5);
+      padding-right: 1em;
+    }
+    .column-message {
+      padding: 0 1em;
+      .message-header {
+        color: darken($color: $white, $amount: 30);
+        font-size: 11px;
+        text-transform: uppercase;
+        margin-bottom: 4px;
+      }
+    }
+    &.active {
+      .column-icon {
+        border-right-color: lighten($color: $primary, $amount: 3);
+      }
+      .message-header {
+        color: lighten($color: $primary, $amount: 15);
+      }
+    }
+  }
+}
+
+.message-card{
+  .card-header {
+    display: block;
+    .card-title {
+      padding-bottom: 1em;
+      border-bottom: 1px solid darken($color: $white, $amount: 6);
+      .provider-icon {
+        vertical-align: text-bottom;
+      }
+      .title {
+        margin-left: .5em;
+      }
+      .dt {
+        float: right;
+        margin-top: 3px;
+        font-size: smaller;
+        color: darken($color: $white, $amount: 30)
+      }
+    }
+  }
+  .card-body{
+    .message {
+      max-width: 80%;
+      margin: 0 auto;
+      .message-text-group,
+      .message-image {
+        background: $whitesmoke;
+        padding: 1.5em;
+        border-radius: 20px;
+      }
+      .message-image{
+        overflow: hidden;
+        padding: 0;
+        border: 1px solid darken($color: $whitesmoke, $amount: 10);
+        img {
+          width: 100%;
+        }
+      }
+      &.telegram .message-image {
+        margin-bottom: 1em;
+      }
+      &.messenger .message-image {
+        margin-bottom: 3px;
+      }
+      .message-text{
+        font-size: 16px;
+      }
+      .message-options{
+        .option-title {
+          color: darken($color: $whitesmoke, $amount: 20);
+          font-size: medium;
+        }
+      }
+      &.telegram .message-options {
+        padding: 1em 0 0;
+        .option-list {
+          padding: 0;
+          margin: 0;
+          list-style: none;
+          li {
+            line-height: 24px;
+            &::before {
+              content: "";
+              display: inline-block;
+              border: 1px solid darken($color: $whitesmoke, $amount: 30);
+              margin-right: 6px;
+              width: 12px;
+              height: 12px;
+              border-radius: 12px;
+            }
+          }
+        }
+      }
+
+      &.messenger .message-options {
+        padding-bottom: 0;
+        .option-list {
+          padding: 0;
+          margin: 0;
+          list-style: none;
+          li {
+            display: inline-block;
+            background-color: $white;
+            border-radius: 16px;
+            padding: 8px 16px;
+            margin: 0 8px 8px 0;
+            box-shadow: 1px 2px 6px 0px #CCC;
+          }
+        }
+      }
+    }
+  }
+}
+
+.chart-option-list{
+  margin: 2em 0 0 0;
+  padding: 0;
+  list-style: none;
+  li {
+    line-height: 28px;
+    .icon {
+      margin-right: 10px;
+      vertical-align: text-bottom;
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border-radius: 16px;
+    }
+    .number {
+      margin-left: 10px;
+    }
+  }
+}

@@ -1,6 +1,6 @@
 import { POST } from 'fetchier';
 import { endpoints } from '../config';
-import { postMessage, uploadImage, fetchMessages } from '../../loader/db/db';
+import { postMessage, uploadImage } from '../../loader/db/db';
 
 export const sendMessage = (props, provider = 'telegram') => async (dispatch, getState) => {
   const { token } = getState().auth.user || {};

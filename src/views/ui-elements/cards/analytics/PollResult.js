@@ -6,23 +6,17 @@ import {
   CardBody
 } from "reactstrap"
 import Chart from "react-apexcharts"
-import _ from "lodash";
-import {
-  Circle
-} from "react-feather"
 import { FormattedMessage } from "react-intl";
 
 class PollResultChart extends React.Component {
   renderChart = () => {
     return this.props.pollResults.map( poll => (
-        <div className="chart-info d-flex justify-content-between mb-1 mt-2">
-          <div className="series-info d-flex align-items-center">
-            <Circle color={poll.color} size={32} />
-            <span className="text-bold-600 mx-50">{poll.text}</span>
-            <span className="align-middle">{poll.percentage}%</span>
-          </div>
-        </div>
-      ));
+      <li className="option-list-item">
+        <span className="icon" style={{ background:poll.color }}></span>
+        <span className="text">{poll.text}</span>
+        <span className="number">{poll.percentage}%</span>
+      </li>
+    ));
   }
   render() {
     const data = {
@@ -55,11 +49,12 @@ class PollResultChart extends React.Component {
               type="donut"
               height={290}
             />
+          <ul className="chart-option-list">
           {this.renderChart()}
+          </ul>
         </CardBody>
       </Card>
     )
   }
 }
 export default PollResultChart;
-
