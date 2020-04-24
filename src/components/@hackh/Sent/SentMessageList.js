@@ -2,9 +2,7 @@ import React from "react"
 import {
   ListGroup,
   ListGroupItem,
-  Badge
 } from "reactstrap"
-import _ from "lodash";
 import moment from "moment";
 import Telegram from '../../../assets/icons/Telegram';
 import Messenger from '../../../assets/icons/Messenger';

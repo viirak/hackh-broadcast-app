@@ -17,26 +17,6 @@ class SentMessages extends React.Component{
     return ((percent/total)*100).toFixed(2)
   }
 
-  // loadPollChart = () => {
-  //   const { statistics } = this.props;
-  //   if (!_.isEmpty(statistics)) {
-  //     var pollResults = [];
-  //     var total = 0;
-  //     if (_.get(statistics, "options", undefined)) {
-  //       statistics.options.forEach(count => total +=count.voter_count );
-  //       for(var opt in statistics.options) {
-  //         pollResults.push({
-  //           text:  statistics.options[opt].text,
-  //           percentage: this.getPercentage(statistics.options[opt].voter_count, total),
-  //           color: opt <= colors.length ? colors[opt] : "#fff"
-  //          });
-  //       }
-  //       return pollResults;
-  //     }
-  //   }
-  //   return []
-  // }
-
   getPollResult = (statistics) => {
     const colors = [
       "#7367F0",
@@ -52,7 +32,7 @@ class SentMessages extends React.Component{
     let pollResults = [];
     let total = 0;
     statistics.forEach(count => total +=count.voter_count );
-    statistics.map((option, idx) => {
+    statistics.forEach((option, idx) => {
       pollResults.push({
         text: option.text,
         percentage: this.getPercentage(option.voter_count, total),

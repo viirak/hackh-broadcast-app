@@ -3,8 +3,7 @@ import {
   Card,
   CardHeader,
   CardTitle,
-  CardBody,
-  Badge
+  CardBody
 } from "reactstrap"
 import _ from "lodash";
 import moment from "moment";

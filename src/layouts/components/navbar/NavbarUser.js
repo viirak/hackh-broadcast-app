@@ -1,37 +1,23 @@
-import React, { useState } from "react"
+import React from "react"
 import {
   UncontrolledDropdown,
   DropdownMenu,
   DropdownItem,
   DropdownToggle,
-  Input
 } from "reactstrap"
-import axios from "axios"
 import * as Icon from "react-feather"
 import { history } from "../../../history"
-import { logout, updateUser } from '../../../redux/actions/auth/customAuth';
-import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../../../redux/actions/auth/customAuth';
+import { useDispatch } from 'react-redux';
 import { FormattedMessage } from "react-intl"
 import LanguageDropdown from './language';
 
 
 const UserDropdown = props => {
   const dispatch = useDispatch();
-  const { auth: { user: { claims: { name = '' } } } } = useSelector(store => store);
-  const [newName, setNewName] = useState(name);
 
   return (
     <DropdownMenu right>
-      {/* <DropdownItem header style={{ paddingLeft: 0 }}><FormattedMessage id="Update Name" /></DropdownItem>
-      <Input
-        type="text"
-        value={newName}
-        onChange={e => setNewName(e.target.value)}
-        onBlur={() => newName.length && dispatch(updateUser({ displayName: newName }))}
-      />
-
-      <DropdownItem divider/> */}
-
       <DropdownItem
         tag="a"
         href="#"
@@ -50,18 +36,6 @@ class NavbarUser extends React.PureComponent {
     langDropdown: false,
     suggestions: []
   }
-
-  // componentDidMount() {
-  //   axios.get("/api/main-search/data").then(({ data }) => {
-  //     this.setState({ suggestions: data.searchResult })
-  //   })
-  // }
-
-  // handleNavbarSearch = () => {
-  //   this.setState({
-  //     navbarSearch: !this.state.navbarSearch
-  //   })
-  // }
 
   render() {
     return (

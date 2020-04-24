@@ -1,17 +1,5 @@
 import { fetchPollStatistics, fetchAllMessages, fetchMessages } from '../../../loader/db/db';
 
-const sortDate = (a, b) => {
-  var dateA = a.date;
-  var dateB = b.date;
-  if (dateA < dateB) {
-    return 1;
-  }
-  if (dateA > dateB) {
-    return -1;
-  }
-  return 0;
-};
-
 export const loadAllMessages = (props) => {
   return async (dispatch, getState) => {
     const { token } = getState().auth.user || {};

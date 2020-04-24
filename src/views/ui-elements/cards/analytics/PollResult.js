@@ -6,10 +6,6 @@ import {
   CardBody
 } from "reactstrap"
 import Chart from "react-apexcharts"
-import _ from "lodash";
-import {
-  Circle
-} from "react-feather"
 import { FormattedMessage } from "react-intl";
 
 class PollResultChart extends React.Component {
