@@ -77,11 +77,28 @@ export const loadPollMessages = (props) => {
 }
 
 export const getMessageInfo = messageInfo => {
-  return dispatch => 
+  return dispatch =>
     dispatch({
-      type: "GET_MESSAGE_INFO", 
+      type: "GET_MESSAGE_INFO",
       payload: messageInfo
   });
+}
+
+export const setSelectedMessage = message => {
+  return async (dispatch, getState) => {
+    let selectedMessage = { message };
+    const { token } = getState().auth.user || {};
+    if (token && message.statisticId) {
+      const statistics = await fetchPollStatistics(message.statisticId);
+      selectedMessage.statistics = statistics[3];
+    } else {
+      selectedMessage.statistics = message.statistics ? message.statistics.options : null;
+    }
+    dispatch({
+      type: "SET_SELECTED_MESSAGE",
+      payload: selectedMessage
+    });
+  }
 }
 
 export const loadStatistics = message => {
