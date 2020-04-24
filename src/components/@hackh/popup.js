@@ -10,16 +10,17 @@ import { FormattedMessage } from 'react-intl'
 
 
 export const Info = ({ action, error = false, body }) => {
+  const content = body.data ? body.data.message : body.message ? body.message : body;
   return <Modal
       isOpen={true}
       toggle={action}
       className="modal-dialog-centered modal-sm"
     >
-      <ModalHeader toggle={action} className={!error ? 'bg-primary' : 'bg-danger'}>
+      <ModalHeader className={!error ? 'bg-primary' : 'bg-danger'}>
         <FormattedMessage id={error ? 'Error' : 'Info'} />
       </ModalHeader>
       <ModalBody>
-        {body.data && body.data.message || body.message || body}
+        {content}
       </ModalBody>
       <ModalFooter>
         <Button color={error ? 'danger' : 'primary'} onClick={action}>

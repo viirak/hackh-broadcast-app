@@ -70,7 +70,15 @@ export default props => {
                 disabled={sending || !content.length}
                 color="primary"
                 onClick={() => setShowConfirm(true)}
-              ><FormattedMessage id="Send" /></Button.Ripple>
+              >
+                {sending
+                  ? <span
+                      className="spinner-border spinner-border-sm"
+                      role="status" aria-hidden="true">
+                    </span>
+                  : <FormattedMessage id="Send" />
+                }
+              </Button.Ripple>
             </div>
           </CardBody>
         </Card>
