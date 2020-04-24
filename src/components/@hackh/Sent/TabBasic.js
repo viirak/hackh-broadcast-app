@@ -10,13 +10,14 @@ import { connect } from 'react-redux';
 import classnames from "classnames"
 import SentMessageList from "./SentMessageList";
 import { FormattedMessage } from "react-intl";
-import { 
-  loadAllMessages, 
-  loadMessengerMessages, 
-  loadTextMessages, 
-  loadPollMessages, 
+import {
+  loadAllMessages,
+  loadMessengerMessages,
+  loadTextMessages,
+  loadPollMessages,
   loadTelegramMessages,
-  getMessageInfo
+  getMessageInfo,
+  setSelectedMessage
 } from "../../../redux/actions/sent/index";
 
 
@@ -44,11 +45,11 @@ class TabsBasic extends React.Component {
 
   toggle = tab => {
     const {
-      loadAllMessages, 
-      loadMessengerMessages, 
-      loadPollMessages, 
+      loadAllMessages,
+      loadMessengerMessages,
+      loadPollMessages,
       loadTextMessages,
-      loadTelegramMessages 
+      loadTelegramMessages
     } = this.props;
 
     if (this.state.active !== tab) {
@@ -66,7 +67,7 @@ class TabsBasic extends React.Component {
   render() {
     return (
         <>
-            <TabContent activeTab={this.state.activeTab} style={{maxHeight: "700px", overflow: "scroll"}}>
+            <TabContent activeTab={this.state.activeTab} style={{maxHeight: "1800px", overflow: "scroll"}}>
               <TabPane tabId="0">
                 <Nav tabs>
                   {socialMediaOptions.map( (social, i) =>
@@ -86,38 +87,43 @@ class TabsBasic extends React.Component {
                 </Nav>
                 <TabContent className="py-50" activeTab={this.state.active} data-spy="scroll">
                   <TabPane tabId="0">
-                    <SentMessageList 
-                      messages={this.props.sentMessages} 
-                      loadStatistics={this.props.loadStatistics}
-                      getMessageInfo={this.props.getMessageInfo}
+                    <SentMessageList
+                      messages={this.props.sentMessages}
+                      setSelectedMessage={this.props.setSelectedMessage}
+                      // loadStatistics={this.props.loadStatistics}
+                      // getMessageInfo={this.props.getMessageInfo}
                     />
                   </TabPane>
                   <TabPane tabId="1">
-                    <SentMessageList 
+                    <SentMessageList
                       messages={this.props.telegram}
-                      loadStatistics={this.props.loadStatistics}
-                      getMessageInfo={this.props.getMessageInfo}
+                      setSelectedMessage={this.props.setSelectedMessage}
+                      // loadStatistics={this.props.loadStatistics}
+                      // getMessageInfo={this.props.getMessageInfo}
                     />
                   </TabPane>
                   <TabPane tabId="2">
-                    <SentMessageList 
-                     messages={this.props.messenger} 
-                     loadStatistics={this.props.loadStatistics}
-                     getMessageInfo={this.props.getMessageInfo}
+                    <SentMessageList
+                     messages={this.props.messenger}
+                     setSelectedMessage={this.props.setSelectedMessage}
+                    //  loadStatistics={this.props.loadStatistics}
+                    //  getMessageInfo={this.props.getMessageInfo}
                     />
                   </TabPane>
                   <TabPane tabId="4">
-                    <SentMessageList 
-                     messages={this.props.textMessages} 
-                     loadStatistics={this.props.loadStatistics}
-                     getMessageInfo={this.props.getMessageInfo}
+                    <SentMessageList
+                     messages={this.props.textMessages}
+                     setSelectedMessage={this.props.setSelectedMessage}
+                    //  loadStatistics={this.props.loadStatistics}
+                    //  getMessageInfo={this.props.getMessageInfo}
                     />
                   </TabPane>
                   <TabPane tabId="5">
-                    <SentMessageList 
-                     messages={this.props.pollMessages} 
-                     loadStatistics={this.props.loadStatistics}
-                     getMessageInfo={this.props.getMessageInfo}
+                    <SentMessageList
+                     messages={this.props.pollMessages}
+                     setSelectedMessage={this.props.setSelectedMessage}
+                    //  loadStatistics={this.props.loadStatistics}
+                    //  getMessageInfo={this.props.getMessageInfo}
                     />
                   </TabPane>
                 </TabContent>
@@ -130,12 +136,12 @@ class TabsBasic extends React.Component {
 
 
 const mapStateToProps = state => {
-  const { 
-    sentMessages, 
+  const {
+    sentMessages,
     telegram,
     messenger,
-    textMessages, 
-    pollMessages, 
+    textMessages,
+    pollMessages,
     statistics
   } = state.sent;
   return {
@@ -154,6 +160,7 @@ const mapDispatchToProps = (dispatch) => ({
   loadMessengerMessages: () => dispatch(loadMessengerMessages()),
   loadTextMessages: () => dispatch(loadTextMessages()),
   loadPollMessages: () => dispatch(loadPollMessages()),
-  getMessageInfo: (message) => dispatch(getMessageInfo(message))
+  getMessageInfo: (message) => dispatch(getMessageInfo(message)),
+  setSelectedMessage: (message) => dispatch(setSelectedMessage(message))
 });
 export default connect(mapStateToProps, mapDispatchToProps)(TabsBasic);
