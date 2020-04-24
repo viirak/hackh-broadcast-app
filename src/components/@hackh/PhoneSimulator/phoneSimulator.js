@@ -32,7 +32,7 @@ const Bubble = ({type, text, image = {}, options={}}) => {
         <div className="message">{text}</div>
         {!!options.length &&
           <div className="poll">
-            <h4 className="buble-sub-title">Poll</h4>
+            <h4 className="buble-sub-title">Anonymous Poll</h4>
             {options.map((opt) => {
               return <div className="option"><span className="icon"></span><span className="text">{opt}</span></div>
             })}
